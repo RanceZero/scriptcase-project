@@ -1287,4 +1287,6 @@
   $this->Nm_lang['lang_clientes_fld_pais_cliente'] = "country";
   $this->Nm_lang['lang_clientes_fld_cep_cliente'] = "cep";
   $this->Nm_lang['lang_clientes_fld_usuario_cliente'] = "user";
+  $this->Nm_lang['lang_menu_administrador'] = "Administrator";
+  $this->Nm_lang['lang_menu_source'] = "Source Code";
 ?>
