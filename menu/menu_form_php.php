@@ -113,7 +113,7 @@ class menu_form_php
       $path_link     = substr($path_link, 0, strrpos($path_link, '/')) . '/';
       $this->nm_location  = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $this->nm_location  = substr($_SERVER['PHP_SELF'], 0, $this->nm_location + 1) ;  
-      $this->nm_location .= "menu.php"; 
+      $this->nm_location .= "index.php"; 
       $this->menu_sc_init = 1;
       $path_imag_cab = $path_link . "_lib/img";
       $path_imag_apl = $str_root . $path_link . "_lib/img";
@@ -145,7 +145,7 @@ class menu_form_php
                    if (count($dir) == 1)
                    {
                        $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
-                       $nm_apl_dest = $path_link . SC_dir_app_name($nm_apl_dest) . "/" . $nm_apl_dest . ".php";
+                       $nm_apl_dest = $path_link . SC_dir_app_name($nm_apl_dest) . "/";
                    }
 ?>
                    <html>
@@ -320,11 +320,16 @@ class menu_form_php
       {
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_2")
       {
-          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/form_clientes.php?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_3")
+      {
+          $apl_run  = "https://github.com/RanceZero/scriptcase-project/tree/master";
+          $link_url = true;
       }
       if ($_SESSION['scriptcase']['sc_item_menu'] == "btn_1")
       {
-          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/form_clientes.php?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
       }
       }
       if (!$link_url)

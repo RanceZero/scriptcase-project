@@ -2,7 +2,7 @@
 //
    if (!session_id())
    {
-   include_once('form_clientes_mob_session.php');
+   include_once('form_tecnicos_mob_session.php');
            include_once("../_lib/lib/php/fix.php");
    @ini_set('session.cookie_httponly', 1);
    @ini_set('session.use_only_cookies', 1);
@@ -40,19 +40,19 @@
         }
        if (!$_SESSION['scriptcase']['display_mobile'])
        {
-          include_once('form_clientes.php');
+          include_once('form_tecnicos.php');
           exit;
        }
    }
 
-   $_SESSION['scriptcase']['form_clientes']['error_buffer'] = '';
+   $_SESSION['scriptcase']['form_tecnicos']['error_buffer'] = '';
 
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil']          = "conn_mysql";
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_prod']       = "";
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imagens']    = "";
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imag_temp']  = "";
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_cache']  = "";
-   $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_doc']        = "";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil']          = "conn_mysql";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_prod']       = "";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imagens']    = "";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp']  = "";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_cache']  = "";
+   $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_doc']        = "";
    $NM_dir_atual = getcwd();
    if (empty($NM_dir_atual))
    {
@@ -72,33 +72,33 @@
    $str_path_apl_dir = substr($str_path_sys, 0, strrpos($str_path_sys, "/"));
    $str_path_apl_dir = substr($str_path_apl_dir, 0, strrpos($str_path_apl_dir, "/")+1);
    //check prod
-   if(empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_prod']))
+   if(empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_prod']))
    {
-           /*check prod*/$_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
+           /*check prod*/$_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
    }
    //check img
-   if(empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imagens']))
+   if(empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imagens']))
    {
-           /*check img*/$_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
+           /*check img*/$_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
    }
    //check tmp
-   if(empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imag_temp']))
+   if(empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp']))
    {
-           /*check tmp*/$_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+           /*check tmp*/$_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
    }
    //check cache
-   if(empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_cache']))
+   if(empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_cache']))
    {
-           /*check cache*/$_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
+           /*check cache*/$_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
    }
    //check doc
-   if(empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_doc']))
+   if(empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_doc']))
    {
-           /*check doc*/$_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
+           /*check doc*/$_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
    }
    //end check publication with the prod
 //
-class form_clientes_mob_ini
+class form_tecnicos_mob_ini
 {
    var $nm_cod_apl;
    var $nm_nome_apl;
@@ -287,10 +287,10 @@ class form_clientes_mob_ini
       $_SESSION['scriptcase']['charset_entities']['EUC-JP'] = 'EUC-JP';
       $_SESSION['scriptcase']['charset_entities']['KOI8-R'] = 'KOI8-R';
       $_SESSION['scriptcase']['trial_version'] = 'N';
-      $_SESSION['sc_session'][$this->sc_page]['form_clientes']['decimal_db'] = "."; 
+      $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['decimal_db'] = "."; 
 
-      $this->nm_cod_apl      = "form_clientes"; 
-      $this->nm_nome_apl     = "Cadastro de Clientes"; 
+      $this->nm_cod_apl      = "form_tecnicos"; 
+      $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
       $this->nm_grupo        = "Projeto"; 
       $this->nm_grupo_versao = "1"; 
@@ -299,11 +299,11 @@ class form_clientes_mob_ini
       $this->nm_script_type  = "PHP"; 
       $this->nm_versao_sc    = "v9"; 
       $this->nm_tp_lic_sc    = "demo"; 
-      $this->nm_dt_criacao   = "20220331"; 
-      $this->nm_hr_criacao   = "234358"; 
+      $this->nm_dt_criacao   = "20220403"; 
+      $this->nm_hr_criacao   = "012657"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20220403"; 
-      $this->nm_hr_ult_alt   = "005659"; 
+      $this->nm_hr_ult_alt   = "012724"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -379,11 +379,11 @@ class form_clientes_mob_ini
 // 
       $this->sc_site_ssl     = (isset($_SERVER['HTTP_REFERER']) && strtolower(substr($_SERVER['HTTP_REFERER'], 0, 5)) == 'https') ? true : false;
       $this->sc_protocolo    = ($this->sc_site_ssl) ? 'https://' : 'http://';
-      $this->path_prod       = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_prod'];
-      $this->path_imagens    = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imagens'];
-      $this->path_imag_temp  = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_imag_temp'];
-      $this->path_cache      = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_cache'];
-      $this->path_doc        = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_path_doc'];
+      $this->path_prod       = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_prod'];
+      $this->path_imagens    = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imagens'];
+      $this->path_imag_temp  = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp'];
+      $this->path_cache      = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_cache'];
+      $this->path_doc        = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_doc'];
       if (!isset($_SESSION['scriptcase']['str_lang']) || empty($_SESSION['scriptcase']['str_lang']))
       {
           $_SESSION['scriptcase']['str_lang'] = "pt_br";
@@ -409,7 +409,7 @@ class form_clientes_mob_ini
       $str_path_web          = str_replace('//', '/', $str_path_web);
       $this->root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
       $this->path_aplicacao  = substr($str_path_sys, 0, strrpos($str_path_sys, '/'));
-      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/clientes';
+      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/form_tecnicos';
       $this->path_embutida   = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/') + 1);
       $this->path_aplicacao .= '/';
       $this->path_link       = substr($str_path_web, 0, strrpos($str_path_web, '/'));
@@ -437,14 +437,14 @@ class form_clientes_mob_ini
       $this->path_adodb      = $this->root . $this->path_prod . "/third/adodb";
 
       $_SESSION['scriptcase']['dir_temp'] = $this->root . $this->path_imag_temp;
-      if (isset($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['lang'])) {
-          $this->str_lang = $_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['lang'];
+      if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['lang'])) {
+          $this->str_lang = $_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['lang'];
       }
-      elseif (!isset($_SESSION['scriptcase']['form_clientes_mob']['actual_lang']) || $_SESSION['scriptcase']['form_clientes_mob']['actual_lang'] != $this->str_lang) {
-          $_SESSION['scriptcase']['form_clientes_mob']['actual_lang'] = $this->str_lang;
+      elseif (!isset($_SESSION['scriptcase']['form_tecnicos_mob']['actual_lang']) || $_SESSION['scriptcase']['form_tecnicos_mob']['actual_lang'] != $this->str_lang) {
+          $_SESSION['scriptcase']['form_tecnicos_mob']['actual_lang'] = $this->str_lang;
           setcookie('sc_actual_lang_Projeto',$this->str_lang,'0','/');
       }
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       if (isset($_SESSION['scriptcase']['user_logout']))
       {
           foreach ($_SESSION['scriptcase']['user_logout'] as $ind => $parms)
@@ -459,13 +459,13 @@ class form_clientes_mob_ini
                       $nm_apl_dest = $this->path_link . SC_dir_app_name($nm_apl_dest) . "/";
                   }
                   unset($_SESSION['scriptcase']['user_logout'][$ind]);
-                  if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag) && $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag)
+                  if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag) && $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag)
                   {
-                      $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['action']  = $nm_apl_dest;
-                      $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['target']  = $parms['T'];
-                      $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['metodo']  = "post";
-                      $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['script_case_init']  = $this->sc_page;
-                      form_clientes_mob_pack_ajax_response();
+                      $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['action']  = $nm_apl_dest;
+                      $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['target']  = $parms['T'];
+                      $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['metodo']  = "post";
+                      $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['script_case_init']  = $this->sc_page;
+                      form_tecnicos_mob_pack_ajax_response();
                       exit;
                   }
 ?>
@@ -487,7 +487,7 @@ class form_clientes_mob_ini
       if (!is_file($this->root . $str_path . 'devel/class/xmlparser/nmXmlparserIniSys.class.php'))
       {
           unset($_SESSION['scriptcase']['nm_sc_retorno']);
-          unset($_SESSION['scriptcase']['form_clientes']['glo_nm_conexao']);
+          unset($_SESSION['scriptcase']['form_tecnicos']['glo_nm_conexao']);
       }
       include($this->path_lang . $this->str_lang . ".lang.php");
       include($this->path_lang . "config_region.php");
@@ -535,9 +535,9 @@ class form_clientes_mob_ini
               $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
           }
       }
-      if (isset($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+      if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir'])) {
+          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -547,7 +547,7 @@ class form_clientes_mob_ini
           }
           $SS_cod_html .= "   <META http-equiv=\"Expires\" content=\"Fri, Jan 01 1900 00:00:00 GMT\"/>\r\n";
           $SS_cod_html .= "    <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n";
-          if ($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir_tp'] == "R") {
+          if ($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir_tp'] == "R") {
               $SS_cod_html .= "  </HEAD>\r\n";
               $SS_cod_html .= "   <body>\r\n";
           }
@@ -562,14 +562,14 @@ class form_clientes_mob_ini
               $SS_cod_html .= $this->Nm_lang['lang_errm_expired_session'] . "\r\n";
               $SS_cod_html .= "     <form name=\"Fsession_redir\" method=\"post\"\r\n";
               $SS_cod_html .= "           target=\"_self\">\r\n";
-              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir'] . "');\">\r\n";
+              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir'] . "');\">\r\n";
               $SS_cod_html .= "     </form>\r\n";
               $SS_cod_html .= "    </td></tr></table>\r\n";
               $SS_cod_html .= "    </div></td></tr></table>\r\n";
           }
           $SS_cod_html .= "    <script type=\"text/javascript\">\r\n";
-          if ($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir_tp'] == "R") {
-              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir'] . "');\r\n";
+          if ($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir_tp'] == "R") {
+              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir'] . "');\r\n";
           }
           $SS_cod_html .= "      function sc_session_redir(url_redir)\r\n";
           $SS_cod_html .= "      {\r\n";
@@ -593,7 +593,7 @@ class form_clientes_mob_ini
           $SS_cod_html .= "    </script>\r\n";
           $SS_cod_html .= " </body>\r\n";
           $SS_cod_html .= "</HTML>\r\n";
-          unset($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']);
+          unset($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']);
           unset($_SESSION['sc_session']);
       }
       if (isset($SS_cod_html) && isset($_GET['nmgp_opcao']) && (substr($_GET['nmgp_opcao'], 0, 14) == "ajax_aut_comp_" || substr($_GET['nmgp_opcao'], 0, 13) == "ajax_autocomp"))
@@ -614,11 +614,11 @@ class form_clientes_mob_ini
       }
       elseif (isset($SS_cod_html) && isset($_POST['rs']) && !is_array($_POST['rs']) && 'ajax_' == substr($_POST['rs'], 0, 5) && isset($_POST['rsargs']) && !empty($_POST['rsargs']))
       {
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['action']  = "form_clientes_mob.php";
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['target']  = "_self";
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['metodo']  = "post";
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']['script_case_init']  = $this->sc_page;
-          form_clientes_mob_pack_ajax_response();
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['action']  = "form_tecnicos_mob.php";
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['target']  = "_self";
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['metodo']  = "post";
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']['script_case_init']  = $this->sc_page;
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
       elseif (isset($SS_cod_html))
@@ -626,7 +626,7 @@ class form_clientes_mob_ini
           echo $SS_cod_html;
           exit;
       }
-      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir']))
+      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir']))
       {
           unset($_SESSION['sc_session']['SC_parm_violation']);
           echo "<html>";
@@ -664,7 +664,7 @@ class form_clientes_mob_ini
       {
           $this->path_grafico    = $this->root . $this->path_prod . "/third/jpgraph4/src";
       }
-      $_SESSION['sc_session'][$this->sc_page]['form_clientes']['path_doc'] = $this->path_doc; 
+      $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['path_doc'] = $this->path_doc; 
       $_SESSION['scriptcase']['nm_path_prod'] = $this->root . $this->path_prod . "/"; 
       $_SESSION['scriptcase']['nm_root_cep']  = $this->root; 
       $_SESSION['scriptcase']['nm_path_cep']  = $this->path_cep; 
@@ -807,7 +807,7 @@ class form_clientes_mob_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] != 'form_clientes_mob')) 
+          if (!$_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] != 'form_tecnicos_mob')) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -831,74 +831,74 @@ class form_clientes_mob_ini
       $opsys = strtolower(php_uname());
 
       global $under_dashboard, $dashboard_app, $own_widget, $parent_widget, $compact_mode, $remove_margin, $remove_border;
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['under_dashboard']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['under_dashboard'] = false;
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['dashboard_app']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['own_widget']      = '';
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['parent_widget']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['compact_mode']    = false;
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_margin']   = false;
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_border']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['dashboard_app']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['own_widget']      = '';
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['parent_widget']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['compact_mode']    = false;
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_margin']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_border']   = false;
       }
       if (isset($_GET['under_dashboard']) && 1 == $_GET['under_dashboard'])
       {
           if (isset($_GET['own_widget']) && 'dbifrm_widget' == substr($_GET['own_widget'], 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['own_widget'] = $_GET['own_widget'];
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['own_widget'] = $_GET['own_widget'];
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard'] = true;
               if (isset($_GET['dashboard_app'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
               }
               if (isset($_GET['parent_widget'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
               }
               if (isset($_GET['compact_mode'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
               }
               if (isset($_GET['remove_margin'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
               }
               if (isset($_GET['remove_border'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
               }
           }
       }
       elseif (isset($under_dashboard) && 1 == $under_dashboard)
       {
           if (isset($own_widget) && 'dbifrm_widget' == substr($own_widget, 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['own_widget'] = $own_widget;
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['own_widget'] = $own_widget;
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard'] = true;
               if (isset($dashboard_app)) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['dashboard_app'] = $dashboard_app;
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['dashboard_app'] = $dashboard_app;
               }
               if (isset($parent_widget)) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['parent_widget'] = $parent_widget;
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['parent_widget'] = $parent_widget;
               }
               if (isset($compact_mode)) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
               }
               if (isset($remove_margin)) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
               }
               if (isset($remove_border)) {
-                  $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['remove_border'] = 1 == $remove_border;
+                  $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['remove_border'] = 1 == $remove_border;
               }
           }
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['maximized']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['maximized'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['maximized'] = false;
       }
       if (isset($_GET['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      if ($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['under_dashboard'])
+      if ($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard'])
       {
-          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['dashboard_info']['dashboard_app'];
-          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["form_clientes_mob"]))
+          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['dashboard_info']['dashboard_app'];
+          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["form_tecnicos_mob"]))
           {
-              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["form_clientes_mob"] as $sTmpTargetLink => $sTmpTargetWidget)
+              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["form_tecnicos_mob"] as $sTmpTargetLink => $sTmpTargetWidget)
               {
                   if (isset($this->sc_lig_target[$sTmpTargetLink]))
                   {
@@ -918,7 +918,7 @@ class form_clientes_mob_ini
       include_once($this->path_adodb . "/adodb.inc.php");
       $this->sc_Include($this->path_libs . "/nm_sec_prod.php", "F", "nm_reg_prod");
       $this->sc_Include($this->path_libs . "/nm_ini_perfil.php", "F", "perfil_lib");
-      if(function_exists('set_php_timezone'))  set_php_timezone('form_clientes_mob'); 
+      if(function_exists('set_php_timezone'))  set_php_timezone('form_tecnicos_mob'); 
       $this->sc_Include($this->path_lib_php . "/nm_data.class.php", "C", "nm_data") ; 
       $this->sc_Include($this->path_lib_php . "/nm_edit.php", "F", "nmgp_Form_Num_Val") ; 
       $this->sc_Include($this->path_lib_php . "/nm_conv_dados.php", "F", "nm_conv_limpa_dado") ; 
@@ -926,8 +926,8 @@ class form_clientes_mob_ini
       $this->sc_Include($this->path_lib_php . "/nm_api.php", "", "") ; 
       $this->sc_Include($this->path_lib_php . "/fix.php", "", "") ; 
       $this->nm_data = new nm_data("pt_br");
-      global $inicial_form_clientes_mob, $NM_run_iframe;
-      if ((isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag) && $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag) || (isset($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['embutida_call']) && $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['embutida_call']) || $NM_run_iframe == 1)
+      global $inicial_form_tecnicos_mob, $NM_run_iframe;
+      if ((isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag) && $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag) || (isset($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['embutida_call']) && $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['embutida_call']) || $NM_run_iframe == 1)
       {
            $_SESSION['scriptcase']['sc_ctl_ajax'] = 'part';
       }
@@ -960,7 +960,7 @@ class form_clientes_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQFGDSN7VWXGDMBYZSJqDuX7HMFaD9BsZSBOD1rwV5B/DEBOHErCH5F/HMBODcJeDQX7D1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYVkJqH5F/HMFaHQFYDQBqD1veHQBODMrwV9BUDur/HMB/HQBsVINUD1rKHQraHgvCHArsHEFqHIFGHQXsZSBiHAvmV5BODMrwV9FeDWXKVEFGHQBqZ1FGHIBeHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuX7DMvsZSNiH5B7VENUDcFYZkBiHIBeHuB/HgvCHArCH5X/ZuB/HQFYDuFaDSvCVWJwDMrwV9FeHEX7HMXGDcNmZSBODSNOHuFGHgvCHArCH5F/HIJeDcXGH9BiD1BeHuNUHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKHEFqHMJeHQJKH9FUHIrKHuFUDMrwV9FeHEBmVErqDcNmZ1BiHIBOZMBOHgvCHArsHEFqHIFUHQXOH9BiDSrwHQrqDMrwVcB/H5B7VoFGHQNmVINUDSrYHuFGDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKZSJ3H5X/ZuJsHQXGZSFUHAveV5BOHuNODkBODuX7VoX7DcBqZ1B/Z1vOD5raHgBOVkXeHEFqVoX7DcBwDQFGD1BOV5JwDMBYVIBODWFYVENUHQBiZ1B/HABYV5JsDMzGHAFKV5FaZuBOHQJeDuBOZ1BYV5JeHuvmVcrsDWB3VEF7HQNmVIJwZ1BeZMBODEvsZSJGDuFaDoJeD9XsZSX7Z1rwVWJsDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBsH5XCHMJwHQXGH9BqDSBeHuFUHgvsZSJqDWBmVoFGHQBiDuFaHIrwHuJeDMNOV9BUDWFaHMrqHQBsZSBqHArKV5FUDMrYZSXeV5FqHIJsD9XsDQFaDSrwVWJsHuBOVIBOHEX7VoX7HQBsZ1B/Z1rYHQrqHgBOHArsHEFqZuBqHQXsH9FUHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7D1BeD5rqHuvmVcBODWFYDoJsD9BiZ1F7HArYD5JeDMNKZSXeV5FqDoB/DcJeZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVIFCHEF/DoF7DcFYH9FaHIBeHuXGDMBYHEXeDWFqHMJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoNUDcJUZ1B/Z1rYD5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5BqHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIB/HEF/DoF7HQBsZkFGZ1NOHQraDEvsDkB/DWr/HIX7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoNUDcJUZ1B/Z1rYD5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUDWF/ZuB/DcJeH9FUZ1rwVWJeHgvsVcBODuFqDoFGDcJUZ1FGHArKHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJsDMvOVcBUH5B7VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQJwHIrKHuBODMNOV9FeHEF/HINUDcNmZSB/DSBeZMFaDErKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBOHEJqDWF/ZuFaDcBiDuBqHAvOVWBODMrYVcFKH5XKVEFGHQJmZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQJsHABYD5F7HuNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHuBYVcFKDWFYVoBqD9BsZSB/DSrYD5rqDEBOZSJGH5FYDoFUD9XsDQX7Z1rwV5X7DMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDQFaHAvmVWJeDMrYDkBOV5X7HIJsHQXOZSBqZ1rYHQJsHgrKDkB/H5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiDcFYZ1FGDSNOHuJwHgNKHErCV5B3VoFGHQJeDQFaHIrwHuBiDMrYVcFeDWBmDoXGHQBqZkFGD1rwHQNUHgBeDkXKDWrGVoFGHQJKDuBqDSzGVWBODMNODkBsDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DurmZuJsHQBiZ9F7D1veHuJwDMrYDkBsHEBmDoXGHQJmVIJsHArYHuJsHgrKDkXKH5FGVoFGHQNwZSBiD1BeV5FaHgvOVIB/DWrmDoXGHQBsZ1X7HIveHQBqHgBeZSJ3H5BmDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZkFGZ1NOHQFGDMveHErCDuXKVoFGHQNwZ9XGHAN7HuBODMrYZSJqDuFGDoXGHQBqZkFGD1zGZMBqHgrKZSJqDWrGVoFGHQFYZ9F7D1BOV5BODMvsVcB/DWrmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQJmVIJsDSvmD5FaHgNOHEBUDWr/DoB/DcBwZSFGHANOV5FUHuNOV9FiDWXCHMFaD9JmZ1B/HIrwV5FaDErKDkBsV5FaHMJeDcBwDQFGD1veHQXGHgvsVcBOHEX7DoraHQFYH9FaHAvmZMJeHgvCHEJGDWF/VoJeD9NwDQBqHINaV5BqDMrwDkFCDuX7VEF7D9BiH9FaHAN7D5FaDEBOZSJGH5BmDoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUHQXsDQFaHABYHQF7DMzGDkB/H5XCHIFGHQXGZ1FUZ1vOD5BOHgBOZSJqDWXCHIFUHQBiDQFUHAN7HuBiDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1NKV5JeDMvODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDENOHEXeHEFqHIBqD9XsDQFaZ1BYHQJsDMvsVcBUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiH5F/VoB/D9XsDQX7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcrsDWFYVoBODcNwH9FaHANOD5NUDEBOHEFiHEFqVoFaHQJKDQFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5BqHgveDkXeV5JeZura";
 $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 108, 101, 61, 34, 102, 111, 110, 116, 45, 102, 97, 109, 105, 108, 121, 58, 32, 84, 97, 104, 111, 109, 97, 44, 32, 65, 114, 105, 97, 108, 44, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 59, 32, 102, 111, 110, 116, 45, 115, 105, 122, 101, 58, 32, 49, 51, 112, 120, 59, 32, 102, 111, 110, 116, 45, 119, 101, 105, 103, 104, 116, 58, 32, 98, 111, 108, 100, 59, 32, 116, 101, 120, 116, 45, 97, 108, 105, 103, 110, 58, 32, 99, 101, 110, 116, 101, 114, 34, 62, 84, 104, 105, 115, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 32, 119, 97, 115, 32, 100, 101, 118, 101, 108, 111, 112, 101, 100, 32, 97, 110, 100, 32, 112, 117, 98, 108, 105, 115, 104, 101, 100, 32, 117, 115, 105, 110, 103, 32, 97, 32, 116, 114, 105, 97, 108, 32, 118, 101, 114, 115, 105, 111, 110, 32, 111, 102, 32, 83, 99, 114, 105, 112, 116, 67, 97, 115, 101, 32, 97, 110, 100, 32, 105, 116, 115, 32, 116, 114, 105, 97, 108, 32, 112, 101, 114, 105, 111, 100, 32, 104, 97, 115, 32, 101, 120, 112, 105, 114, 101, 100, 46, 60, 47, 100, 105, 118, 62);
       $this->prep_conect();
       $this->conectDB();
@@ -973,7 +973,7 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] != 'form_clientes_mob')) 
+          if (!$_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] != 'form_tecnicos_mob')) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -989,7 +989,7 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
    }
    function prep_conect()
    {
-      $con_devel             =  (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'] : ""; 
+      $con_devel             =  (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'] : ""; 
       $perfil_trab           = ""; 
       $this->nm_falta_var    = ""; 
       $this->nm_falta_var_db = ""; 
@@ -998,21 +998,21 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
       {
           foreach ($_SESSION['scriptcase']['sc_connection'] as $NM_con_orig => $NM_con_dest)
           {
-              if (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']) && $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']) && $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil']) && $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil']) && $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_con_' . $NM_con_orig]))
+              if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_con_' . $NM_con_orig]))
               {
-                  $_SESSION['scriptcase']['form_clientes_mob']['glo_con_' . $NM_con_orig] = $NM_con_dest;
+                  $_SESSION['scriptcase']['form_tecnicos_mob']['glo_con_' . $NM_con_orig] = $NM_con_dest;
               }
           }
       }
-      if (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']))
       {
           db_conect_devel($con_devel, $this->root . $this->path_prod, 'Projeto', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1020,9 +1020,9 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
               $nm_crit_perfil = true;
           }
       }
-      if (isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil']))
+      if (isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil']))
       {
-          $perfil_trab = $_SESSION['scriptcase']['form_clientes_mob']['glo_nm_perfil'];
+          $perfil_trab = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_perfil'];
       }
       elseif (isset($_SESSION['scriptcase']['glo_perfil']) && !empty($_SESSION['scriptcase']['glo_perfil']))
       {
@@ -1167,27 +1167,27 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
       }
       if (isset($_SESSION['scriptcase']['glo_decimal_db']) && !empty($_SESSION['scriptcase']['glo_decimal_db']))
       {
-         $_SESSION['sc_session'][$this->sc_page]['form_clientes']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
+         $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
       }
       if (isset($_SESSION['scriptcase']['glo_date_separator']) && !empty($_SESSION['scriptcase']['glo_date_separator']))
       {
           $SC_temp = trim($_SESSION['scriptcase']['glo_date_separator']);
           if (strlen($SC_temp) == 2)
           {
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date']  = substr($SC_temp, 0, 1); 
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date']  = substr($SC_temp, 0, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
           }
           else
           {
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date']  = $SC_temp; 
-              $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date1'] = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date']  = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date1'] = $SC_temp; 
           }
-          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date'];
-          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['form_clientes']['SC_sep_date1'];
+          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date'];
+          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['SC_sep_date1'];
       }
       if (empty($this->nm_tabela))
       {
-          $this->nm_tabela = "clientes"; 
+          $this->nm_tabela = "tecnicos"; 
       }
 // 
       if (!empty($this->nm_falta_var) || !empty($this->nm_falta_var_db) || $nm_crit_perfil)
@@ -1348,7 +1348,7 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
               echo " </tr>";
           }
           echo "</table>";
-          if (!$_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['sc_outra_jan'] != 'form_clientes_mob')) 
+          if (!$_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['iframe_menu'] && (!isset($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['sc_outra_jan']) || $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['sc_outra_jan'] != 'form_tecnicos_mob')) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -1389,9 +1389,9 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
   function conectDB()
   {
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
-      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'Projeto', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'Projeto', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1446,13 +1446,13 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
           $this->Db->Execute("alter session set nls_time_format         = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_time_tz_format      = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_numeric_characters  = '.,'");
-          $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['decimal_db'] = "."; 
+          $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['decimal_db'] = "."; 
       } 
   }
 
   function setConnectionHash() {
-    if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'])) {
-      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['form_clientes_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'Projeto', 1, $this->force_db_utf8);
+    if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'])) {
+      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'Projeto', 1, $this->force_db_utf8);
     }
     else {
       $connectionDbms     = $this->nm_tpbanco;
@@ -1529,10 +1529,10 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
                $delim  = "#";
                $delim1 = "#";
            }
-           if (isset($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['SC_sep_date']))
+           if (isset($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['SC_sep_date']))
            {
-               $delim  = $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['SC_sep_date'];
-               $delim1 = $_SESSION['sc_session'][$this->sc_page]['form_clientes_mob']['SC_sep_date1'];
+               $delim  = $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['SC_sep_date'];
+               $delim1 = $_SESSION['sc_session'][$this->sc_page]['form_tecnicos_mob']['SC_sep_date1'];
            }
            return $delim . $var . $delim1;
        }
@@ -1543,14 +1543,14 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
    } // sc_Sql_Protect
 }
 //===============================================================================
-class form_clientes_mob_edit
+class form_tecnicos_mob_edit
 {
-    var $contr_form_clientes_mob;
+    var $contr_form_tecnicos_mob;
     function inicializa()
     {
         global $nm_opc_lookup, $nm_opc_php, $script_case_init;
-        require_once("form_clientes_mob_apl.php");
-        $this->contr_form_clientes_mob = new form_clientes_mob_apl();
+        require_once("form_tecnicos_mob_apl.php");
+        $this->contr_form_tecnicos_mob = new form_tecnicos_mob_apl();
     }
 }
 if (!function_exists("NM_is_utf8"))
@@ -1561,7 +1561,7 @@ ob_start();
 //
 //----------------  
 //
-    $_SESSION['scriptcase']['form_clientes_mob']['contr_erro'] = 'off';
+    $_SESSION['scriptcase']['form_tecnicos_mob']['contr_erro'] = 'off';
     if (!function_exists("NM_is_utf8"))
     {
         include_once("../_lib/lib/php/nm_utf8.php");
@@ -1624,7 +1624,7 @@ ob_start();
              {
                  $nmgp_var = $sc_conv_var[strtolower($nmgp_var)];
              }
-             nm_limpa_str_form_clientes_mob($nmgp_val);
+             nm_limpa_str_form_tecnicos_mob($nmgp_val);
              $nmgp_val = NM_decode_input($nmgp_val);
              $$nmgp_var = $nmgp_val;
         }
@@ -1659,7 +1659,7 @@ ob_start();
              {
                  $nmgp_var = $sc_conv_var[strtolower($nmgp_var)];
              }
-             nm_limpa_str_form_clientes_mob($nmgp_val);
+             nm_limpa_str_form_tecnicos_mob($nmgp_val);
              $nmgp_val = NM_decode_input($nmgp_val);
              $$nmgp_var = $nmgp_val;
         }
@@ -1687,23 +1687,23 @@ ob_start();
         if (isset($_COOKIE['sc_apl_default_Projeto'])) {
             $apl_def = explode(",", $_COOKIE['sc_apl_default_Projeto']);
         }
-        elseif (is_file($root . $_SESSION['scriptcase']['form_clientes']['glo_nm_path_imag_temp'] . "/sc_apl_default_Projeto.txt")) {
-            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['form_clientes']['glo_nm_path_imag_temp'] . "/sc_apl_default_Projeto.txt"));
+        elseif (is_file($root . $_SESSION['scriptcase']['form_tecnicos']['glo_nm_path_imag_temp'] . "/sc_apl_default_Projeto.txt")) {
+            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['form_tecnicos']['glo_nm_path_imag_temp'] . "/sc_apl_default_Projeto.txt"));
         }
         if (isset($apl_def)) {
-            if ($apl_def[0] != "form_clientes") {
+            if ($apl_def[0] != "form_tecnicos") {
                 $_SESSION['scriptcase']['sem_session'] = true;
                 if (strtolower(substr($apl_def[0], 0 , 7)) == "http://" || strtolower(substr($apl_def[0], 0 , 8)) == "https://" || substr($apl_def[0], 0 , 2) == "..") {
-                    $_SESSION['scriptcase']['form_clientes']['session_timeout']['redir'] = $apl_def[0];
+                    $_SESSION['scriptcase']['form_tecnicos']['session_timeout']['redir'] = $apl_def[0];
                 }
                 else {
-                    $_SESSION['scriptcase']['form_clientes']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
+                    $_SESSION['scriptcase']['form_tecnicos']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
                 }
                 $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
-                $_SESSION['scriptcase']['form_clientes']['session_timeout']['redir_tp'] = $Redir_tp;
+                $_SESSION['scriptcase']['form_tecnicos']['session_timeout']['redir_tp'] = $Redir_tp;
             }
             if (isset($_COOKIE['sc_actual_lang_Projeto'])) {
-                $_SESSION['scriptcase']['form_clientes']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_Projeto'];
+                $_SESSION['scriptcase']['form_tecnicos']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_Projeto'];
             }
         }
     }
@@ -1717,74 +1717,55 @@ ob_start();
     }
     if (isset($SC_where_pdf) && !empty($SC_where_pdf))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['where_filter'] = $SC_where_pdf;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['where_filter'] = $SC_where_pdf;
     }
 
-    if (isset($_POST['rs']) && !is_array($_POST['rs']) && 'ajax_' == substr($_POST['rs'], 0, 5) && isset($_POST['rsargs']) && !empty($_POST['rsargs']) && !isset($_SESSION['scriptcase']['form_clientes_mob']['session_timeout']['redir']))
+    if (isset($_POST['rs']) && !is_array($_POST['rs']) && 'ajax_' == substr($_POST['rs'], 0, 5) && isset($_POST['rsargs']) && !empty($_POST['rsargs']) && !isset($_SESSION['scriptcase']['form_tecnicos_mob']['session_timeout']['redir']))
     {
-        if ('ajax_form_clientes_mob_validate_nome_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_validate_id_tecnico' == $_POST['rs'])
         {
-            $nome_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $id_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_clientes_mob_validate_fone_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_validate_nome_tecnico' == $_POST['rs'])
         {
-            $fone_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nome_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_clientes_mob_validate_email_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_validate_email_tecnico' == $_POST['rs'])
         {
-            $email_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $email_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_clientes_mob_validate_endereco_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_validate_fone_tecnico' == $_POST['rs'])
         {
-            $endereco_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $fone_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_clientes_mob_validate_cidade_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_validate_usuario_login' == $_POST['rs'])
         {
-            $cidade_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $usuario_login = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_clientes_mob_validate_estado_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_submit_form' == $_POST['rs'])
         {
-            $estado_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $id_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nome_tecnico = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $email_tecnico = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $fone_tecnico = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $usuario_login = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][12]);
         }
-        if ('ajax_form_clientes_mob_validate_pais_cliente' == $_POST['rs'])
+        if ('ajax_form_tecnicos_mob_navigate_form' == $_POST['rs'])
         {
-            $pais_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_clientes_mob_validate_cep_cliente' == $_POST['rs'])
-        {
-            $cep_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_clientes_mob_submit_form' == $_POST['rs'])
-        {
-            $nome_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $fone_cliente = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $email_cliente = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $endereco_cliente = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $cidade_cliente = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $estado_cliente = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $pais_cliente = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $cep_cliente = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $id_cliente = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][16]);
-        }
-        if ('ajax_form_clientes_mob_navigate_form' == $_POST['rs'])
-        {
-            $id_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $id_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][1]);
             $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][2]);
             $nmgp_ordem = NM_utf8_urldecode($_POST['rsargs'][3]);
@@ -1821,69 +1802,69 @@ ob_start();
     {
         $_SESSION['scriptcase']['glo_senha_protect'] = $glo_senha_protect;
     }
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['lig_edit_lookup']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['lig_edit_lookup']     = false;
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['lig_edit_lookup_cb']  = '';
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['lig_edit_lookup_row'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup']     = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_cb']  = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_row'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_call']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_call']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_call'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_call'] = false;
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_proc']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_proc']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_proc'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_proc'] = false;
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_insert']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_insert']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_insert'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_insert'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_update']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_update']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_update'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_update'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_delete']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_delete']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_delete'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_delete'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_btn_nav']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_btn_nav']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_form_btn_nav'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_form_btn_nav'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_grid_edit']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_grid_edit']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_grid_edit'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_grid_edit'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_grid_edit_link']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_grid_edit_link']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_grid_edit_link'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_grid_edit_link'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_qtd_reg']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_qtd_reg']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_qtd_reg'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_qtd_reg'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_tp_pag']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_tp_pag']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_liga_tp_pag'] = '';
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_liga_tp_pag'] = '';
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_modal']))
+    if (isset($script_case_init) && !is_array($script_case_init) && !isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_modal']))
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_modal'] = isset($_GET['nmgp_url_saida']) && 'modal' == $_GET['nmgp_url_saida'];
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_modal'] = isset($_GET['nmgp_url_saida']) && 'modal' == $_GET['nmgp_url_saida'];
     } 
-    if (isset($script_case_init) && !is_array($script_case_init) && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_proc'])
+    if (isset($script_case_init) && !is_array($script_case_init) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_proc'])
     {
         return;
     }
-    if (isset($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_parms']))
+    if (isset($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms']))
     { 
         $tmp_nmgp_parms = '';
         if (isset($nmgp_parms) && '' != $nmgp_parms)
         {
             $tmp_nmgp_parms = $nmgp_parms . '?@?';
         }
-        $nmgp_parms = $tmp_nmgp_parms . $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_parms'];
-        unset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_parms']);
+        $nmgp_parms = $tmp_nmgp_parms . $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms'];
+        unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms']);
     } 
     if (isset($nmgp_parms) && !empty($nmgp_parms) && !is_array($nmgp_parms)) 
     { 
@@ -1908,7 +1889,7 @@ ob_start();
                    $cadapar[0] = substr($cadapar[0], 11);
                    $cadapar[1] = $_SESSION[$cadapar[1]];
                }
-               nm_limpa_str_form_clientes_mob($cadapar[1]);
+               nm_limpa_str_form_tecnicos_mob($cadapar[1]);
                if (isset($sc_conv_var[$cadapar[0]]))
                {
                    $cadapar[0] = $sc_conv_var[$cadapar[0]];
@@ -1924,11 +1905,11 @@ ob_start();
            $ix++;
         }
     } 
-    elseif (isset($script_case_init) && !empty($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['parms']))
+    elseif (isset($script_case_init) && !empty($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['parms']))
     {
         if (!isset($nmgp_opcao) || ($nmgp_opcao != "incluir" && $nmgp_opcao != "novo" && $nmgp_opcao != "recarga" && $nmgp_opcao != "muda_form"))
         {
-            $todox = str_replace("?#?@?@?", "?#?@ ?@?", $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['parms']);
+            $todox = str_replace("?#?@?@?", "?#?@ ?@?", $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['parms']);
             $todo  = explode("?@?", $todox);
             $ix = 0;
             while (!empty($todo[$ix]))
@@ -1956,15 +1937,15 @@ ob_start();
     }
     $salva_run = "N";
     $salva_iframe = false;
-    if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu']))
+    if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu']))
     {
-        $salva_iframe = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu'];
-        unset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu']);
+        $salva_iframe = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu'];
+        unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu']);
     }
-    if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe']))
+    if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe']))
     {
-        $salva_run = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'];
-        unset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe']);
+        $salva_run = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'];
+        unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe']);
     }
     if (isset($nm_run_menu) && $nm_run_menu == 1)
     {
@@ -1979,13 +1960,13 @@ ob_start();
                 }
             }
         }
-        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "form_clientes_mob";
+        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "form_tecnicos_mob";
         $achou = false;
         if (isset($_SESSION['sc_session'][$script_case_init]))
         {
             foreach ($_SESSION['sc_session'][$script_case_init] as $nome_apl => $resto)
             {
-                if ($nome_apl == 'form_clientes_mob' || $achou)
+                if ($nome_apl == 'form_tecnicos_mob' || $achou)
                 {
                     unset($_SESSION['sc_session'][$script_case_init][$nome_apl]);
                     if (!empty($_SESSION['sc_session'][$script_case_init][$nome_apl]))
@@ -2009,77 +1990,77 @@ ob_start();
                 }
             }
         }
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu']  = true;
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['mostra_cab']   = "S";
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe']   = "N";
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'] = "";
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu']  = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['mostra_cab']   = "S";
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe']   = "N";
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'] = "";
     }
     else
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe']  = $salva_run;
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['iframe_menu'] = $salva_iframe;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe']  = $salva_run;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['iframe_menu'] = $salva_iframe;
     }
 
-    if (!isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['db_changed']))
+    if (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['db_changed']))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['db_changed'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['db_changed'] = false;
     }
     if (isset($_GET['nmgp_outra_jan']) && 'true' == $_GET['nmgp_outra_jan'] && isset($_GET['nmgp_url_saida']) && 'modal' == $_GET['nmgp_url_saida'])
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['db_changed'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['db_changed'] = false;
     }
 
-    if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'form_clientes_mob')
+    if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'form_tecnicos_mob')
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] = true;
          unset($_SESSION['scriptcase']['sc_outra_jan']);
     }
     if (isset($nmgp_outra_jan) && $nmgp_outra_jan == 'true')
     {
         if (isset($nmgp_url_saida) && $nmgp_url_saida == "modal")
         {
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_modal'] = true;
-            $nm_url_saida = "form_clientes_mob_fim.php"; 
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_modal'] = true;
+            $nm_url_saida = "form_tecnicos_mob_fim.php"; 
         }
         $nm_apl_dependente = 0;
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] = true;
     }
     if (!isset($nm_apl_dependente)) {
         $nm_apl_dependente = 0;
     }
 
-    if (!isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['initialize']))
+    if (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['initialize']))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['initialize'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['initialize'] = true;
     }
     elseif (!isset($_SERVER['HTTP_REFERER']))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['initialize'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['initialize'] = false;
     }
-    elseif (false === strpos($_SERVER['HTTP_REFERER'], '/clientes/'))
+    elseif (false === strpos($_SERVER['HTTP_REFERER'], '/form_tecnicos/'))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['initialize'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['initialize'] = true;
     }
     else
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['initialize'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['initialize'] = false;
     }
 
-    if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['first_time']))
+    if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['first_time']))
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['first_time'] = false;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['first_time'] = false;
     }
     else
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['first_time'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['first_time'] = true;
     }
 
-    $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['menu_desenv'] = false;   
+    $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['menu_desenv'] = false;   
     if (!defined("SC_ERROR_HANDLER"))
     {
         define("SC_ERROR_HANDLER", 1);
     }
-    include_once(dirname(__FILE__) . "/form_clientes_mob_erro.php");
+    include_once(dirname(__FILE__) . "/form_tecnicos_mob_erro.php");
     $nm_browser = strpos($_SERVER['HTTP_USER_AGENT'], "Konqueror") ;
     if (is_int($nm_browser))   
     {
@@ -2139,43 +2120,43 @@ ob_start();
     {
         if (!empty($nmgp_opcao))  
         {
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['opcao'] = $nmgp_opcao ; 
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['opcao'] = $nmgp_opcao ; 
         }
-        if (!empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_redirect_apl']))
+        if (!empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_redirect_apl']))
         {
-            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_redirect_apl']; 
-            $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_redirect_tp']; 
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_redirect_apl'] = "";
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_redirect_tp'] = "";
-            $nm_url_saida = "form_clientes_mob_fim.php"; 
+            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_redirect_apl']; 
+            $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_redirect_tp']; 
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_redirect_apl'] = "";
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_redirect_tp'] = "";
+            $nm_url_saida = "form_tecnicos_mob_fim.php"; 
         }
-        elseif (isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] == 'true')
+        elseif (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] == 'true')
         {
-               $nm_url_saida = "form_clientes_mob_fim.php"; 
+               $nm_url_saida = "form_tecnicos_mob_fim.php"; 
         }
-        elseif ($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "R")
+        elseif ($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "R")
         {
            $nm_url_saida = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ""; 
            $nm_url_saida = str_replace("_fim.php", ".php", $nm_url_saida); 
             $nm_saida_global = $nm_url_saida;
-            if (!empty($nmgp_url_saida) && empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'])) 
+            if (!empty($nmgp_url_saida) && empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'])) 
             {
-                $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'] = $nmgp_url_saida ; 
+                $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'] = $nmgp_url_saida ; 
             } 
-            if (!empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'])) 
+            if (!empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'])) 
             {
-                $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'] . "?script_case_init=" . $script_case_init;  
+                $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'] . "?script_case_init=" . $script_case_init;  
                 $nm_apl_dependente = 1 ; 
                 $nm_saida_global = $nm_url_saida;
             } 
             if ($nm_apl_dependente != 1) 
             { 
-                $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] = "N"; 
+                $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] = "N"; 
             } 
-            if ($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "R" && (!isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_call']) || !$_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['embutida_call']))
+            if ($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "R" && (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_call']) || !$_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_call']))
             { 
                 $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $nm_url_saida; 
-                $nm_url_saida = "form_clientes_mob_fim.php"; 
+                $nm_url_saida = "form_tecnicos_mob_fim.php"; 
                 $_SESSION['scriptcase']['sc_tp_saida'] = "P"; 
                 if ($nm_apl_dependente == 1) 
                 { 
@@ -2187,90 +2168,84 @@ ob_start();
                 } 
             } 
         }
-        if (empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_tp']) && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "R")
+        if (empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_tp']) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "R")
         {
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_php'] = $nm_url_saida;
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_apl'] = $nm_saida_global;
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_ss']  = (isset($_SESSION['scriptcase']['sc_url_saida'][$script_case_init])) ? $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] : "";
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_dep'] = $nm_apl_dependente;
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_tp']  = (isset($_SESSION['scriptcase']['sc_tp_saida'])) ? $_SESSION['scriptcase']['sc_tp_saida'] : "";
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_php'] = $nm_url_saida;
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_apl'] = $nm_saida_global;
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_ss']  = (isset($_SESSION['scriptcase']['sc_url_saida'][$script_case_init])) ? $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] : "";
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_dep'] = $nm_apl_dependente;
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_tp']  = (isset($_SESSION['scriptcase']['sc_tp_saida'])) ? $_SESSION['scriptcase']['sc_tp_saida'] : "";
         }
-        $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_php'];
-        $nm_saida_global = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_php'];
-        $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_dep'];
-        if ($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "R" && !empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_ss'])) 
+        $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_php'];
+        $nm_saida_global = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_php'];
+        $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_dep'];
+        if ($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "R" && !empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_ss'])) 
         { 
-            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_ss'];
-            $_SESSION['scriptcase']['sc_tp_saida']  = $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['volta_tp'];
+            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_ss'];
+            $_SESSION['scriptcase']['sc_tp_saida']  = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['volta_tp'];
         } 
-        if ($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] == "R") 
+        if ($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] == "R") 
         { 
-            if (!empty($nmgp_url_saida) && empty($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'])) 
+            if (!empty($nmgp_url_saida) && empty($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'])) 
             {
-                $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['retorno_edit'] = $nmgp_url_saida . "?script_case_init=" . $script_case_init; 
+                $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['retorno_edit'] = $nmgp_url_saida . "?script_case_init=" . $script_case_init; 
             } 
         } 
-        if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['run_iframe'] != "R") 
+        if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['run_iframe'] != "R") 
         { 
-            $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['menu_desenv'] = true;   
+            $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['menu_desenv'] = true;   
         } 
     }
     if (isset($nmgp_redir)) 
     { 
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['redir'] = $nmgp_redir;   
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['redir'] = $nmgp_redir;   
     } 
     if (isset($nmgp_outra_jan) && $nmgp_outra_jan == 'true')
     {
-        $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'] = true;
+        $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'] = true;
          if ($nmgp_url_saida == "modal")
          {
-             $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_modal'] = true;
-             $nm_url_saida = "form_clientes_mob_fim.php"; 
+             $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_modal'] = true;
+             $nm_url_saida = "form_tecnicos_mob_fim.php"; 
          }
     }
-    if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['form_clientes_mob']['sc_outra_jan'])
+    if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_outra_jan'])
     {
         $nm_apl_dependente = 0;
     }
     $GLOBALS["NM_ERRO_IBASE"] = 0;  
-    $inicial_form_clientes_mob = new form_clientes_mob_edit();
-    $inicial_form_clientes_mob->inicializa();
-
-    $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['select_html'] = array();
-    $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['select_html']['pais_cliente'] = "class=\"sc-js-input scFormObjectOdd css_pais_cliente_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_pais_cliente\" name=\"pais_cliente\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
+    $inicial_form_tecnicos_mob = new form_tecnicos_mob_edit();
+    $inicial_form_tecnicos_mob->inicializa();
 
     if (!defined('SC_SAJAX_LOADED'))
     {
-        include_once(dirname(__FILE__) . '/form_clientes_mob_sajax.php');
+        include_once(dirname(__FILE__) . '/form_tecnicos_mob_sajax.php');
         define('SC_SAJAX_LOADED', 'YES');
     }
     if (!class_exists('Services_JSON'))
     {
-        include_once(dirname(__FILE__) . '/form_clientes_mob_json.php');
+        include_once(dirname(__FILE__) . '/form_tecnicos_mob_json.php');
     }
     $sajax_request_type = "POST";
     sajax_init();
     //$sajax_debug_mode = 1;
-    sajax_export("ajax_form_clientes_mob_validate_nome_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_fone_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_email_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_endereco_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_cidade_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_estado_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_pais_cliente");
-    sajax_export("ajax_form_clientes_mob_validate_cep_cliente");
-    sajax_export("ajax_form_clientes_mob_submit_form");
-    sajax_export("ajax_form_clientes_mob_navigate_form");
+    sajax_export("ajax_form_tecnicos_mob_validate_id_tecnico");
+    sajax_export("ajax_form_tecnicos_mob_validate_nome_tecnico");
+    sajax_export("ajax_form_tecnicos_mob_validate_email_tecnico");
+    sajax_export("ajax_form_tecnicos_mob_validate_fone_tecnico");
+    sajax_export("ajax_form_tecnicos_mob_validate_usuario_login");
+    sajax_export("ajax_form_tecnicos_mob_submit_form");
+    sajax_export("ajax_form_tecnicos_mob_navigate_form");
     sajax_handle_client_request();
 
 if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
-    $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'] = true;
+    $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'] = true;
     ob_start();
 }
 
-    $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+    $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
 //
-    function nm_limpa_str_form_clientes_mob(&$str)
+    function nm_limpa_str_form_tecnicos_mob(&$str)
     {
         if (get_magic_quotes_gpc())
         {
@@ -2290,174 +2265,113 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
     }
 
-    function ajax_form_clientes_mob_validate_nome_cliente($nome_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_validate_id_tecnico($id_tecnico, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_nome_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'nome_cliente' => NM_utf8_urldecode($nome_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'validate_id_tecnico';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'id_tecnico' => NM_utf8_urldecode($id_tecnico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
-    } // ajax_validate_nome_cliente
+    } // ajax_validate_id_tecnico
 
-    function ajax_form_clientes_mob_validate_fone_cliente($fone_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_validate_nome_tecnico($nome_tecnico, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_fone_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'fone_cliente' => NM_utf8_urldecode($fone_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'validate_nome_tecnico';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'nome_tecnico' => NM_utf8_urldecode($nome_tecnico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
-    } // ajax_validate_fone_cliente
+    } // ajax_validate_nome_tecnico
 
-    function ajax_form_clientes_mob_validate_email_cliente($email_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_validate_email_tecnico($email_tecnico, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_email_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'email_cliente' => NM_utf8_urldecode($email_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'validate_email_tecnico';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'email_tecnico' => NM_utf8_urldecode($email_tecnico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
-    } // ajax_validate_email_cliente
+    } // ajax_validate_email_tecnico
 
-    function ajax_form_clientes_mob_validate_endereco_cliente($endereco_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_validate_fone_tecnico($fone_tecnico, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_endereco_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'endereco_cliente' => NM_utf8_urldecode($endereco_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'validate_fone_tecnico';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'fone_tecnico' => NM_utf8_urldecode($fone_tecnico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
-    } // ajax_validate_endereco_cliente
+    } // ajax_validate_fone_tecnico
 
-    function ajax_form_clientes_mob_validate_cidade_cliente($cidade_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_validate_usuario_login($usuario_login, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_cidade_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'cidade_cliente' => NM_utf8_urldecode($cidade_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'validate_usuario_login';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'usuario_login' => NM_utf8_urldecode($usuario_login),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
-    } // ajax_validate_cidade_cliente
+    } // ajax_validate_usuario_login
 
-    function ajax_form_clientes_mob_validate_estado_cliente($estado_cliente, $script_case_init)
+    function ajax_form_tecnicos_mob_submit_form($id_tecnico, $nome_tecnico, $email_tecnico, $fone_tecnico, $usuario_login, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_estado_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'estado_cliente' => NM_utf8_urldecode($estado_cliente),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
-        exit;
-    } // ajax_validate_estado_cliente
-
-    function ajax_form_clientes_mob_validate_pais_cliente($pais_cliente, $script_case_init)
-    {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_pais_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'pais_cliente' => NM_utf8_urldecode($pais_cliente),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
-        exit;
-    } // ajax_validate_pais_cliente
-
-    function ajax_form_clientes_mob_validate_cep_cliente($cep_cliente, $script_case_init)
-    {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'validate_cep_cliente';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'cep_cliente' => NM_utf8_urldecode($cep_cliente),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
-        exit;
-    } // ajax_validate_cep_cliente
-
-    function ajax_form_clientes_mob_submit_form($nome_cliente, $fone_cliente, $email_cliente, $endereco_cliente, $cidade_cliente, $estado_cliente, $pais_cliente, $cep_cliente, $id_cliente, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
-    {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'submit_form';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'nome_cliente' => NM_utf8_urldecode($nome_cliente),
-                  'fone_cliente' => NM_utf8_urldecode($fone_cliente),
-                  'email_cliente' => NM_utf8_urldecode($email_cliente),
-                  'endereco_cliente' => NM_utf8_urldecode($endereco_cliente),
-                  'cidade_cliente' => NM_utf8_urldecode($cidade_cliente),
-                  'estado_cliente' => NM_utf8_urldecode($estado_cliente),
-                  'pais_cliente' => NM_utf8_urldecode($pais_cliente),
-                  'cep_cliente' => NM_utf8_urldecode($cep_cliente),
-                  'id_cliente' => NM_utf8_urldecode($id_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'submit_form';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'id_tecnico' => NM_utf8_urldecode($id_tecnico),
+                  'nome_tecnico' => NM_utf8_urldecode($nome_tecnico),
+                  'email_tecnico' => NM_utf8_urldecode($email_tecnico),
+                  'fone_tecnico' => NM_utf8_urldecode($fone_tecnico),
+                  'usuario_login' => NM_utf8_urldecode($usuario_login),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),
@@ -2468,22 +2382,22 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'csrf_token' => NM_utf8_urldecode($csrf_token),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
     } // ajax_submit_form
 
-    function ajax_form_clientes_mob_navigate_form($id_cliente, $nm_form_submit, $nmgp_opcao, $nmgp_ordem, $nmgp_arg_dyn_search, $script_case_init)
+    function ajax_form_tecnicos_mob_navigate_form($id_tecnico, $nm_form_submit, $nmgp_opcao, $nmgp_ordem, $nmgp_arg_dyn_search, $script_case_init)
     {
-        global $inicial_form_clientes_mob;
-        //register_shutdown_function("form_clientes_mob_pack_ajax_response");
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_flag          = true;
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao         = 'navigate_form';
-        $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param'] = array(
-                  'id_cliente' => NM_utf8_urldecode($id_cliente),
+        global $inicial_form_tecnicos_mob;
+        //register_shutdown_function("form_tecnicos_mob_pack_ajax_response");
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_flag          = true;
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao         = 'navigate_form';
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param'] = array(
+                  'id_tecnico' => NM_utf8_urldecode($id_tecnico),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),
                   'nmgp_ordem' => NM_utf8_urldecode($nmgp_ordem),
@@ -2491,60 +2405,60 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
-        if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+        if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
         {
             ob_start();
         }
-        $inicial_form_clientes_mob->contr_form_clientes_mob->controle();
+        $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->controle();
         exit;
     } // ajax_navigate_form
 
 
-   function form_clientes_mob_pack_ajax_response()
+   function form_tecnicos_mob_pack_ajax_response()
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp = array();
 
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['wizard']))
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['wizard']))
       {
-          $aResp['wizard'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['wizard'];
+          $aResp['wizard'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['wizard'];
       }
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['empty_filter']))
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['empty_filter']))
       {
-          $aResp['empty_filter'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['empty_filter'];
+          $aResp['empty_filter'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['empty_filter'];
       }
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['dyn_search']['NM_Dynamic_Search']))
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['dyn_search']['NM_Dynamic_Search']))
       {
-          $aResp['dyn_search']['NM_Dynamic_Search'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['dyn_search']['NM_Dynamic_Search'];
+          $aResp['dyn_search']['NM_Dynamic_Search'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['dyn_search']['NM_Dynamic_Search'];
       }
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['dyn_search']['id_dyn_search_cmd_str']))
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['dyn_search']['id_dyn_search_cmd_str']))
       {
-          $aResp['dyn_search']['id_dyn_search_cmd_str'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['dyn_search']['id_dyn_search_cmd_str'];
+          $aResp['dyn_search']['id_dyn_search_cmd_str'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['dyn_search']['id_dyn_search_cmd_str'];
       }
-      if ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['calendarReload'])
+      if ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['calendarReload'])
       {
          $aResp['result'] = 'CALENDARRELOAD';
       }
-      elseif ('' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['autoComp'])
+      elseif ('' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['autoComp'])
       {
          $aResp['result'] = 'AUTOCOMP';
       }
 //mestre_detalhe
-      elseif (!empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['newline']))
+      elseif (!empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['newline']))
       {
          $aResp['result'] = 'NEWLINE';
          ob_end_clean();
       }
-      elseif (!empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['tableRefresh']))
+      elseif (!empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['tableRefresh']))
       {
          $aResp['result'] = 'TABLEREFRESH';
       }
 //-----
-      elseif (!empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['errList']))
+      elseif (!empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['errList']))
       {
          $aResp['result'] = 'ERROR';
       }
-      elseif (!empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fldList']))
+      elseif (!empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fldList']))
       {
          $aResp['result'] = 'SET';
       }
@@ -2554,136 +2468,136 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
       }
       if ('AUTOCOMP' == $aResp['result'])
       {
-         $aResp = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['autoComp'];
+         $aResp = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['autoComp'];
       }
 //mestre_detalhe
       elseif ('NEWLINE' == $aResp['result'])
       {
-         $aResp = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['newline'];
+         $aResp = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['newline'];
       }
       else
 //-----
       {
-         $aResp['ajaxRequest'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_opcao;
+         $aResp['ajaxRequest'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_opcao;
          if ('CALENDARRELOAD' == $aResp['result'])
          {
-            form_clientes_mob_pack_calendar_reload($aResp);
+            form_tecnicos_mob_pack_calendar_reload($aResp);
          }
          elseif ('ERROR' == $aResp['result'])
          {
-            form_clientes_mob_pack_ajax_errors($aResp);
+            form_tecnicos_mob_pack_ajax_errors($aResp);
          }
          elseif ('SET' == $aResp['result'])
          {
-            form_clientes_mob_pack_ajax_set_fields($aResp);
+            form_tecnicos_mob_pack_ajax_set_fields($aResp);
          }
          elseif ('TABLEREFRESH' == $aResp['result'])
          {
-            form_clientes_mob_pack_ajax_set_fields($aResp);
-            $aResp['tableRefresh'] = form_clientes_mob_pack_protect_string($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['tableRefresh']);
+            form_tecnicos_mob_pack_ajax_set_fields($aResp);
+            $aResp['tableRefresh'] = form_tecnicos_mob_pack_protect_string($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['tableRefresh']);
          }
          if ('OK' == $aResp['result'] || 'SET' == $aResp['result'])
          {
-            form_clientes_mob_pack_ajax_ok($aResp);
+            form_tecnicos_mob_pack_ajax_ok($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['focus']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['focus'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['focus']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['focus'])
          {
-            $aResp['setFocus'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['focus'];
+            $aResp['setFocus'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['focus'];
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['closeLine']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['closeLine'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['closeLine']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['closeLine'])
          {
-            $aResp['closeLine'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['closeLine'];
+            $aResp['closeLine'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['closeLine'];
          }
          else
          {
             $aResp['closeLine'] = 'N';
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['clearUpload']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['clearUpload'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['clearUpload']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['clearUpload'])
          {
-            $aResp['clearUpload'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['clearUpload'];
+            $aResp['clearUpload'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['clearUpload'];
          }
          else
          {
             $aResp['clearUpload'] = 'N';
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnDisabled'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnDisabled'])
          {
-            form_clientes_mob_pack_btn_disabled($aResp);
+            form_tecnicos_mob_pack_btn_disabled($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnLabel'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnLabel'])
          {
-            form_clientes_mob_pack_btn_label($aResp);
+            form_tecnicos_mob_pack_btn_label($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['varList']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['varList']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['varList']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['varList']))
          {
-            form_clientes_mob_pack_var_list($aResp);
+            form_tecnicos_mob_pack_var_list($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['masterValue']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['masterValue'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['masterValue']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['masterValue'])
          {
-            form_clientes_mob_pack_master_value($aResp);
+            form_tecnicos_mob_pack_master_value($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert'])
          {
-            form_clientes_mob_pack_ajax_alert($aResp);
+            form_tecnicos_mob_pack_ajax_alert($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage'])
          {
-            form_clientes_mob_pack_ajax_message($aResp);
+            form_tecnicos_mob_pack_ajax_message($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxJavascript']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxJavascript'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxJavascript']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxJavascript'])
          {
-            form_clientes_mob_pack_ajax_javascript($aResp);
+            form_tecnicos_mob_pack_ajax_javascript($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir']))
          {
-            form_clientes_mob_pack_ajax_redir($aResp);
+            form_tecnicos_mob_pack_ajax_redir($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redirExit']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redirExit']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redirExit']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redirExit']))
          {
-            form_clientes_mob_pack_ajax_redir_exit($aResp);
+            form_tecnicos_mob_pack_ajax_redir_exit($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['blockDisplay']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['blockDisplay']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['blockDisplay']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['blockDisplay']))
          {
-            form_clientes_mob_pack_ajax_block_display($aResp);
+            form_tecnicos_mob_pack_ajax_block_display($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldDisplay']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldDisplay']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldDisplay']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldDisplay']))
          {
-            form_clientes_mob_pack_ajax_field_display($aResp);
+            form_tecnicos_mob_pack_ajax_field_display($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplay']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplay']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplay']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplay']))
          {
-            $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplay'] = $inicial_form_clientes_mob->contr_form_clientes_mob->nmgp_botoes;
-            form_clientes_mob_pack_ajax_button_display($aResp);
+            $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplay'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->nmgp_botoes;
+            form_tecnicos_mob_pack_ajax_button_display($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplayVert']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplayVert']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplayVert']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplayVert']))
          {
-            form_clientes_mob_pack_ajax_button_display_vert($aResp);
+            form_tecnicos_mob_pack_ajax_button_display_vert($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldLabel']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldLabel']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldLabel']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldLabel']))
          {
-            form_clientes_mob_pack_ajax_field_label($aResp);
+            form_tecnicos_mob_pack_ajax_field_label($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['readOnly']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['readOnly']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['readOnly']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['readOnly']))
          {
-            form_clientes_mob_pack_ajax_readonly($aResp);
+            form_tecnicos_mob_pack_ajax_readonly($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']))
          {
-            form_clientes_mob_pack_ajax_nav_status($aResp);
+            form_tecnicos_mob_pack_ajax_nav_status($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navSummary']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navSummary']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navSummary']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navSummary']))
          {
-            form_clientes_mob_pack_ajax_nav_Summary($aResp);
+            form_tecnicos_mob_pack_ajax_nav_Summary($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navPage']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navPage']))
          {
-            form_clientes_mob_pack_ajax_navPage($aResp);
+            form_tecnicos_mob_pack_ajax_navPage($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnVars']) && !empty($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnVars']))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnVars']) && !empty($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnVars']))
          {
-            form_clientes_mob_pack_ajax_btn_vars($aResp);
+            form_tecnicos_mob_pack_ajax_btn_vars($aResp);
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['quickSearchRes']) && $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['quickSearchRes'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['quickSearchRes']) && $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['quickSearchRes'])
          {
             $aResp['quickSearchRes'] = 'Y';
          }
@@ -2691,9 +2605,9 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          {
             $aResp['quickSearchRes'] = 'N';
          }
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['event_field']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['event_field'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['event_field']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['event_field'])
          {
-            $aResp['eventField'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['event_field'];
+            $aResp['eventField'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['event_field'];
          }
          else
          {
@@ -2701,7 +2615,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          }
          $aResp['htmOutput'] = '';
     
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output']) && $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['buffer_output'])
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output']) && $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['buffer_output'])
          {
             $aResp['htmOutput'] = ob_get_contents();
             if (false === $aResp['htmOutput'])
@@ -2710,7 +2624,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
             }
             else
             {
-               $aResp['htmOutput'] = form_clientes_mob_pack_protect_string(NM_charset_to_utf8($aResp['htmOutput']));
+               $aResp['htmOutput'] = form_tecnicos_mob_pack_protect_string(NM_charset_to_utf8($aResp['htmOutput']));
                ob_end_clean();
             }
          }
@@ -2730,36 +2644,36 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
           echo "var res = " . trim(sajax_get_js_repr($aResp)) . "; res;";
       }
       exit;
-   } // form_clientes_mob_pack_ajax_response
+   } // form_tecnicos_mob_pack_ajax_response
 
-   function form_clientes_mob_pack_calendar_reload(&$aResp)
+   function form_tecnicos_mob_pack_calendar_reload(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['calendarReload'] = 'OK';
-   } // form_clientes_mob_pack_calendar_reload
+   } // form_tecnicos_mob_pack_calendar_reload
 
-   function form_clientes_mob_pack_ajax_errors(&$aResp)
+   function form_tecnicos_mob_pack_ajax_errors(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['errList'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['errList'] as $sField => $aMsg)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['errList'] as $sField => $aMsg)
       {
-         if ('geral_form_clientes_mob' == $sField)
+         if ('geral_form_tecnicos_mob' == $sField)
          {
-             $aMsg = form_clientes_mob_pack_ajax_remove_erros($aMsg);
+             $aMsg = form_tecnicos_mob_pack_ajax_remove_erros($aMsg);
          }
          foreach ($aMsg as $sMsg)
          {
-            $iNumLinha = (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row']) && 'geral_form_clientes_mob' != $sField)
-                       ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
+            $iNumLinha = (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row']) && 'geral_form_tecnicos_mob' != $sField)
+                       ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
             $aResp['errList'][] = array('fldName'  => $sField,
-                                        'msgText'  => form_clientes_mob_pack_protect_string(NM_charset_to_utf8($sMsg)),
+                                        'msgText'  => form_tecnicos_mob_pack_protect_string(NM_charset_to_utf8($sMsg)),
                                         'numLinha' => $iNumLinha);
          }
       }
-   } // form_clientes_mob_pack_ajax_errors
+   } // form_tecnicos_mob_pack_ajax_errors
 
-   function form_clientes_mob_pack_ajax_remove_erros($aErrors)
+   function form_tecnicos_mob_pack_ajax_remove_erros($aErrors)
    {
        $aNewErrors = array();
        if (!empty($aErrors))
@@ -2776,28 +2690,28 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
            }
        }
        return $aNewErrors;
-   } // form_clientes_mob_pack_ajax_remove_erros
+   } // form_tecnicos_mob_pack_ajax_remove_erros
 
-   function form_clientes_mob_pack_ajax_ok(&$aResp)
+   function form_tecnicos_mob_pack_ajax_ok(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      $iNumLinha = (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row']))
-                 ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
-      $aResp['msgDisplay'] = array('msgText'  => form_clientes_mob_pack_protect_string($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['msgDisplay']),
+      global $inicial_form_tecnicos_mob;
+      $iNumLinha = (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row']))
+                 ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
+      $aResp['msgDisplay'] = array('msgText'  => form_tecnicos_mob_pack_protect_string($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['msgDisplay']),
                                    'numLinha' => $iNumLinha);
-   } // form_clientes_mob_pack_ajax_ok
+   } // form_tecnicos_mob_pack_ajax_ok
 
-   function form_clientes_mob_pack_ajax_set_fields(&$aResp)
+   function form_tecnicos_mob_pack_ajax_set_fields(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      $iNumLinha = (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row']))
-                 ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
-      if ('' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['rsSize'])
+      global $inicial_form_tecnicos_mob;
+      $iNumLinha = (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row']))
+                 ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['param']['nmgp_refresh_row'] : "";
+      if ('' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['rsSize'])
       {
-         $aResp['rsSize'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['rsSize'];
+         $aResp['rsSize'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['rsSize'];
       }
       $aResp['fldList'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fldList'] as $sField => $aData)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fldList'] as $sField => $aData)
       {
          $aField = array();
          if (isset($aData['colNum']))
@@ -2810,15 +2724,15 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          }
          if (isset($aData['imgFile']))
          {
-            $aField['imgFile'] = form_clientes_mob_pack_protect_string($aData['imgFile']);
+            $aField['imgFile'] = form_tecnicos_mob_pack_protect_string($aData['imgFile']);
          }
          if (isset($aData['imgOrig']))
          {
-            $aField['imgOrig'] = form_clientes_mob_pack_protect_string($aData['imgOrig']);
+            $aField['imgOrig'] = form_tecnicos_mob_pack_protect_string($aData['imgOrig']);
          }
          if (isset($aData['imgLink']))
          {
-            $aField['imgLink'] = form_clientes_mob_pack_protect_string($aData['imgLink']);
+            $aField['imgLink'] = form_tecnicos_mob_pack_protect_string($aData['imgLink']);
          }
          if (isset($aData['keepImg']))
          {
@@ -2830,15 +2744,15 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          }
          if (isset($aData['docLink']))
          {
-            $aField['docLink'] = form_clientes_mob_pack_protect_string($aData['docLink']);
+            $aField['docLink'] = form_tecnicos_mob_pack_protect_string($aData['docLink']);
          }
          if (isset($aData['docIcon']))
          {
-            $aField['docIcon'] = form_clientes_mob_pack_protect_string($aData['docIcon']);
+            $aField['docIcon'] = form_tecnicos_mob_pack_protect_string($aData['docIcon']);
          }
          if (isset($aData['docReadonly']))
          {
-            $aField['docReadonly'] = form_clientes_mob_pack_protect_string($aData['docReadonly']);
+            $aField['docReadonly'] = form_tecnicos_mob_pack_protect_string($aData['docReadonly']);
          }
          if (isset($aData['keyVal']))
          {
@@ -2866,11 +2780,11 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          }
          if (isset($aData['imgHtml']))
          {
-            $aField['imgHtml'] = form_clientes_mob_pack_protect_string($aData['imgHtml']);
+            $aField['imgHtml'] = form_tecnicos_mob_pack_protect_string($aData['imgHtml']);
          }
          if (isset($aData['mulHtml']))
          {
-            $aField['mulHtml'] = form_clientes_mob_pack_protect_string($aData['mulHtml']);
+            $aField['mulHtml'] = form_tecnicos_mob_pack_protect_string($aData['mulHtml']);
          }
          if (isset($aData['updInnerHtml']))
          {
@@ -2889,9 +2803,9 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
             $aValue = array();
             if (isset($aData['labList'][$iIndex]))
             {
-               $aValue['label'] = form_clientes_mob_pack_protect_string($aData['labList'][$iIndex]);
+               $aValue['label'] = form_tecnicos_mob_pack_protect_string($aData['labList'][$iIndex]);
             }
-            $aValue['value']     = ('_autocomp' != substr($sField, -9)) ? form_clientes_mob_pack_protect_string($sValue) : $sValue;
+            $aValue['value']     = ('_autocomp' != substr($sField, -9)) ? form_tecnicos_mob_pack_protect_string($sValue) : $sValue;
             $aField['valList'][] = $aValue;
          }
          foreach ($aField['valList'] as $iIndex => $aFieldData)
@@ -2911,8 +2825,8 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   foreach ($aOptList as $sValue => $sLabel)
                   {
                      $sOpt = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                     $aField['optList'][] = array('value' => form_clientes_mob_pack_protect_string($sOpt),
-                                                  'label' => form_clientes_mob_pack_protect_string($sLabel));
+                     $aField['optList'][] = array('value' => form_tecnicos_mob_pack_protect_string($sOpt),
+                                                  'label' => form_tecnicos_mob_pack_protect_string($sLabel));
                   }
                }
             }
@@ -2923,229 +2837,229 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
          }
          $aResp['fldList'][] = $aField;
       }
-   } // form_clientes_mob_pack_ajax_set_fields
+   } // form_tecnicos_mob_pack_ajax_set_fields
 
-   function form_clientes_mob_pack_ajax_redir(&$aResp)
+   function form_tecnicos_mob_pack_ajax_redir(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aInfo              = array('metodo', 'action', 'target', 'nmgp_parms', 'nmgp_outra_jan', 'nmgp_url_saida', 'script_case_init', 'script_case_session', 'h_modal', 'w_modal');
       $aResp['redirInfo'] = array();
       foreach ($aInfo as $sTag)
       {
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir'][$sTag]))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir'][$sTag]))
          {
-            $aResp['redirInfo'][$sTag] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redir'][$sTag];
+            $aResp['redirInfo'][$sTag] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redir'][$sTag];
          }
       }
-   } // form_clientes_mob_pack_ajax_redir
+   } // form_tecnicos_mob_pack_ajax_redir
 
-   function form_clientes_mob_pack_ajax_redir_exit(&$aResp)
+   function form_tecnicos_mob_pack_ajax_redir_exit(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aInfo                  = array('metodo', 'action', 'target', 'nmgp_parms', 'nmgp_outra_jan', 'nmgp_url_saida', 'script_case_init', 'script_case_session');
       $aResp['redirExitInfo'] = array();
       foreach ($aInfo as $sTag)
       {
-         if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redirExit'][$sTag]))
+         if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redirExit'][$sTag]))
          {
-            $aResp['redirExitInfo'][$sTag] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['redirExit'][$sTag];
+            $aResp['redirExitInfo'][$sTag] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['redirExit'][$sTag];
          }
       }
-   } // form_clientes_mob_pack_ajax_redir_exit
+   } // form_tecnicos_mob_pack_ajax_redir_exit
 
-   function form_clientes_mob_pack_var_list(&$aResp)
+   function form_tecnicos_mob_pack_var_list(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['varList'] as $varData)
+      global $inicial_form_tecnicos_mob;
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['varList'] as $varData)
       {
          $aResp['varList'][] = array('index' => key($varData),
                                       'value' => current($varData));
       }
-   } // form_clientes_mob_pack_var_list
+   } // form_tecnicos_mob_pack_var_list
 
-   function form_clientes_mob_pack_master_value(&$aResp)
+   function form_tecnicos_mob_pack_master_value(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['masterValue'] as $sIndex => $sValue)
+      global $inicial_form_tecnicos_mob;
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['masterValue'] as $sIndex => $sValue)
       {
          $aResp['masterValue'][] = array('index' => $sIndex,
                                          'value' => $sValue);
       }
-   } // form_clientes_mob_pack_master_value
+   } // form_tecnicos_mob_pack_master_value
 
-   function form_clientes_mob_pack_btn_disabled(&$aResp)
+   function form_tecnicos_mob_pack_btn_disabled(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['btnDisabled'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
         $aResp['btnDisabled'][$btnName] = $btnStatus;
       }
-   } // form_clientes_mob_pack_ajax_alert
+   } // form_tecnicos_mob_pack_ajax_alert
 
-   function form_clientes_mob_pack_btn_label(&$aResp)
+   function form_tecnicos_mob_pack_btn_label(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['btnLabel'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
         $aResp['btnLabel'][$btnName] = $btnLabel;
       }
-   } // form_clientes_mob_pack_ajax_alert
+   } // form_tecnicos_mob_pack_ajax_alert
 
-   function form_clientes_mob_pack_ajax_alert(&$aResp)
+   function form_tecnicos_mob_pack_ajax_alert(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
 // PHP 8.0
-      if (!isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['message'])) {
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['message'] = '';
+      if (!isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['message'])) {
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['message'] = '';
       }
-      if (!isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['params'])) {
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['params'] = '';
+      if (!isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['params'])) {
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['params'] = '';
       }
 //---
-      $aResp['ajaxAlert'] = array('message' => $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['message'], 'params' =>  $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxAlert']['params']);
-   } // form_clientes_mob_pack_ajax_alert
+      $aResp['ajaxAlert'] = array('message' => $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['message'], 'params' =>  $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxAlert']['params']);
+   } // form_tecnicos_mob_pack_ajax_alert
 
-   function form_clientes_mob_pack_ajax_message(&$aResp)
+   function form_tecnicos_mob_pack_ajax_message(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
 // PHP 8.0
-      if (!isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['message'])) {
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['message'] = '';
+      if (!isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['message'])) {
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['message'] = '';
       }
-      if (!isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['title'])) {
-          $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['title'] = '';
+      if (!isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['title'])) {
+          $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['title'] = '';
       }
 //---
-      $aResp['ajaxMessage'] = array('message'      => form_clientes_mob_pack_protect_string($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['message']),
-                                    'title'        => form_clientes_mob_pack_protect_string($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['title']),
-                                    'modal'        => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['modal'])        ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['modal']        : 'N',
-                                    'timeout'      => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['timeout'])      ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['timeout']      : '',
-                                    'button'       => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['button'])       ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['button']       : '',
-                                    'button_label' => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['button_label']) ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['button_label'] : 'Ok',
-                                    'top'          => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['top'])          ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['top']          : '',
-                                    'left'         => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['left'])         ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['left']         : '',
-                                    'width'        => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['width'])        ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['width']        : '',
-                                    'height'       => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['height'])       ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['height']       : '',
-                                    'redir'        => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir'])        ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir']        : '',
-                                    'show_close'   => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['show_close'])   ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['show_close']   : 'Y',
-                                    'body_icon'    => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['body_icon'])    ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['body_icon']    : 'Y',
-                                    'toast'        => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['toast'])        ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['toast']        : 'N',
-                                    'toast_pos'    => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['toast_pos'])    ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['toast_pos']    : '',
-                                    'type'         => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['type'])         ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['type']         : '',
-                                    'redir_target' => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir_target']) ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir_target'] : '',
-                                    'redir_par'    => isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir_par'])    ? $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxMessage']['redir_par']    : '');
-   } // form_clientes_mob_pack_ajax_message
+      $aResp['ajaxMessage'] = array('message'      => form_tecnicos_mob_pack_protect_string($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['message']),
+                                    'title'        => form_tecnicos_mob_pack_protect_string($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['title']),
+                                    'modal'        => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['modal'])        ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['modal']        : 'N',
+                                    'timeout'      => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['timeout'])      ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['timeout']      : '',
+                                    'button'       => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['button'])       ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['button']       : '',
+                                    'button_label' => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['button_label']) ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['button_label'] : 'Ok',
+                                    'top'          => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['top'])          ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['top']          : '',
+                                    'left'         => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['left'])         ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['left']         : '',
+                                    'width'        => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['width'])        ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['width']        : '',
+                                    'height'       => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['height'])       ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['height']       : '',
+                                    'redir'        => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir'])        ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir']        : '',
+                                    'show_close'   => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['show_close'])   ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['show_close']   : 'Y',
+                                    'body_icon'    => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['body_icon'])    ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['body_icon']    : 'Y',
+                                    'toast'        => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['toast'])        ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['toast']        : 'N',
+                                    'toast_pos'    => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['toast_pos'])    ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['toast_pos']    : '',
+                                    'type'         => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['type'])         ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['type']         : '',
+                                    'redir_target' => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir_target']) ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir_target'] : '',
+                                    'redir_par'    => isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir_par'])    ? $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxMessage']['redir_par']    : '');
+   } // form_tecnicos_mob_pack_ajax_message
 
-   function form_clientes_mob_pack_ajax_javascript(&$aResp)
+   function form_tecnicos_mob_pack_ajax_javascript(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['ajaxJavascript'] as $aJsFunc)
+      global $inicial_form_tecnicos_mob;
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['ajaxJavascript'] as $aJsFunc)
       {
          $aResp['ajaxJavascript'][] = $aJsFunc;
       }
-   } // form_clientes_mob_pack_ajax_javascript
+   } // form_tecnicos_mob_pack_ajax_javascript
 
-   function form_clientes_mob_pack_ajax_block_display(&$aResp)
+   function form_tecnicos_mob_pack_ajax_block_display(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['blockDisplay'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['blockDisplay'] as $sBlockName => $sBlockStatus)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['blockDisplay'] as $sBlockName => $sBlockStatus)
       {
         $aResp['blockDisplay'][] = array($sBlockName, $sBlockStatus);
       }
-   } // form_clientes_mob_pack_ajax_block_display
+   } // form_tecnicos_mob_pack_ajax_block_display
 
-   function form_clientes_mob_pack_ajax_field_display(&$aResp)
+   function form_tecnicos_mob_pack_ajax_field_display(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['fieldDisplay'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldDisplay'] as $sFieldName => $sFieldStatus)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldDisplay'] as $sFieldName => $sFieldStatus)
       {
         $aResp['fieldDisplay'][] = array($sFieldName, $sFieldStatus);
       }
-   } // form_clientes_mob_pack_ajax_field_display
+   } // form_tecnicos_mob_pack_ajax_field_display
 
-   function form_clientes_mob_pack_ajax_button_display(&$aResp)
+   function form_tecnicos_mob_pack_ajax_button_display(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['buttonDisplay'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplay'] as $sButtonName => $sButtonStatus)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplay'] as $sButtonName => $sButtonStatus)
       {
         $aResp['buttonDisplay'][] = array($sButtonName, $sButtonStatus);
       }
-   } // form_clientes_mob_pack_ajax_button_display
+   } // form_tecnicos_mob_pack_ajax_button_display
 
-   function form_clientes_mob_pack_ajax_button_display_vert(&$aResp)
+   function form_tecnicos_mob_pack_ajax_button_display_vert(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['buttonDisplayVert'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['buttonDisplayVert'] as $aButtonData)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['buttonDisplayVert'] as $aButtonData)
       {
         $aResp['buttonDisplayVert'][] = $aButtonData;
       }
-   } // form_clientes_mob_pack_ajax_button_display
+   } // form_tecnicos_mob_pack_ajax_button_display
 
-   function form_clientes_mob_pack_ajax_field_label(&$aResp)
+   function form_tecnicos_mob_pack_ajax_field_label(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['fieldLabel'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['fieldLabel'] as $sFieldName => $sFieldLabel)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['fieldLabel'] as $sFieldName => $sFieldLabel)
       {
-        $aResp['fieldLabel'][] = array($sFieldName, form_clientes_mob_pack_protect_string($sFieldLabel));
+        $aResp['fieldLabel'][] = array($sFieldName, form_tecnicos_mob_pack_protect_string($sFieldLabel));
       }
-   } // form_clientes_mob_pack_ajax_field_label
+   } // form_tecnicos_mob_pack_ajax_field_label
 
-   function form_clientes_mob_pack_ajax_readonly(&$aResp)
+   function form_tecnicos_mob_pack_ajax_readonly(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['readOnly'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['readOnly'] as $sFieldName => $sFieldStatus)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['readOnly'] as $sFieldName => $sFieldStatus)
       {
         $aResp['readOnly'][] = array($sFieldName, $sFieldStatus);
       }
-   } // form_clientes_mob_pack_ajax_readonly
+   } // form_tecnicos_mob_pack_ajax_readonly
 
-   function form_clientes_mob_pack_ajax_nav_status(&$aResp)
+   function form_tecnicos_mob_pack_ajax_nav_status(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['navStatus'] = array();
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ret']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ret'])
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ret']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ret'])
       {
-         $aResp['navStatus']['ret'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ret'];
+         $aResp['navStatus']['ret'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ret'];
       }
-      if (isset($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ava']) && '' != $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ava'])
+      if (isset($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ava']) && '' != $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ava'])
       {
-         $aResp['navStatus']['ava'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navStatus']['ava'];
+         $aResp['navStatus']['ava'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navStatus']['ava'];
       }
-   } // form_clientes_mob_pack_ajax_nav_status
+   } // form_tecnicos_mob_pack_ajax_nav_status
 
-   function form_clientes_mob_pack_ajax_nav_Summary(&$aResp)
+   function form_tecnicos_mob_pack_ajax_nav_Summary(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['navSummary'] = array();
-      $aResp['navSummary']['reg_ini'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navSummary']['reg_ini'];
-      $aResp['navSummary']['reg_qtd'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navSummary']['reg_qtd'];
-      $aResp['navSummary']['reg_tot'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navSummary']['reg_tot'];
-   } // form_clientes_mob_pack_ajax_nav_Summary
+      $aResp['navSummary']['reg_ini'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navSummary']['reg_ini'];
+      $aResp['navSummary']['reg_qtd'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navSummary']['reg_qtd'];
+      $aResp['navSummary']['reg_tot'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navSummary']['reg_tot'];
+   } // form_tecnicos_mob_pack_ajax_nav_Summary
 
-   function form_clientes_mob_pack_ajax_navPage(&$aResp)
+   function form_tecnicos_mob_pack_ajax_navPage(&$aResp)
    {
-      global $inicial_form_clientes_mob;
-      $aResp['navPage'] = $inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['navPage'];
-   } // form_clientes_mob_pack_ajax_navPage
+      global $inicial_form_tecnicos_mob;
+      $aResp['navPage'] = $inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['navPage'];
+   } // form_tecnicos_mob_pack_ajax_navPage
 
 
-   function form_clientes_mob_pack_ajax_btn_vars(&$aResp)
+   function form_tecnicos_mob_pack_ajax_btn_vars(&$aResp)
    {
-      global $inicial_form_clientes_mob;
+      global $inicial_form_tecnicos_mob;
       $aResp['btnVars'] = array();
-      foreach ($inicial_form_clientes_mob->contr_form_clientes_mob->NM_ajax_info['btnVars'] as $sBtnName => $sBtnValue)
+      foreach ($inicial_form_tecnicos_mob->contr_form_tecnicos_mob->NM_ajax_info['btnVars'] as $sBtnName => $sBtnValue)
       {
-        $aResp['btnVars'][] = array($sBtnName, form_clientes_mob_pack_protect_string($sBtnValue));
+        $aResp['btnVars'][] = array($sBtnName, form_tecnicos_mob_pack_protect_string($sBtnValue));
       }
-   } // form_clientes_mob_pack_ajax_btn_vars
+   } // form_tecnicos_mob_pack_ajax_btn_vars
 
-   function form_clientes_mob_pack_protect_string($sString)
+   function form_tecnicos_mob_pack_protect_string($sString)
    {
       $sString = (string) $sString;
 
@@ -3169,5 +3083,5 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
       {
          return '';
       }
-   } // form_clientes_mob_pack_protect_string
+   } // form_tecnicos_mob_pack_protect_string
 ?>

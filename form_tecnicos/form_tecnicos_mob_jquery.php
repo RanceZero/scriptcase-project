@@ -51,63 +51,42 @@ function scSetFocusOnField($oField) {
 } // scSetFocusOnField
 
 function scEventControl_init(iSeqRow) {
-  scEventControl_data["nome_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["fone_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["email_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["endereco_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["cidade_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["estado_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["pais_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["cep_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nome_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["email_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["fone_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["usuario_login" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
-  if (scEventControl_data["nome_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["id_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["nome_cliente" + iSeqRow]["change"]) {
+  if (scEventControl_data["id_tecnico" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["fone_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["nome_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["fone_cliente" + iSeqRow]["change"]) {
+  if (scEventControl_data["nome_tecnico" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["email_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["email_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["email_cliente" + iSeqRow]["change"]) {
+  if (scEventControl_data["email_tecnico" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["endereco_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["fone_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["endereco_cliente" + iSeqRow]["change"]) {
+  if (scEventControl_data["fone_tecnico" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["cidade_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["usuario_login" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["cidade_cliente" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["estado_cliente" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["estado_cliente" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["pais_cliente" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["pais_cliente" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["cep_cliente" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["cep_cliente" + iSeqRow]["change"]) {
+  if (scEventControl_data["usuario_login" + iSeqRow]["change"]) {
     return true;
   }
   return false;
@@ -118,9 +97,6 @@ function scEventControl_onFocus(oField, iSeq) {
   fieldId = $(oField).attr("id");
   fieldName = fieldId.substr(12);
   scEventControl_data[fieldName]["blur"] = true;
-  if ("pais_cliente" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
-  }
   scEventControl_data[fieldName]["change"] = false;
 } // scEventControl_onFocus
 
@@ -144,152 +120,66 @@ function scEventControl_onAutocomp(sFieldName) {
 var scEventControl_data = {};
 
 function scJQEventsAdd(iSeqRow) {
-  $('#id_sc_field_id_cliente' + iSeqRow).bind('change', function() { sc_form_clientes_id_cliente_onchange(this, iSeqRow) });
-  $('#id_sc_field_nome_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_nome_cliente_onblur(this, iSeqRow) })
-                                          .bind('change', function() { sc_form_clientes_nome_cliente_onchange(this, iSeqRow) })
-                                          .bind('focus', function() { sc_form_clientes_nome_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_email_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_email_cliente_onblur(this, iSeqRow) })
-                                           .bind('change', function() { sc_form_clientes_email_cliente_onchange(this, iSeqRow) })
-                                           .bind('focus', function() { sc_form_clientes_email_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_fone_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_fone_cliente_onblur(this, iSeqRow) })
-                                          .bind('change', function() { sc_form_clientes_fone_cliente_onchange(this, iSeqRow) })
-                                          .bind('focus', function() { sc_form_clientes_fone_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_endereco_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_endereco_cliente_onblur(this, iSeqRow) })
-                                              .bind('change', function() { sc_form_clientes_endereco_cliente_onchange(this, iSeqRow) })
-                                              .bind('focus', function() { sc_form_clientes_endereco_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_cidade_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_cidade_cliente_onblur(this, iSeqRow) })
-                                            .bind('change', function() { sc_form_clientes_cidade_cliente_onchange(this, iSeqRow) })
-                                            .bind('focus', function() { sc_form_clientes_cidade_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_estado_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_estado_cliente_onblur(this, iSeqRow) })
-                                            .bind('change', function() { sc_form_clientes_estado_cliente_onchange(this, iSeqRow) })
-                                            .bind('focus', function() { sc_form_clientes_estado_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_pais_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_pais_cliente_onblur(this, iSeqRow) })
-                                          .bind('change', function() { sc_form_clientes_pais_cliente_onchange(this, iSeqRow) })
-                                          .bind('focus', function() { sc_form_clientes_pais_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_cep_cliente' + iSeqRow).bind('blur', function() { sc_form_clientes_cep_cliente_onblur(this, iSeqRow) })
-                                         .bind('change', function() { sc_form_clientes_cep_cliente_onchange(this, iSeqRow) })
-                                         .bind('focus', function() { sc_form_clientes_cep_cliente_onfocus(this, iSeqRow) });
-  $('#id_sc_field_usuario_login' + iSeqRow).bind('change', function() { sc_form_clientes_usuario_login_onchange(this, iSeqRow) });
+  $('#id_sc_field_id_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_id_tecnico_onblur(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_tecnicos_id_tecnico_onfocus(this, iSeqRow) });
+  $('#id_sc_field_nome_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_nome_tecnico_onblur(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_tecnicos_nome_tecnico_onfocus(this, iSeqRow) });
+  $('#id_sc_field_email_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_email_tecnico_onblur(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_tecnicos_email_tecnico_onfocus(this, iSeqRow) });
+  $('#id_sc_field_fone_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_fone_tecnico_onblur(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_tecnicos_fone_tecnico_onfocus(this, iSeqRow) });
+  $('#id_sc_field_usuario_login' + iSeqRow).bind('blur', function() { sc_form_tecnicos_usuario_login_onblur(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_tecnicos_usuario_login_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
-function sc_form_clientes_id_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_nome_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_nome_cliente();
+function sc_form_tecnicos_id_tecnico_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_mob_validate_id_tecnico();
   scCssBlur(oThis);
 }
 
-function sc_form_clientes_nome_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_nome_cliente_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_id_tecnico_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
-function sc_form_clientes_email_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_email_cliente();
+function sc_form_tecnicos_nome_tecnico_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_mob_validate_nome_tecnico();
   scCssBlur(oThis);
 }
 
-function sc_form_clientes_email_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_email_cliente_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_nome_tecnico_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
-function sc_form_clientes_fone_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_fone_cliente();
+function sc_form_tecnicos_email_tecnico_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_mob_validate_email_tecnico();
   scCssBlur(oThis);
 }
 
-function sc_form_clientes_fone_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_fone_cliente_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_email_tecnico_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
-function sc_form_clientes_endereco_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_endereco_cliente();
+function sc_form_tecnicos_fone_tecnico_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_mob_validate_fone_tecnico();
   scCssBlur(oThis);
 }
 
-function sc_form_clientes_endereco_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_endereco_cliente_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_fone_tecnico_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
-function sc_form_clientes_cidade_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_cidade_cliente();
+function sc_form_tecnicos_usuario_login_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_mob_validate_usuario_login();
   scCssBlur(oThis);
 }
 
-function sc_form_clientes_cidade_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_cidade_cliente_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_usuario_login_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
-}
-
-function sc_form_clientes_estado_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_estado_cliente();
-  scCssBlur(oThis);
-}
-
-function sc_form_clientes_estado_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_estado_cliente_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_clientes_pais_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_pais_cliente();
-  scCssBlur(oThis);
-}
-
-function sc_form_clientes_pais_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_pais_cliente_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_clientes_cep_cliente_onblur(oThis, iSeqRow) {
-  do_ajax_form_clientes_validate_cep_cliente();
-  scCssBlur(oThis);
-}
-
-function sc_form_clientes_cep_cliente_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_form_clientes_cep_cliente_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_clientes_usuario_login_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
 }
 
 function displayChange_block(block, status) {
@@ -299,76 +189,52 @@ function displayChange_block(block, status) {
 }
 
 function displayChange_block_0(status) {
-	displayChange_field("nome_cliente", "", status);
-	displayChange_field("fone_cliente", "", status);
-	displayChange_field("email_cliente", "", status);
-	displayChange_field("endereco_cliente", "", status);
-	displayChange_field("cidade_cliente", "", status);
-	displayChange_field("estado_cliente", "", status);
-	displayChange_field("pais_cliente", "", status);
-	displayChange_field("cep_cliente", "", status);
+	displayChange_field("id_tecnico", "", status);
+	displayChange_field("nome_tecnico", "", status);
+	displayChange_field("email_tecnico", "", status);
+	displayChange_field("fone_tecnico", "", status);
+	displayChange_field("usuario_login", "", status);
 }
 
 function displayChange_row(row, status) {
-	displayChange_field_nome_cliente(row, status);
-	displayChange_field_fone_cliente(row, status);
-	displayChange_field_email_cliente(row, status);
-	displayChange_field_endereco_cliente(row, status);
-	displayChange_field_cidade_cliente(row, status);
-	displayChange_field_estado_cliente(row, status);
-	displayChange_field_pais_cliente(row, status);
-	displayChange_field_cep_cliente(row, status);
+	displayChange_field_id_tecnico(row, status);
+	displayChange_field_nome_tecnico(row, status);
+	displayChange_field_email_tecnico(row, status);
+	displayChange_field_fone_tecnico(row, status);
+	displayChange_field_usuario_login(row, status);
 }
 
 function displayChange_field(field, row, status) {
-	if ("nome_cliente" == field) {
-		displayChange_field_nome_cliente(row, status);
+	if ("id_tecnico" == field) {
+		displayChange_field_id_tecnico(row, status);
 	}
-	if ("fone_cliente" == field) {
-		displayChange_field_fone_cliente(row, status);
+	if ("nome_tecnico" == field) {
+		displayChange_field_nome_tecnico(row, status);
 	}
-	if ("email_cliente" == field) {
-		displayChange_field_email_cliente(row, status);
+	if ("email_tecnico" == field) {
+		displayChange_field_email_tecnico(row, status);
 	}
-	if ("endereco_cliente" == field) {
-		displayChange_field_endereco_cliente(row, status);
+	if ("fone_tecnico" == field) {
+		displayChange_field_fone_tecnico(row, status);
 	}
-	if ("cidade_cliente" == field) {
-		displayChange_field_cidade_cliente(row, status);
-	}
-	if ("estado_cliente" == field) {
-		displayChange_field_estado_cliente(row, status);
-	}
-	if ("pais_cliente" == field) {
-		displayChange_field_pais_cliente(row, status);
-	}
-	if ("cep_cliente" == field) {
-		displayChange_field_cep_cliente(row, status);
+	if ("usuario_login" == field) {
+		displayChange_field_usuario_login(row, status);
 	}
 }
 
-function displayChange_field_nome_cliente(row, status) {
+function displayChange_field_id_tecnico(row, status) {
 }
 
-function displayChange_field_fone_cliente(row, status) {
+function displayChange_field_nome_tecnico(row, status) {
 }
 
-function displayChange_field_email_cliente(row, status) {
+function displayChange_field_email_tecnico(row, status) {
 }
 
-function displayChange_field_endereco_cliente(row, status) {
+function displayChange_field_fone_tecnico(row, status) {
 }
 
-function displayChange_field_cidade_cliente(row, status) {
-}
-
-function displayChange_field_estado_cliente(row, status) {
-}
-
-function displayChange_field_pais_cliente(row, status) {
-}
-
-function displayChange_field_cep_cliente(row, status) {
+function displayChange_field_usuario_login(row, status) {
 }
 
 function scRecreateSelect2() {
@@ -378,14 +244,14 @@ function scResetPagesDisplay() {
 }
 
 function scHidePage(pageNo) {
-	$("#id_form_clientes_form" + pageNo).hide();
+	$("#id_form_tecnicos_mob_form" + pageNo).hide();
 }
 
 function scCheckNoPageSelected() {
 	if (!$(".sc-form-page").filter(".scTabActive").filter(":visible").length) {
 		var inactiveTabs = $(".sc-form-page").filter(".scTabInactive").filter(":visible");
 		if (inactiveTabs.length) {
-			var tabNo = $(inactiveTabs[0]).attr("id").substr(21);
+			var tabNo = $(inactiveTabs[0]).attr("id").substr(25);
 		}
 	}
 }
@@ -482,7 +348,7 @@ function do_ajax_check_file(rs, field  ,t, iSeqRow){
 
                 }
                      if(usa_read_only && $('a',$('#id_read_on_'+field+iSeqRow)).length == 0){
-                         $(t).html("<a href=\"javascript:nm_mostra_doc('0', '"+rs2+"', 'form_clientes')\">"+$('#id_read_on_'+field+iSeqRow).text()+"</a>");
+                         $(t).html("<a href=\"javascript:nm_mostra_doc('0', '"+rs2+"', 'form_tecnicos_mob')\">"+$('#id_read_on_'+field+iSeqRow).text()+"</a>");
                      }
                 }
                 if($('#id_ajax_doc_'+field+iSeqRow+' a').length > 0){

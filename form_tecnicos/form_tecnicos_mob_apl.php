@@ -1,6 +1,6 @@
 <?php
 //
-class form_clientes_apl
+class form_tecnicos_mob_apl
 {
    var $has_where_params = false;
    var $NM_is_redirected = false;
@@ -51,16 +51,10 @@ class form_clientes_apl
    var $Ini;
    var $Erro;
    var $Db;
-   var $id_cliente;
-   var $nome_cliente;
-   var $email_cliente;
-   var $fone_cliente;
-   var $endereco_cliente;
-   var $cidade_cliente;
-   var $estado_cliente;
-   var $pais_cliente;
-   var $pais_cliente_1;
-   var $cep_cliente;
+   var $id_tecnico;
+   var $nome_tecnico;
+   var $email_tecnico;
+   var $fone_tecnico;
    var $usuario_login;
    var $nm_data;
    var $nmgp_opcao;
@@ -107,37 +101,21 @@ class form_clientes_apl
 
       if ($this->NM_ajax_flag)
       {
-          if (isset($this->NM_ajax_info['param']['cep_cliente']))
-          {
-              $this->cep_cliente = $this->NM_ajax_info['param']['cep_cliente'];
-          }
-          if (isset($this->NM_ajax_info['param']['cidade_cliente']))
-          {
-              $this->cidade_cliente = $this->NM_ajax_info['param']['cidade_cliente'];
-          }
           if (isset($this->NM_ajax_info['param']['csrf_token']))
           {
               $this->csrf_token = $this->NM_ajax_info['param']['csrf_token'];
           }
-          if (isset($this->NM_ajax_info['param']['email_cliente']))
+          if (isset($this->NM_ajax_info['param']['email_tecnico']))
           {
-              $this->email_cliente = $this->NM_ajax_info['param']['email_cliente'];
+              $this->email_tecnico = $this->NM_ajax_info['param']['email_tecnico'];
           }
-          if (isset($this->NM_ajax_info['param']['endereco_cliente']))
+          if (isset($this->NM_ajax_info['param']['fone_tecnico']))
           {
-              $this->endereco_cliente = $this->NM_ajax_info['param']['endereco_cliente'];
+              $this->fone_tecnico = $this->NM_ajax_info['param']['fone_tecnico'];
           }
-          if (isset($this->NM_ajax_info['param']['estado_cliente']))
+          if (isset($this->NM_ajax_info['param']['id_tecnico']))
           {
-              $this->estado_cliente = $this->NM_ajax_info['param']['estado_cliente'];
-          }
-          if (isset($this->NM_ajax_info['param']['fone_cliente']))
-          {
-              $this->fone_cliente = $this->NM_ajax_info['param']['fone_cliente'];
-          }
-          if (isset($this->NM_ajax_info['param']['id_cliente']))
-          {
-              $this->id_cliente = $this->NM_ajax_info['param']['id_cliente'];
+              $this->id_tecnico = $this->NM_ajax_info['param']['id_tecnico'];
           }
           if (isset($this->NM_ajax_info['param']['nm_form_submit']))
           {
@@ -150,18 +128,6 @@ class form_clientes_apl
           if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
@@ -183,17 +149,17 @@ class form_clientes_apl
           {
               $this->nmgp_url_saida = $this->NM_ajax_info['param']['nmgp_url_saida'];
           }
-          if (isset($this->NM_ajax_info['param']['nome_cliente']))
+          if (isset($this->NM_ajax_info['param']['nome_tecnico']))
           {
-              $this->nome_cliente = $this->NM_ajax_info['param']['nome_cliente'];
-          }
-          if (isset($this->NM_ajax_info['param']['pais_cliente']))
-          {
-              $this->pais_cliente = $this->NM_ajax_info['param']['pais_cliente'];
+              $this->nome_tecnico = $this->NM_ajax_info['param']['nome_tecnico'];
           }
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
+          }
+          if (isset($this->NM_ajax_info['param']['usuario_login']))
+          {
+              $this->usuario_login = $this->NM_ajax_info['param']['usuario_login'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -306,13 +272,13 @@ class form_clientes_apl
       if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
           $_POST['nmgp_opcao'] = "novo";
           $this->nmgp_opcao    = "novo";
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['opcao']   = "novo";
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['opc_ant'] = "inicio";
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['opc_ant'] = "inicio";
       }
-      if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes']['embutida_parms']))
+      if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms']))
       { 
-          $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_clientes']['embutida_parms'];
-          unset($_SESSION['sc_session'][$script_case_init]['form_clientes']['embutida_parms']);
+          $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms'];
+          unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['embutida_parms']);
       } 
       if (isset($this->nmgp_parms) && !empty($this->nmgp_parms)) 
       { 
@@ -345,7 +311,7 @@ class form_clientes_apl
                  {
                      $cadapar[0] = $this->sc_conv_var[strtolower($cadapar[0])];
                  }
-                 nm_limpa_str_form_clientes($cadapar[1]);
+                 nm_limpa_str_form_tecnicos_mob($cadapar[1]);
                  if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
                  $Tmp_par = $cadapar[0];
                  $this->$Tmp_par = $cadapar[1];
@@ -354,23 +320,23 @@ class form_clientes_apl
           }
           if (isset($this->NM_where_filter_form))
           {
-              $_SESSION['sc_session'][$script_case_init]['form_clientes']['where_filter_form'] = $this->NM_where_filter_form;
-              unset($_SESSION['sc_session'][$script_case_init]['form_clientes']['total']);
+              $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['where_filter_form'] = $this->NM_where_filter_form;
+              unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['total']);
           }
           if (isset($this->sc_redir_atualiz))
           {
-              $_SESSION['sc_session'][$script_case_init]['form_clientes']['sc_redir_atualiz'] = $this->sc_redir_atualiz;
+              $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_redir_atualiz'] = $this->sc_redir_atualiz;
           }
           if (isset($this->sc_redir_insert))
           {
-              $_SESSION['sc_session'][$script_case_init]['form_clientes']['sc_redir_insert'] = $this->sc_redir_insert;
+              $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['sc_redir_insert'] = $this->sc_redir_insert;
           }
       } 
-      elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_clientes']['parms']))
+      elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['parms']))
       {
           if ((!isset($this->nmgp_opcao) || ($this->nmgp_opcao != "incluir" && $this->nmgp_opcao != "alterar" && $this->nmgp_opcao != "excluir" && $this->nmgp_opcao != "novo" && $this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form")) && (!isset($this->NM_ajax_opcao) || $this->NM_ajax_opcao == ""))
           {
-              $todox = str_replace("?#?@?@?", "?#?@ ?@?", $_SESSION['sc_session'][$script_case_init]['form_clientes']['parms']);
+              $todox = str_replace("?#?@?@?", "?#?@ ?@?", $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['parms']);
               $todo  = explode("?@?", $todox);
               $ix = 0;
               while (!empty($todo[$ix]))
@@ -391,7 +357,7 @@ class form_clientes_apl
 
       if (isset($this->nm_run_menu) && $this->nm_run_menu == 1)
       { 
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['nm_run_menu'] = 1;
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['nm_run_menu'] = 1;
       } 
       if (!$this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
       {
@@ -402,38 +368,45 @@ class form_clientes_apl
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       if (isset($this->nm_evt_ret_edit) && '' != $this->nm_evt_ret_edit)
       {
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup']     = true;
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup_cb']  = $this->nm_evt_ret_edit;
-          $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup_row'] = isset($this->nm_evt_ret_row) ? $this->nm_evt_ret_row : '';
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup']     = true;
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_cb']  = $this->nm_evt_ret_edit;
+          $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_row'] = isset($this->nm_evt_ret_row) ? $this->nm_evt_ret_row : '';
       }
-      if (isset($_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup']) && $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup'])
+      if (isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup']) && $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup'])
       {
           $this->lig_edit_lookup     = true;
-          $this->lig_edit_lookup_cb  = $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup_cb'];
-          $this->lig_edit_lookup_row = $_SESSION['sc_session'][$script_case_init]['form_clientes']['lig_edit_lookup_row'];
+          $this->lig_edit_lookup_cb  = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_cb'];
+          $this->lig_edit_lookup_row = $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['lig_edit_lookup_row'];
       }
       if (!$this->Ini)
       { 
-          $this->Ini = new form_clientes_ini(); 
+          $this->Ini = new form_tecnicos_mob_ini(); 
           $this->Ini->init();
           $this->nm_data = new nm_data("pt_br");
-          $this->app_is_initializing = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['initialize'];
+          $this->app_is_initializing = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['initialize'];
+          if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos']))
+          {
+              foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos'] as $I_conf => $Conf_opt)
+              {
+                  $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob'][$I_conf]  = $Conf_opt;
+              }
+          }
       } 
       else 
       { 
          $this->nm_data = new nm_data("pt_br");
       } 
-      $_SESSION['sc_session'][$script_case_init]['form_clientes']['upload_field_info'] = array();
+      $_SESSION['sc_session'][$script_case_init]['form_tecnicos_mob']['upload_field_info'] = array();
 
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue']);
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue']);
       $this->Change_Menu = false;
-      $run_iframe = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe']) && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "R")) ? true : false;
-      if (!$run_iframe && isset($_SESSION['scriptcase']['menu_atual']) && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_call'] && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_outra_jan']))
+      $run_iframe = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe']) && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "R")) ? true : false;
+      if (!$run_iframe && isset($_SESSION['scriptcase']['menu_atual']) && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_call'] && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_outra_jan']))
       {
           $this->sc_init_menu = "x";
-          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_clientes']))
+          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_tecnicos_mob']))
           {
-              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_clientes'];
+              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_tecnicos_mob'];
           }
           elseif (isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']]))
           {
@@ -446,10 +419,10 @@ class form_clientes_apl
                   }
               }
           }
-          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_clientes']))
+          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_tecnicos_mob']))
           {
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_clientes']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_clientes') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_clientes']['label'] = "" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " " . $this->Ini->Nm_lang['lang_tbl_clientes'] . "";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_tecnicos_mob']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_tecnicos_mob') . "/";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_tecnicos_mob']['label'] = "" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " tecnicos";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -457,7 +430,7 @@ class form_clientes_apl
               $achou = false;
               foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu] as $apl => $parms)
               {
-                  if ($apl == "form_clientes")
+                  if ($apl == "form_tecnicos_mob")
                   {
                       $achou = true;
                   }
@@ -479,15 +452,6 @@ class form_clientes_apl
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
-      $this->nm_new_label['nome_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . '';
-      $this->nm_new_label['email_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_email_cliente'] . '';
-      $this->nm_new_label['fone_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_fone_cliente'] . '';
-      $this->nm_new_label['endereco_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_endereco_cliente'] . '';
-      $this->nm_new_label['cidade_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_cidade_cliente'] . '';
-      $this->nm_new_label['estado_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_estado_cliente'] . '';
-      $this->nm_new_label['pais_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_pais_cliente'] . '';
-      $this->nm_new_label['cep_cliente'] = '' . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . '';
-
       $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -531,18 +495,18 @@ class form_clientes_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_clientes']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
-      $_SESSION['scriptcase']['error_close']['form_clientes'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
+      $_SESSION['scriptcase']['error_icon']['form_tecnicos_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_close']['form_tecnicos_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
-      $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_proc'] : $this->Embutida_proc;
-      $this->Embutida_form = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_form']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_form'] : $this->Embutida_form;
-      $this->Embutida_call = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_call']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_call'] : $this->Embutida_call;
+      $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_proc'] : $this->Embutida_proc;
+      $this->Embutida_form = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_form']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_form'] : $this->Embutida_form;
+      $this->Embutida_call = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_call']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_call'] : $this->Embutida_call;
 
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['table_refresh'] = false;
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['table_refresh'] = false;
 
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit'])
       {
-          $this->Grid_editavel = ('on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit']) ? true : false;
+          $this->Grid_editavel = ('on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit']) ? true : false;
       }
       if (isset($this->Grid_editavel) && $this->Grid_editavel)
       {
@@ -550,29 +514,29 @@ class form_clientes_apl
           $this->Embutida_ronly = true;
       }
       $this->Embutida_multi = false;
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_multi']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_multi'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_multi']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_multi'])
       {
           $this->Grid_editavel  = false;
           $this->Embutida_form  = false;
           $this->Embutida_ronly = false;
           $this->Embutida_multi = true;
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_tp_pag']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_tp_pag'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_tp_pag']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_tp_pag'])
       {
-          $this->form_paginacao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_tp_pag'];
+          $this->form_paginacao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_tp_pag'];
       }
 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_form']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_form'])
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_form']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_form'])
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_form'] = $this->Embutida_form;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_form'] = $this->Embutida_form;
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit'])
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit'])
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit'] = $this->Grid_editavel ? 'on' : 'off';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit'] = $this->Grid_editavel ? 'on' : 'off';
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit'])
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit'])
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_grid_edit'] = $this->Embutida_call;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_grid_edit'] = $this->Embutida_call;
       }
 
       $this->Ini->cor_grid_par = $this->Ini->cor_grid_impar;
@@ -585,94 +549,93 @@ class form_clientes_apl
 
       $this->loadFieldConfig();
 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['first_time'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['first_time'])
       {
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['new']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage']);
-          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['new']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto']);
       }
       $this->NM_cancel_return_new = (isset($this->NM_cancel_return_new) && $this->NM_cancel_return_new == 1) ? "1" : "";
       $this->NM_cancel_insert_new = ((isset($this->NM_cancel_insert_new) && $this->NM_cancel_insert_new == 1) || $this->NM_cancel_return_new == 1) ? "document.F5.action='" . $nm_url_saida . "';" : "";
-      if (isset($this->NM_btn_insert) && '' != $this->NM_btn_insert && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert']))
+      if (isset($this->NM_btn_insert) && '' != $this->NM_btn_insert && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert']))
       {
           if ('N' == $this->NM_btn_insert)
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert'] = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert'] = 'off';
           }
           else
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert'] = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert'] = 'on';
           }
       }
       if (isset($this->NM_btn_new) && 'N' == $this->NM_btn_new)
       {
-          $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['new'] = 'off';
+          $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['new'] = 'off';
       }
-      if (isset($this->NM_btn_update) && '' != $this->NM_btn_update && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['update']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['update']))
+      if (isset($this->NM_btn_update) && '' != $this->NM_btn_update && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['update']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['update']))
       {
           if ('N' == $this->NM_btn_update)
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update'] = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update'] = 'off';
           }
           else
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update'] = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update'] = 'on';
           }
       }
-      if (isset($this->NM_btn_delete) && '' != $this->NM_btn_delete && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['delete']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['delete']))
+      if (isset($this->NM_btn_delete) && '' != $this->NM_btn_delete && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['delete']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['delete']))
       {
           if ('N' == $this->NM_btn_delete)
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete'] = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete'] = 'off';
           }
           else
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete'] = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete'] = 'on';
           }
       }
       if (isset($this->NM_btn_navega) && '' != $this->NM_btn_navega)
       {
           if ('N' == $this->NM_btn_navega)
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first']     = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back']      = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward']   = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last']      = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch']   = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch'] = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary']   = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage']   = 'off';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto']      = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first']     = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back']      = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last']      = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch'] = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto']      = 'off';
               $this->Nav_permite_ava = false;
               $this->Nav_permite_ret = false;
           }
           else
           {
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first']     = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back']      = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward']   = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last']      = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch']   = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch'] = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary']   = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage']   = 'on';
-              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto']      = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first']     = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back']      = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last']      = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch'] = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto']      = 'on';
           }
       }
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
       $this->nmgp_botoes['copy'] = "off";
@@ -683,117 +646,117 @@ class form_clientes_apl
       $this->nmgp_botoes['forward'] = "on";
       $this->nmgp_botoes['last'] = "on";
       $this->nmgp_botoes['summary'] = "on";
-      $this->nmgp_botoes['navpage'] = "on";
-      $this->nmgp_botoes['goto'] = "on";
+      $this->nmgp_botoes['navpage'] = "off";
+      $this->nmgp_botoes['goto'] = "off";
       $this->nmgp_botoes['qtline'] = "off";
       $this->nmgp_botoes['reload'] = "on";
       if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
       {
           $this->nmgp_botoes['cancel'] = "off";
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_orig'] = "";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_pesq']))
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_orig'] = "";
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_pesq']))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_pesq'] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_pesq_filtro'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_pesq'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_pesq_filtro'] = "";
       }
-      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_orig'];
-      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_pesq'];
-      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_pesq_filtro'];
+      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_orig'];
+      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_pesq'];
+      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_pesq_filtro'];
       if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6)) {
-          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['buttonStatus'];
+          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['buttonStatus'];
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['iframe_filtro']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['iframe_filtro'] == "S")
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['iframe_filtro']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['iframe_filtro'] == "S")
       {
           $this->nmgp_botoes['exit'] = "off";
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['btn_display']))
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['btn_display']))
       {
-          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
           {
               $this->nmgp_botoes[$NM_cada_btn] = $NM_cada_opc;
           }
       }
 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert'] != '')
       {
-          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert'];
-          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['insert'];
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['insert'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['new'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['new'] != '')
       {
-          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['new'];
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['new'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update'] != '')
       {
-          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['update'];
+          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['update'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete'] != '')
       {
-          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['delete'];
+          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['delete'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first'] != '')
       {
-          $this->nmgp_botoes['first'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['first'];
+          $this->nmgp_botoes['first'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['first'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back'] != '')
       {
-          $this->nmgp_botoes['back'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['back'];
+          $this->nmgp_botoes['back'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['back'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward'] != '')
       {
-          $this->nmgp_botoes['forward'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['forward'];
+          $this->nmgp_botoes['forward'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['forward'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last'] != '')
       {
-          $this->nmgp_botoes['last'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['last'];
+          $this->nmgp_botoes['last'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['last'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch'] != '')
       {
-          $this->nmgp_botoes['qsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['qsearch'];
+          $this->nmgp_botoes['qsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['qsearch'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch'] != '')
       {
-          $this->nmgp_botoes['dynsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['dynsearch'];
+          $this->nmgp_botoes['dynsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['dynsearch'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary'] != '')
       {
-          $this->nmgp_botoes['summary'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['summary'];
+          $this->nmgp_botoes['summary'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['summary'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage'] != '')
       {
-          $this->nmgp_botoes['navpage'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['navpage'];
+          $this->nmgp_botoes['navpage'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['navpage'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto'] != '')
       {
-          $this->nmgp_botoes['goto'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_clientes']['goto'];
-      }
-
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_insert']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_insert'] != '')
-      {
-          $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_insert'];
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_update'] != '')
-      {
-          $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_update'];
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_delete']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_delete'] != '')
-      {
-          $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_delete'];
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav'] != '')
-      {
-          $this->nmgp_botoes['first']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav'];
-          $this->nmgp_botoes['back']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav'];
-          $this->nmgp_botoes['forward'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav'];
-          $this->nmgp_botoes['last']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['goto'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_tecnicos_mob']['goto'];
       }
 
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['maximized']) {
-          $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['dashboard_app'];
-          if (isset($_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_clientes'])) {
-              $tmpDashboardButtons = $_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_clientes'];
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_insert']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_insert'] != '')
+      {
+          $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_insert'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_update'] != '')
+      {
+          $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_update'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_delete']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_delete'] != '')
+      {
+          $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_delete'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav'] != '')
+      {
+          $this->nmgp_botoes['first']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['back']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['forward'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['last']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['embutida_liga_form_btn_nav'];
+      }
+
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['maximized']) {
+          $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['dashboard_app'];
+          if (isset($_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_tecnicos_mob'])) {
+              $tmpDashboardButtons = $_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_tecnicos_mob'];
 
               $this->nmgp_botoes['update']     = $tmpDashboardButtons['form_update']    ? 'on' : 'off';
               $this->nmgp_botoes['new']        = $tmpDashboardButtons['form_insert']    ? 'on' : 'off';
@@ -814,46 +777,44 @@ class form_clientes_apl
           }
       }
 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert']) && $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert']) && $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert'] != '')
       {
-          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert'];
-          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['insert'];
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['insert'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['update'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['update'] != '')
       {
-          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['update'];
+          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['update'];
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['delete']) && $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['delete'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['delete']) && $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['delete'] != '')
       {
-          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['delete'];
+          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['delete'];
       }
 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_display']))
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_display']))
       {
-          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_display'] as $NM_cada_field => $NM_cada_opc)
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_display'] as $NM_cada_field => $NM_cada_opc)
           {
               $this->nmgp_cmp_hidden[$NM_cada_field] = $NM_cada_opc;
               $this->NM_ajax_info['fieldDisplay'][$NM_cada_field] = $NM_cada_opc;
           }
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_readonly']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_readonly']))
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_readonly']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_readonly']))
       {
-          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['field_readonly'] as $NM_cada_field => $NM_cada_opc)
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['field_readonly'] as $NM_cada_field => $NM_cada_opc)
           {
               $this->nmgp_cmp_readonly[$NM_cada_field] = "on";
               $this->NM_ajax_info['readOnly'][$NM_cada_field] = $NM_cada_opc;
           }
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['exit'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['exit'] != '')
       {
-          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['exit'];
+          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['exit'];
           $_SESSION['scriptcase']['sc_force_url_saida'][$this->Ini->sc_page] = true;
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form']))
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form']))
       {
-          $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form'];
-          if (!isset($this->id_cliente)){$this->id_cliente = $this->nmgp_dados_form['id_cliente'];} 
-          if (!isset($this->usuario_login)){$this->usuario_login = $this->nmgp_dados_form['usuario_login'];} 
+          $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form'];
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -861,14 +822,14 @@ class form_clientes_apl
       {
           foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
           {
-              if (in_array("form_clientes", $apls_aba))
+              if (in_array("form_tecnicos_mob", $apls_aba))
               {
                   $this->aba_iframe = true;
                   break;
               }
           }
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
       {
           $this->aba_iframe = true;
       }
@@ -928,9 +889,9 @@ class form_clientes_apl
       }
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_trata_img.php", "C", "nm_trata_img") ; 
 
-      if (is_file($this->Ini->path_aplicacao . 'form_clientes_help.txt'))
+      if (is_file($this->Ini->path_aplicacao . 'form_tecnicos_mob_help.txt'))
       {
-          $arr_link_webhelp = file($this->Ini->path_aplicacao . 'form_clientes_help.txt');
+          $arr_link_webhelp = file($this->Ini->path_aplicacao . 'form_tecnicos_mob_help.txt');
           if ($arr_link_webhelp)
           {
               foreach ($arr_link_webhelp as $str_link_webhelp)
@@ -967,36 +928,33 @@ class form_clientes_apl
 
       if ($this->Embutida_proc)
       { 
-          require_once($this->Ini->path_embutida . 'clientes/form_clientes_erro.class.php');
+          require_once($this->Ini->path_embutida . 'form_tecnicos/form_tecnicos_mob_erro.class.php');
       }
       else
       { 
-          require_once($this->Ini->path_aplicacao . "form_clientes_erro.class.php"); 
+          require_once($this->Ini->path_aplicacao . "form_tecnicos_mob_erro.class.php"); 
       }
-      $this->Erro      = new form_clientes_erro();
+      $this->Erro      = new form_tecnicos_mob_erro();
       $this->Erro->Ini = $this->Ini;
-      $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_max_reg']) && strtolower($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_max_reg']) == "all")
       {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
+          $this->form_paginacao = "total";
+      }
+      $this->proc_fast_search = false;
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
-         if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao']))
+         if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao']))
          { 
-             if ($this->id_cliente != "")   
+             if ($this->id_tecnico != "")   
              { 
-                 $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao'] = "igual" ;  
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao'] = "igual" ;  
              }   
          }   
       } 
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao']) && empty($this->nmgp_refresh_fields))
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao']) && empty($this->nmgp_refresh_fields))
       {
-          $this->nmgp_opcao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao'];  
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao'] = "" ;  
+          $this->nmgp_opcao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao'];  
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao'] = "" ;  
           if ($this->nmgp_opcao == "edit_novo")  
           {
              $this->nmgp_opcao = "novo";
@@ -1004,12 +962,12 @@ class form_clientes_apl
           }
       } 
       $this->nm_Start_new = false;
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['start'] == 'new')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['start'] == 'new')
       {
           $this->nmgp_opcao = "novo";
           $this->nm_Start_new = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao'] = "novo";
-          unset($_SESSION['scriptcase']['sc_apl_conf']['form_clientes']['start']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao'] = "novo";
+          unset($_SESSION['scriptcase']['sc_apl_conf']['form_tecnicos_mob']['start']);
       }
       if ($this->nmgp_opcao == "igual")  
       {
@@ -1017,21 +975,21 @@ class form_clientes_apl
       } 
       else
       {
-          $this->nmgp_opc_ant = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opc_ant'];
+          $this->nmgp_opc_ant = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opc_ant'];
       } 
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
       {
-          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['botoes'];
-          $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['inicio'];
-          $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'] != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['final'];
+          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['botoes'];
+          $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['inicio'];
+          $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total'] != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['final'];
       }
       else
       {
       }
       $this->nm_flag_iframe = false;
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form'])) 
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form'])) 
       {
-         $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form'];
+         $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form'];
       }
       if ($this->nmgp_opcao == "edit_novo")  
       {
@@ -1051,8 +1009,8 @@ class form_clientes_apl
                break;
                }
 
-            $out1_img_cache = $_SESSION['scriptcase']['form_clientes']['glo_nm_path_imag_temp'] . $file_name;
-            $orig_img = $_SESSION['scriptcase']['form_clientes']['glo_nm_path_imag_temp']. '/sc_'.md5(date('YmdHis').basename($_POST['AjaxCheckImg'])).'.gif';
+            $out1_img_cache = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp'] . $file_name;
+            $orig_img = $_SESSION['scriptcase']['form_tecnicos_mob']['glo_nm_path_imag_temp']. '/sc_'.md5(date('YmdHis').basename($_POST['AjaxCheckImg'])).'.gif';
             copy($__file_download, $_SERVER['DOCUMENT_ROOT'].$orig_img);
             echo $orig_img . '_@@NM@@_';
 
@@ -1072,14 +1030,11 @@ class form_clientes_apl
             echo $out1_img_cache;
                exit;
             }
-      if (isset($this->nome_cliente)) { $this->nm_limpa_alfa($this->nome_cliente); }
-      if (isset($this->email_cliente)) { $this->nm_limpa_alfa($this->email_cliente); }
-      if (isset($this->fone_cliente)) { $this->nm_limpa_alfa($this->fone_cliente); }
-      if (isset($this->endereco_cliente)) { $this->nm_limpa_alfa($this->endereco_cliente); }
-      if (isset($this->cidade_cliente)) { $this->nm_limpa_alfa($this->cidade_cliente); }
-      if (isset($this->estado_cliente)) { $this->nm_limpa_alfa($this->estado_cliente); }
-      if (isset($this->pais_cliente)) { $this->nm_limpa_alfa($this->pais_cliente); }
-      if (isset($this->cep_cliente)) { $this->nm_limpa_alfa($this->cep_cliente); }
+      if (isset($this->id_tecnico)) { $this->nm_limpa_alfa($this->id_tecnico); }
+      if (isset($this->nome_tecnico)) { $this->nm_limpa_alfa($this->nome_tecnico); }
+      if (isset($this->email_tecnico)) { $this->nm_limpa_alfa($this->email_tecnico); }
+      if (isset($this->fone_tecnico)) { $this->nm_limpa_alfa($this->fone_tecnico); }
+      if (isset($this->usuario_login)) { $this->nm_limpa_alfa($this->usuario_login); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1087,23 +1042,23 @@ class form_clientes_apl
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          =  substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opc_edit'] = true;  
-     if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_select'])) 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opc_edit'] = true;  
+     if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_select'])) 
      {
-        $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_select'];
+        $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_select'];
      }
    }
 
    function loadFieldConfig()
    {
       $this->field_config = array();
-      //-- id_cliente
-      $this->field_config['id_cliente']               = array();
-      $this->field_config['id_cliente']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['id_cliente']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['id_cliente']['symbol_dec'] = '';
-      $this->field_config['id_cliente']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['id_cliente']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- id_tecnico
+      $this->field_config['id_tecnico']               = array();
+      $this->field_config['id_tecnico']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['id_tecnico']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['id_tecnico']['symbol_dec'] = '';
+      $this->field_config['id_tecnico']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['id_tecnico']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
    }
 
    function controle()
@@ -1144,44 +1099,32 @@ class form_clientes_apl
 //
       if ($this->NM_ajax_flag && 'validate_' == substr($this->NM_ajax_opcao, 0, 9))
       {
-          if ('validate_nome_cliente' == $this->NM_ajax_opcao)
+          if ('validate_id_tecnico' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nome_cliente');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_tecnico');
           }
-          if ('validate_fone_cliente' == $this->NM_ajax_opcao)
+          if ('validate_nome_tecnico' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'fone_cliente');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nome_tecnico');
           }
-          if ('validate_email_cliente' == $this->NM_ajax_opcao)
+          if ('validate_email_tecnico' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'email_cliente');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'email_tecnico');
           }
-          if ('validate_endereco_cliente' == $this->NM_ajax_opcao)
+          if ('validate_fone_tecnico' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'endereco_cliente');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'fone_tecnico');
           }
-          if ('validate_cidade_cliente' == $this->NM_ajax_opcao)
+          if ('validate_usuario_login' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'cidade_cliente');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'usuario_login');
           }
-          if ('validate_estado_cliente' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'estado_cliente');
-          }
-          if ('validate_pais_cliente' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'pais_cliente');
-          }
-          if ('validate_cep_cliente' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'cep_cliente');
-          }
-          form_clientes_pack_ajax_response();
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
       if (isset($this->sc_inline_call) && 'Y' == $this->sc_inline_call)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['inline_form_seq'] = $this->sc_seq_row;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['inline_form_seq'] = $this->sc_seq_row;
           $this->nm_tira_formatacao();
       }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "recarga_mobile" || $this->nmgp_opcao == "muda_form") 
@@ -1193,7 +1136,7 @@ class form_clientes_apl
           if ($this->NM_ajax_flag)
           {
               $this->ajax_return_values();
-              form_clientes_pack_ajax_response();
+              form_tecnicos_mob_pack_ajax_response();
               exit;
           }
           $this->nm_formatar_campos();
@@ -1206,7 +1149,7 @@ class form_clientes_apl
       if ($this->nmgp_opcao == "incluir" || $this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "excluir") 
       {
           $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros) ; 
-          $_SESSION['scriptcase']['form_clientes']['contr_erro'] = 'off';
+          $_SESSION['scriptcase']['form_tecnicos_mob']['contr_erro'] = 'off';
           if ($Campos_Crit != "") 
           {
               $Campos_Crit = $this->Ini->Nm_lang['lang_errm_flds'] . ' ' . $Campos_Crit ; 
@@ -1215,7 +1158,7 @@ class form_clientes_apl
           {
               if ($this->NM_ajax_flag)
               {
-                  form_clientes_pack_ajax_response();
+                  form_tecnicos_mob_pack_ajax_response();
                   exit;
               }
               $campos_erro = $this->Formata_Erros($Campos_Crit, $Campos_Falta, $Campos_Erros, 4);
@@ -1254,34 +1197,13 @@ class form_clientes_apl
       }
       if ($this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form" && !$this->Apl_com_erro)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['recarga'] = $this->nmgp_opcao;
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_insert']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_insert'] == "ok")
-          {
-              if ($this->sc_evento == "insert" || ($this->nmgp_opc_ant == "novo" && $this->nmgp_opcao == "novo" && $this->sc_evento == "novo"))
-              {
-                  $this->NM_close_db(); 
-                  $this->nmgp_redireciona(2); 
-              }
-          }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_atualiz']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_atualiz'] == "ok")
-          {
-              if ($this->sc_evento == "update")
-              {
-                  $this->NM_close_db(); 
-                  $this->nmgp_redireciona(2); 
-              }
-              if ($this->sc_evento == "delete")
-              {
-                  $this->NM_close_db(); 
-                  $this->nmgp_redireciona(2); 
-              }
-          }
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['recarga'] = $this->nmgp_opcao;
       }
       if ($this->NM_ajax_flag && 'navigate_form' == $this->NM_ajax_opcao)
       {
           $this->ajax_return_values();
           $this->ajax_add_parameters();
-          form_clientes_pack_ajax_response();
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
       $this->nm_formatar_campos();
@@ -1292,7 +1214,7 @@ class form_clientes_apl
           {
               $this->NM_ajax_info['msgDisplay'] = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_ajax_frmu']);
           }
-          form_clientes_pack_ajax_response();
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
       $this->nm_gera_html();
@@ -1333,7 +1255,7 @@ class form_clientes_apl
       $Html_password = "";
           $Arq_base  = $this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_html;
           $Parm_pass = ($Html_password != "") ? " -p" : "";
-          $Zip_name = "sc_prt_" . date("YmdHis") . "_" . rand(0, 1000) . "form_clientes.zip";
+          $Zip_name = "sc_prt_" . date("YmdHis") . "_" . rand(0, 1000) . "form_tecnicos_mob.zip";
           $Arq_htm = $this->Ini->path_imag_temp . "/" . $Zip_name;
           $Arq_zip = $this->Ini->root . $Arq_htm;
           $Zip_f     = (FALSE !== strpos($Arq_zip, ' ')) ? " \"" . $Arq_zip . "\"" :  $Arq_zip;
@@ -1405,12 +1327,12 @@ class form_clientes_apl
                unlink($Arq_base);
            } 
           $path_doc_md5 = md5($Arq_htm);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes'][$path_doc_md5][0] = $Arq_htm;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes'][$path_doc_md5][1] = $Zip_name;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob'][$path_doc_md5][0] = $Arq_htm;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob'][$path_doc_md5][1] = $Zip_name;
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " " . $this->Ini->Nm_lang['lang_tbl_clientes'] . "") ?></TITLE>
+ <TITLE><?php echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " tecnicos") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 
@@ -1457,12 +1379,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 </td></tr></table>
 <form name="Fview" method="get" action="<?php echo  $this->form_encode_input($Arq_htm) ?>" target="_self" style="display: none"> 
 </form>
-<form name="Fdown" method="get" action="form_clientes_download.php" target="_self" style="display: none"> 
+<form name="Fdown" method="get" action="form_tecnicos_mob_download.php" target="_self" style="display: none"> 
 <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="form_clientes"> 
+<input type="hidden" name="nm_tit_doc" value="form_tecnicos_mob"> 
 <input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
 </form>
-<form name="F0" method=post action="./" target="_self" style="display: none"> 
+<form name="F0" method=post action="form_tecnicos_mob.php" target="_self" style="display: none"> 
 <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
 <input type="hidden" name="nmgp_opcao" value="<?php echo $this->nmgp_opcao ?>"> 
 </form> 
@@ -1701,32 +1623,17 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    {
        switch($campo)
        {
-           case 'nome_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . "";
+           case 'id_tecnico':
+               return "Id Tecnico";
                break;
-           case 'fone_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_fone_cliente'] . "";
+           case 'nome_tecnico':
+               return "Nome Tecnico";
                break;
-           case 'email_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_email_cliente'] . "";
+           case 'email_tecnico':
+               return "Email Tecnico";
                break;
-           case 'endereco_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_endereco_cliente'] . "";
-               break;
-           case 'cidade_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_cidade_cliente'] . "";
-               break;
-           case 'estado_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_estado_cliente'] . "";
-               break;
-           case 'pais_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_pais_cliente'] . "";
-               break;
-           case 'cep_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . "";
-               break;
-           case 'id_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
+           case 'fone_tecnico':
+               return "Fone Tecnico";
                break;
            case 'usuario_login':
                return "Usuario Login";
@@ -1772,29 +1679,23 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           if ($this->NM_ajax_flag)
           {
-              if (!isset($this->NM_ajax_info['errList']['geral_form_clientes']) || !is_array($this->NM_ajax_info['errList']['geral_form_clientes']))
+              if (!isset($this->NM_ajax_info['errList']['geral_form_tecnicos_mob']) || !is_array($this->NM_ajax_info['errList']['geral_form_tecnicos_mob']))
               {
-                  $this->NM_ajax_info['errList']['geral_form_clientes'] = array();
+                  $this->NM_ajax_info['errList']['geral_form_tecnicos_mob'] = array();
               }
-              $this->NM_ajax_info['errList']['geral_form_clientes'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
+              $this->NM_ajax_info['errList']['geral_form_tecnicos_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ((!is_array($filtro) && ('' == $filtro || 'nome_cliente' == $filtro)) || (is_array($filtro) && in_array('nome_cliente', $filtro)))
-        $this->ValidateField_nome_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'fone_cliente' == $filtro)) || (is_array($filtro) && in_array('fone_cliente', $filtro)))
-        $this->ValidateField_fone_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'email_cliente' == $filtro)) || (is_array($filtro) && in_array('email_cliente', $filtro)))
-        $this->ValidateField_email_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'endereco_cliente' == $filtro)) || (is_array($filtro) && in_array('endereco_cliente', $filtro)))
-        $this->ValidateField_endereco_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'cidade_cliente' == $filtro)) || (is_array($filtro) && in_array('cidade_cliente', $filtro)))
-        $this->ValidateField_cidade_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'estado_cliente' == $filtro)) || (is_array($filtro) && in_array('estado_cliente', $filtro)))
-        $this->ValidateField_estado_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'pais_cliente' == $filtro)) || (is_array($filtro) && in_array('pais_cliente', $filtro)))
-        $this->ValidateField_pais_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'cep_cliente' == $filtro)) || (is_array($filtro) && in_array('cep_cliente', $filtro)))
-        $this->ValidateField_cep_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_tecnico' == $filtro)) || (is_array($filtro) && in_array('id_tecnico', $filtro)))
+        $this->ValidateField_id_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nome_tecnico' == $filtro)) || (is_array($filtro) && in_array('nome_tecnico', $filtro)))
+        $this->ValidateField_nome_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'email_tecnico' == $filtro)) || (is_array($filtro) && in_array('email_tecnico', $filtro)))
+        $this->ValidateField_email_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'fone_tecnico' == $filtro)) || (is_array($filtro) && in_array('fone_tecnico', $filtro)))
+        $this->ValidateField_fone_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'usuario_login' == $filtro)) || (is_array($filtro) && in_array('usuario_login', $filtro)))
+        $this->ValidateField_usuario_login($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -1808,317 +1709,189 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       }
    }
 
-    function ValidateField_nome_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_id_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['php_cmp_required']['nome_cliente']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['php_cmp_required']['nome_cliente'] == "on")) 
+      if ($this->id_tecnico === "" || is_null($this->id_tecnico))  
       { 
-          if ($this->nome_cliente == "")  
-          { 
-              $hasError = true;
-              $Campos_Falta[] =  "" . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . "" ; 
-              if (!isset($Campos_Erros['nome_cliente']))
-              {
-                  $Campos_Erros['nome_cliente'] = array();
-              }
-              $Campos_Erros['nome_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['nome_cliente']) || !is_array($this->NM_ajax_info['errList']['nome_cliente']))
-                  {
-                      $this->NM_ajax_info['errList']['nome_cliente'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['nome_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-          } 
+          $this->id_tecnico = 0;
       } 
-      if ($this->nmgp_opcao != "excluir") 
+      nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
+      if ($this->nmgp_opcao == "incluir")
       { 
-          if (NM_utf8_strlen($this->nome_cliente) > 100) 
+          if ($this->id_tecnico != '')  
           { 
-              $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['nome_cliente']))
-              {
-                  $Campos_Erros['nome_cliente'] = array();
-              }
-              $Campos_Erros['nome_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['nome_cliente']) || !is_array($this->NM_ajax_info['errList']['nome_cliente']))
-              {
-                  $this->NM_ajax_info['errList']['nome_cliente'] = array();
-              }
-              $this->NM_ajax_info['errList']['nome_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'nome_cliente';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_nome_cliente
-
-    function ValidateField_fone_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      {
-          if (!$this->nm_validate_mask($this->fone_cliente, explode(';', "(99) 99999-9999")))  
-          { 
-              $hasError = true;
-              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-              if (!isset($Campos_Erros['fone_cliente']))
-              {
-                  $Campos_Erros['fone_cliente'] = array();
-              }
-              $Campos_Erros['fone_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                  if (!isset($this->NM_ajax_info['errList']['fone_cliente']) || !is_array($this->NM_ajax_info['errList']['fone_cliente']))
-                  {
-                      $this->NM_ajax_info['errList']['fone_cliente'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['fone_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-          } 
-      }
-      $this->nm_tira_mask($this->fone_cliente, "(99) 99999-9999", "(){}[].,;:-+/ "); 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->fone_cliente) > 20) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_fone_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['fone_cliente']))
-              {
-                  $Campos_Erros['fone_cliente'] = array();
-              }
-              $Campos_Erros['fone_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['fone_cliente']) || !is_array($this->NM_ajax_info['errList']['fone_cliente']))
-              {
-                  $this->NM_ajax_info['errList']['fone_cliente'] = array();
-              }
-              $this->NM_ajax_info['errList']['fone_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'fone_cliente';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_fone_cliente
-
-    function ValidateField_email_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (trim($this->email_cliente) != "")  
-          { 
-              if ($teste_validade->Email($this->email_cliente) == false)  
+              $iTestSize = 10;
+              if (strlen($this->id_tecnico) > $iTestSize)  
               { 
                   $hasError = true;
-                      $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_email_cliente'] . "; " ; 
-                  if (!isset($Campos_Erros['email_cliente']))
+                  $Campos_Crit .= "Id Tecnico: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['id_tecnico']))
                   {
-                      $Campos_Erros['email_cliente'] = array();
+                      $Campos_Erros['id_tecnico'] = array();
                   }
-                  $Campos_Erros['email_cliente'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                      if (!isset($this->NM_ajax_info['errList']['email_cliente']) || !is_array($this->NM_ajax_info['errList']['email_cliente']))
-                      {
-                          $this->NM_ajax_info['errList']['email_cliente'] = array();
-                      }
-                      $this->NM_ajax_info['errList']['email_cliente'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  $Campos_Erros['id_tecnico'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['id_tecnico']) || !is_array($this->NM_ajax_info['errList']['id_tecnico']))
+                  {
+                      $this->NM_ajax_info['errList']['id_tecnico'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['id_tecnico'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->id_tecnico, 10, 0, 0, 0, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Id Tecnico; " ; 
+                  if (!isset($Campos_Erros['id_tecnico']))
+                  {
+                      $Campos_Erros['id_tecnico'] = array();
+                  }
+                  $Campos_Erros['id_tecnico'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['id_tecnico']) || !is_array($this->NM_ajax_info['errList']['id_tecnico']))
+                  {
+                      $this->NM_ajax_info['errList']['id_tecnico'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['id_tecnico'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
               } 
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'email_cliente';
+            $fieldName = 'id_tecnico';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_email_cliente
+    } // ValidateField_id_tecnico
 
-    function ValidateField_endereco_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_nome_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->endereco_cliente) > 150) 
+          if (NM_utf8_strlen($this->nome_tecnico) > 100) 
           { 
               $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_endereco_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['endereco_cliente']))
+              $Campos_Crit .= "Nome Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['nome_tecnico']))
               {
-                  $Campos_Erros['endereco_cliente'] = array();
+                  $Campos_Erros['nome_tecnico'] = array();
               }
-              $Campos_Erros['endereco_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['endereco_cliente']) || !is_array($this->NM_ajax_info['errList']['endereco_cliente']))
+              $Campos_Erros['nome_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['nome_tecnico']) || !is_array($this->NM_ajax_info['errList']['nome_tecnico']))
               {
-                  $this->NM_ajax_info['errList']['endereco_cliente'] = array();
+                  $this->NM_ajax_info['errList']['nome_tecnico'] = array();
               }
-              $this->NM_ajax_info['errList']['endereco_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $this->NM_ajax_info['errList']['nome_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'endereco_cliente';
+            $fieldName = 'nome_tecnico';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_endereco_cliente
+    } // ValidateField_nome_tecnico
 
-    function ValidateField_cidade_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_email_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->cidade_cliente) > 60) 
+          if (NM_utf8_strlen($this->email_tecnico) > 60) 
           { 
               $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_cidade_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['cidade_cliente']))
+              $Campos_Crit .= "Email Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['email_tecnico']))
               {
-                  $Campos_Erros['cidade_cliente'] = array();
+                  $Campos_Erros['email_tecnico'] = array();
               }
-              $Campos_Erros['cidade_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['cidade_cliente']) || !is_array($this->NM_ajax_info['errList']['cidade_cliente']))
+              $Campos_Erros['email_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['email_tecnico']) || !is_array($this->NM_ajax_info['errList']['email_tecnico']))
               {
-                  $this->NM_ajax_info['errList']['cidade_cliente'] = array();
+                  $this->NM_ajax_info['errList']['email_tecnico'] = array();
               }
-              $this->NM_ajax_info['errList']['cidade_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $this->NM_ajax_info['errList']['email_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'cidade_cliente';
+            $fieldName = 'email_tecnico';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_cidade_cliente
+    } // ValidateField_email_tecnico
 
-    function ValidateField_estado_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_fone_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->estado_cliente) > 45) 
+          if (NM_utf8_strlen($this->fone_tecnico) > 20) 
           { 
               $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_estado_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['estado_cliente']))
+              $Campos_Crit .= "Fone Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['fone_tecnico']))
               {
-                  $Campos_Erros['estado_cliente'] = array();
+                  $Campos_Erros['fone_tecnico'] = array();
               }
-              $Campos_Erros['estado_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['estado_cliente']) || !is_array($this->NM_ajax_info['errList']['estado_cliente']))
+              $Campos_Erros['fone_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['fone_tecnico']) || !is_array($this->NM_ajax_info['errList']['fone_tecnico']))
               {
-                  $this->NM_ajax_info['errList']['estado_cliente'] = array();
+                  $this->NM_ajax_info['errList']['fone_tecnico'] = array();
               }
-              $this->NM_ajax_info['errList']['estado_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $this->NM_ajax_info['errList']['fone_tecnico'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'estado_cliente';
+            $fieldName = 'fone_tecnico';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_estado_cliente
+    } // ValidateField_fone_tecnico
 
-    function ValidateField_pais_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_usuario_login(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-               if (!empty($this->pais_cliente) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']) && !in_array($this->pais_cliente, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['pais_cliente']))
-                   {
-                       $Campos_Erros['pais_cliente'] = array();
-                   }
-                   $Campos_Erros['pais_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['pais_cliente']) || !is_array($this->NM_ajax_info['errList']['pais_cliente']))
-                   {
-                       $this->NM_ajax_info['errList']['pais_cliente'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['pais_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'pais_cliente';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_pais_cliente
-
-    function ValidateField_cep_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      {
-          if (!$this->nm_validate_mask($this->cep_cliente, explode(';', "99999-999")))  
-          { 
-              $hasError = true;
-              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-              if (!isset($Campos_Erros['cep_cliente']))
-              {
-                  $Campos_Erros['cep_cliente'] = array();
-              }
-              $Campos_Erros['cep_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                  if (!isset($this->NM_ajax_info['errList']['cep_cliente']) || !is_array($this->NM_ajax_info['errList']['cep_cliente']))
-                  {
-                      $this->NM_ajax_info['errList']['cep_cliente'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['cep_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-          } 
-      }
-      $this->nm_tira_mask($this->cep_cliente, "99999-999", "(){}[].,;:-+/ "); 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->cep_cliente) > 45) 
+          if (NM_utf8_strlen($this->usuario_login) > 32) 
           { 
               $hasError = true;
-              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['cep_cliente']))
+              $Campos_Crit .= "Usuario Login " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['usuario_login']))
               {
-                  $Campos_Erros['cep_cliente'] = array();
+                  $Campos_Erros['usuario_login'] = array();
               }
-              $Campos_Erros['cep_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['cep_cliente']) || !is_array($this->NM_ajax_info['errList']['cep_cliente']))
+              $Campos_Erros['usuario_login'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['usuario_login']) || !is_array($this->NM_ajax_info['errList']['usuario_login']))
               {
-                  $this->NM_ajax_info['errList']['cep_cliente'] = array();
+                  $this->NM_ajax_info['errList']['usuario_login'] = array();
               }
-              $this->NM_ajax_info['errList']['cep_cliente'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 45 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $this->NM_ajax_info['errList']['usuario_login'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'cep_cliente';
+            $fieldName = 'usuario_login';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_cep_cliente
+    } // ValidateField_usuario_login
 
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
@@ -2143,29 +1916,20 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    {
     global
            $sc_seq_vert;
-    $this->nmgp_dados_form['nome_cliente'] = $this->nome_cliente;
-    $this->nmgp_dados_form['fone_cliente'] = $this->fone_cliente;
-    $this->nmgp_dados_form['email_cliente'] = $this->email_cliente;
-    $this->nmgp_dados_form['endereco_cliente'] = $this->endereco_cliente;
-    $this->nmgp_dados_form['cidade_cliente'] = $this->cidade_cliente;
-    $this->nmgp_dados_form['estado_cliente'] = $this->estado_cliente;
-    $this->nmgp_dados_form['pais_cliente'] = $this->pais_cliente;
-    $this->nmgp_dados_form['cep_cliente'] = $this->cep_cliente;
-    $this->nmgp_dados_form['id_cliente'] = $this->id_cliente;
+    $this->nmgp_dados_form['id_tecnico'] = $this->id_tecnico;
+    $this->nmgp_dados_form['nome_tecnico'] = $this->nome_tecnico;
+    $this->nmgp_dados_form['email_tecnico'] = $this->email_tecnico;
+    $this->nmgp_dados_form['fone_tecnico'] = $this->fone_tecnico;
     $this->nmgp_dados_form['usuario_login'] = $this->usuario_login;
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form'] = $this->nmgp_dados_form;
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form'] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
    {
       global $nm_form_submit;
          $this->Before_unformat = array();
          $this->formatado = false;
-      $this->Before_unformat['fone_cliente'] = $this->fone_cliente;
-      $this->nm_tira_mask($this->fone_cliente, "(99) 99999-9999", "(){}[].,;:-+/ "); 
-      $this->Before_unformat['cep_cliente'] = $this->cep_cliente;
-      $this->nm_tira_mask($this->cep_cliente, "99999-999", "(){}[].,;:-+/ "); 
-      $this->Before_unformat['id_cliente'] = $this->id_cliente;
-      nm_limpa_numero($this->id_cliente, $this->field_config['id_cliente']['symbol_grp']) ; 
+      $this->Before_unformat['id_tecnico'] = $this->id_tecnico;
+      nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -2209,17 +1973,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    }
    function nm_clear_val($Nome_Campo)
    {
-      if ($Nome_Campo == "fone_cliente")
+      if ($Nome_Campo == "id_tecnico")
       {
-          $this->nm_tira_mask($this->fone_cliente, "(99) 99999-9999", "(){}[].,;:-+/ "); 
-      }
-      if ($Nome_Campo == "cep_cliente")
-      {
-          $this->nm_tira_mask($this->cep_cliente, "99999-999", "(){}[].,;:-+/ "); 
-      }
-      if ($Nome_Campo == "id_cliente")
-      {
-          nm_limpa_numero($this->id_cliente, $this->field_config['id_cliente']['symbol_grp']) ; 
+          nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
       }
    }
    function nm_formatar_campos($format_fields = array())
@@ -2230,13 +1986,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
          return;
      }
      $this->formatado = true;
-      if (!empty($this->fone_cliente) || (!empty($format_fields) && isset($format_fields['fone_cliente'])))
+      if ('' !== $this->id_tecnico || (!empty($format_fields) && isset($format_fields['id_tecnico'])))
       {
-          $this->nm_gera_mask($this->fone_cliente, "(99) 99999-9999"); 
-      }
-      if (!empty($this->cep_cliente) || (!empty($format_fields) && isset($format_fields['cep_cliente'])))
-      {
-          $this->nm_gera_mask($this->cep_cliente, "99999-999"); 
+          nmgp_Form_Num_Val($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp'], $this->field_config['id_tecnico']['symbol_dec'], "0", "S", $this->field_config['id_tecnico']['format_neg'], "", "", "-", $this->field_config['id_tecnico']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -2554,114 +2306,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
        return $new;
    }
-   function nm_validate_mask($value, $mask_list)
-   {
-       if ('' == $value)
-       {
-           return true;
-       }
-
-       $size_ok   = false;
-       $test_mask = '';
-       foreach ($mask_list as $tmp_mask)
-       {
-           if (mb_strlen($value) == strlen($tmp_mask))
-           {
-               $size_ok   = true;
-               $test_mask = $tmp_mask;
-           }
-       }
-
-       if (!$size_ok)
-       {
-           return false;
-       }
-
-       $i           = 0;
-       $thisPointer = 0;
-       while (false !== ($test_char = $this->nm_next_char($value, $thisPointer)))
-       {
-           if (!$this->nm_validate_mask_char($test_char, $test_mask[$i]))
-           {
-               return false;
-           }
-           $i++;
-       }
-
-       return true;
-       for ($i = 0; $i < strlen($value); $i++)
-       {
-           if (!$this->nm_validate_mask_char($value[$i], $test_mask[$i]))
-           {
-               return false;
-           }
-       }
-
-       return true;
-   }
-
-   function nm_validate_mask_char($value_char, $mask_char)
-   {
-       switch ($mask_char)
-       {
-           case '9':
-               return false !== strpos('0123456789', $value_char);
-               break;
-
-           case 'a':
-               return false !== strpos('abcdefghijklmnopqrstuvwxyz', strtolower($value_char));
-               break;
-
-           case '*':
-               if (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($value_char))) {
-                   return true;
-               }
-               if (preg_match("/\p{Arabic}/u", $value_char)) {
-                   return true;
-               }
-
-               return false;
-               break;
-
-           default:
-               return $value_char == $mask_char;
-               break;
-       }
-   }
-
-   function nm_next_char($string, &$pointer) {
-       if (!isset($string[$pointer])) {
-           return false;
-       }
-
-       $char = ord($string[$pointer]);
-
-       if ($char < 128) {
-           return $string[$pointer++];
-       }
-       else {
-           if ($char < 224) {
-               $bytes = 2;
-           }
-           elseif ($char < 240) {
-               $bytes = 3;
-           }
-           elseif ($char < 248) {
-               $bytes = 4;
-           }
-           elseif($char == 252) {
-               $bytes = 5;
-           }
-           else {
-               $bytes = 6;
-           }
-
-           $str      = substr($string, $pointer, $bytes);
-           $pointer += $bytes;
-
-           return $str;
-       }
-   }
 //
    function nm_limpa_alfa(&$str)
    {
@@ -2747,80 +2391,46 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
    function ajax_return_values()
    {
-          $this->ajax_return_values_nome_cliente();
-          $this->ajax_return_values_fone_cliente();
-          $this->ajax_return_values_email_cliente();
-          $this->ajax_return_values_endereco_cliente();
-          $this->ajax_return_values_cidade_cliente();
-          $this->ajax_return_values_estado_cliente();
-          $this->ajax_return_values_pais_cliente();
-          $this->ajax_return_values_cep_cliente();
+          $this->ajax_return_values_id_tecnico();
+          $this->ajax_return_values_nome_tecnico();
+          $this->ajax_return_values_email_tecnico();
+          $this->ajax_return_values_fone_tecnico();
+          $this->ajax_return_values_usuario_login();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
               $this->NM_ajax_info['navStatus']['ret'] = $this->Nav_permite_ret ? 'S' : 'N';
               $this->NM_ajax_info['navStatus']['ava'] = $this->Nav_permite_ava ? 'S' : 'N';
-              $this->NM_ajax_info['fldList']['id_cliente']['keyVal'] = form_clientes_pack_protect_string($this->nmgp_dados_form['id_cliente']);
+              $this->NM_ajax_info['fldList']['id_tecnico']['keyVal'] = form_tecnicos_mob_pack_protect_string($this->nmgp_dados_form['id_tecnico']);
           }
    } // ajax_return_values
 
-          //----- nome_cliente
-   function ajax_return_values_nome_cliente($bForce = false)
+          //----- id_tecnico
+   function ajax_return_values_id_tecnico($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nome_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_tecnico", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->nome_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->id_tecnico);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['nome_cliente'] = array(
+          $this->NM_ajax_info['fldList']['id_tecnico'] = array(
                        'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- fone_cliente
-   function ajax_return_values_fone_cliente($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("fone_cliente", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->fone_cliente);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['fone_cliente'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- email_cliente
-   function ajax_return_values_email_cliente($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("email_cliente", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->email_cliente);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['email_cliente'] = array(
-                       'row'    => '',
-               'type'    => 'text',
+               'type'    => 'label',
                'valList' => array($sTmpValue),
+               'labList' => array($this->form_format_readonly("id_tecnico", $this->form_encode_input($sTmpValue))),
               );
           }
    }
 
-          //----- endereco_cliente
-   function ajax_return_values_endereco_cliente($bForce = false)
+          //----- nome_tecnico
+   function ajax_return_values_nome_tecnico($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("endereco_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nome_tecnico", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->endereco_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->nome_tecnico);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['endereco_cliente'] = array(
+          $this->NM_ajax_info['fldList']['nome_tecnico'] = array(
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($this->form_encode_input($sTmpValue)),
@@ -2828,15 +2438,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           }
    }
 
-          //----- cidade_cliente
-   function ajax_return_values_cidade_cliente($bForce = false)
+          //----- email_tecnico
+   function ajax_return_values_email_tecnico($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("cidade_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("email_tecnico", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->cidade_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->email_tecnico);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['cidade_cliente'] = array(
+          $this->NM_ajax_info['fldList']['email_tecnico'] = array(
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($this->form_encode_input($sTmpValue)),
@@ -2844,15 +2454,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           }
    }
 
-          //----- estado_cliente
-   function ajax_return_values_estado_cliente($bForce = false)
+          //----- fone_tecnico
+   function ajax_return_values_fone_tecnico($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("estado_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("fone_tecnico", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->estado_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->fone_tecnico);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['estado_cliente'] = array(
+          $this->NM_ajax_info['fldList']['fone_tecnico'] = array(
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($this->form_encode_input($sTmpValue)),
@@ -2860,130 +2470,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           }
    }
 
-          //----- pais_cliente
-   function ajax_return_values_pais_cliente($bForce = false)
+          //----- usuario_login
+   function ajax_return_values_usuario_login($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("pais_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("usuario_login", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->pais_cliente);
-              $aLookup = array();
-              $this->_tmp_lookup_pais_cliente = $this->pais_cliente;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array(); 
-}
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_fone_cliente = $this->fone_cliente;
-   $old_value_cep_cliente = $this->cep_cliente;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_fone_cliente = $this->fone_cliente;
-   $unformatted_value_cep_cliente = $this->cep_cliente;
-
-   $nm_comando = "SELECT id_pais, nome_pais  FROM pais  ORDER BY nome_pais";
-
-   $this->fone_cliente = $old_value_fone_cliente;
-   $this->cep_cliente = $old_value_cep_cliente;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_clientes_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_clientes_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"pais_cliente\"";
-          if (isset($this->NM_ajax_info['select_html']['pais_cliente']) && !empty($this->NM_ajax_info['select_html']['pais_cliente']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['pais_cliente']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->pais_cliente == $sValue)
-                  {
-                      $this->_tmp_lookup_pais_cliente = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['pais_cliente'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['pais_cliente']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['pais_cliente']['valList'][$i] = form_clientes_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['pais_cliente']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['pais_cliente']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['pais_cliente']['labList'] = $aLabel;
-          }
-   }
-
-          //----- cep_cliente
-   function ajax_return_values_cep_cliente($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("cep_cliente", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->cep_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->usuario_login);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['cep_cliente'] = array(
+          $this->NM_ajax_info['fldList']['usuario_login'] = array(
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($this->form_encode_input($sTmpValue)),
@@ -3002,9 +2497,9 @@ else
         {
             return $originalName;
         }
-        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName]))
+        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName]))
         {
-            $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName] = array();
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName] = array();
             $resDir = @opendir($uploadDir);
             if (!$resDir)
             {
@@ -3014,20 +2509,20 @@ else
             {
                 if (@is_file($uploadDir . $fileName))
                 {
-                    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName][] = $fileName;
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName][] = $fileName;
                 }
             }
             @closedir($resDir);
         }
-        if (!in_array($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName]))
+        if (!in_array($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName]))
         {
-            $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName][] = $originalName;
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName][] = $originalName;
             return $originalName;
         }
         else
         {
-            $newName = $this->fetchFileNextName($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName]);
-            $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['upload_dir'][$fieldName][] = $newName;
+            $newName = $this->fetchFileNextName($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName]);
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['upload_dir'][$fieldName][] = $newName;
             return $newName;
         }
     } // fetchUniqueUploadName
@@ -3140,78 +2635,38 @@ else
       { 
           $this->Ini->sc_tem_trans_banco = $this->Db->BeginTrans(); 
       } 
-      $NM_val_form['nome_cliente'] = $this->nome_cliente;
-      $NM_val_form['fone_cliente'] = $this->fone_cliente;
-      $NM_val_form['email_cliente'] = $this->email_cliente;
-      $NM_val_form['endereco_cliente'] = $this->endereco_cliente;
-      $NM_val_form['cidade_cliente'] = $this->cidade_cliente;
-      $NM_val_form['estado_cliente'] = $this->estado_cliente;
-      $NM_val_form['pais_cliente'] = $this->pais_cliente;
-      $NM_val_form['cep_cliente'] = $this->cep_cliente;
-      $NM_val_form['id_cliente'] = $this->id_cliente;
+      $NM_val_form['id_tecnico'] = $this->id_tecnico;
+      $NM_val_form['nome_tecnico'] = $this->nome_tecnico;
+      $NM_val_form['email_tecnico'] = $this->email_tecnico;
+      $NM_val_form['fone_tecnico'] = $this->fone_tecnico;
       $NM_val_form['usuario_login'] = $this->usuario_login;
-      if ($this->id_cliente === "" || is_null($this->id_cliente))  
+      if ($this->id_tecnico === "" || is_null($this->id_tecnico))  
       { 
-          $this->id_cliente = 0;
+          $this->id_tecnico = 0;
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir") 
       {
-          $this->nome_cliente_before_qstr = $this->nome_cliente;
-          $this->nome_cliente = substr($this->Db->qstr($this->nome_cliente), 1, -1); 
-          if ($this->nome_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          $this->nome_tecnico_before_qstr = $this->nome_tecnico;
+          $this->nome_tecnico = substr($this->Db->qstr($this->nome_tecnico), 1, -1); 
+          if ($this->nome_tecnico == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
-              $this->nome_cliente = "null"; 
-              $NM_val_null[] = "nome_cliente";
+              $this->nome_tecnico = "null"; 
+              $NM_val_null[] = "nome_tecnico";
           } 
-          $this->email_cliente_before_qstr = $this->email_cliente;
-          $this->email_cliente = substr($this->Db->qstr($this->email_cliente), 1, -1); 
-          if ($this->email_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          $this->email_tecnico_before_qstr = $this->email_tecnico;
+          $this->email_tecnico = substr($this->Db->qstr($this->email_tecnico), 1, -1); 
+          if ($this->email_tecnico == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
-              $this->email_cliente = "null"; 
-              $NM_val_null[] = "email_cliente";
+              $this->email_tecnico = "null"; 
+              $NM_val_null[] = "email_tecnico";
           } 
-          $this->fone_cliente_before_qstr = $this->fone_cliente;
-          $this->fone_cliente = substr($this->Db->qstr($this->fone_cliente), 1, -1); 
-          if ($this->fone_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          $this->fone_tecnico_before_qstr = $this->fone_tecnico;
+          $this->fone_tecnico = substr($this->Db->qstr($this->fone_tecnico), 1, -1); 
+          if ($this->fone_tecnico == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
-              $this->fone_cliente = "null"; 
-              $NM_val_null[] = "fone_cliente";
-          } 
-          $this->endereco_cliente_before_qstr = $this->endereco_cliente;
-          $this->endereco_cliente = substr($this->Db->qstr($this->endereco_cliente), 1, -1); 
-          if ($this->endereco_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->endereco_cliente = "null"; 
-              $NM_val_null[] = "endereco_cliente";
-          } 
-          $this->cidade_cliente_before_qstr = $this->cidade_cliente;
-          $this->cidade_cliente = substr($this->Db->qstr($this->cidade_cliente), 1, -1); 
-          if ($this->cidade_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->cidade_cliente = "null"; 
-              $NM_val_null[] = "cidade_cliente";
-          } 
-          $this->estado_cliente_before_qstr = $this->estado_cliente;
-          $this->estado_cliente = substr($this->Db->qstr($this->estado_cliente), 1, -1); 
-          if ($this->estado_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->estado_cliente = "null"; 
-              $NM_val_null[] = "estado_cliente";
-          } 
-          $this->pais_cliente_before_qstr = $this->pais_cliente;
-          $this->pais_cliente = substr($this->Db->qstr($this->pais_cliente), 1, -1); 
-          if ($this->pais_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->pais_cliente = "null"; 
-              $NM_val_null[] = "pais_cliente";
-          } 
-          $this->cep_cliente_before_qstr = $this->cep_cliente;
-          $this->cep_cliente = substr($this->Db->qstr($this->cep_cliente), 1, -1); 
-          if ($this->cep_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->cep_cliente = "null"; 
-              $NM_val_null[] = "cep_cliente";
+              $this->fone_tecnico = "null"; 
+              $NM_val_null[] = "fone_tecnico";
           } 
           $this->usuario_login_before_qstr = $this->usuario_login;
           $this->usuario_login = substr($this->Db->qstr($this->usuario_login), 1, -1); 
@@ -3224,9 +2679,9 @@ else
       if ($this->nmgp_opcao == "alterar") 
       {
           $SC_fields_update = array(); 
-          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']))
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']))
           {
-              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key'] as $sFKName => $sFKValue)
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key'] as $sFKName => $sFKValue)
               {
                    if (isset($this->sc_conv_var[$sFKName]))
                    {
@@ -3237,35 +2692,35 @@ else
           }
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente ";
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente ";
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente ";
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente ";
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           else  
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente ";
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           if ($rs1 === false)  
           { 
               $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
               if ($this->NM_ajax_flag)
               {
-                 form_clientes_pack_ajax_response();
+                 form_tecnicos_mob_pack_ajax_response();
               }
               exit; 
           }  
@@ -3279,38 +2734,6 @@ else
               $this->sc_evento = 'update';
           } 
           $aUpdateOk = array();
-              $Cmd_Unique = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where (nome_cliente = '" . $this->nome_cliente . "') AND (id_cliente <> $this->id_cliente)";
-              $Cmd_Unique = str_replace("'null'", "null", $Cmd_Unique) ; 
-              $Cmd_Unique = str_replace("#null#", "null", $Cmd_Unique) ; 
-              $Cmd_Unique = str_replace($this->Ini->date_delim . "null" . $this->Ini->date_delim1, "null", $Cmd_Unique) ; 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $Cmd_Unique;
-              $rsUni = $this->Db->Execute($Cmd_Unique);
-              if (false === $rsUni)
-              {
-                  $dbErrorMessage = $this->Db->ErrorMsg();
-                  $dbErrorCode = $this->Db->ErrorNo();
-                  $this->handleDbErrorMessage($dbErrorMessage, $dbErrorCode);
-                  $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_updt'], $dbErrorMessage, true);
-                  if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler']) {
-                      $this->sc_erro_update = $dbErrorMessage;
-                      $this->NM_rollback_db();
-                      if ($this->NM_ajax_flag) {
-                          form_clientes_pack_ajax_response();
-                      }
-                      exit;
-                  }
-              }
-              elseif (0 < $rsUni->fields[0])
-              {
-                  $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_ukey'] . " " . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . ""); 
-                  $this->nmgp_opcao = "nada"; 
-                  $aUpdateOk[] = 'nome_cliente';
-                  $rsUni->Close();
-              }
-              else
-              {
-                  $rsUni->Close();
-              }
           $bUpdateOk = $bUpdateOk && empty($aUpdateOk);
           if ($bUpdateOk)
           { 
@@ -3319,62 +2742,58 @@ else
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
-              } 
-              if (isset($NM_val_form['usuario_login']) && $NM_val_form['usuario_login'] != $this->nmgp_dados_select['usuario_login']) 
-              { 
-                  $SC_fields_update[] = "usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
               } 
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
-                  $comando .= " WHERE id_cliente = $this->id_cliente ";  
+                  $comando .= " WHERE id_tecnico = $this->id_tecnico ";  
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               {
-                  $comando .= " WHERE id_cliente = $this->id_cliente ";  
+                  $comando .= " WHERE id_tecnico = $this->id_tecnico ";  
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando .= " WHERE id_cliente = $this->id_cliente ";  
+                  $comando .= " WHERE id_tecnico = $this->id_tecnico ";  
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando .= " WHERE id_cliente = $this->id_cliente ";  
+                  $comando .= " WHERE id_tecnico = $this->id_tecnico ";  
               }  
               else  
               {
-                  $comando .= " WHERE id_cliente = $this->id_cliente ";  
+                  $comando .= " WHERE id_tecnico = $this->id_tecnico ";  
               }  
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -3406,21 +2825,16 @@ else
                               $this->NM_rollback_db(); 
                               if ($this->NM_ajax_flag)
                               {
-                                  form_clientes_pack_ajax_response();
+                                  form_tecnicos_mob_pack_ajax_response();
                               }
                               exit;  
                           }   
                       }   
                   }   
               }   
-              $this->nome_cliente = $this->nome_cliente_before_qstr;
-              $this->email_cliente = $this->email_cliente_before_qstr;
-              $this->fone_cliente = $this->fone_cliente_before_qstr;
-              $this->endereco_cliente = $this->endereco_cliente_before_qstr;
-              $this->cidade_cliente = $this->cidade_cliente_before_qstr;
-              $this->estado_cliente = $this->estado_cliente_before_qstr;
-              $this->pais_cliente = $this->pais_cliente_before_qstr;
-              $this->cep_cliente = $this->cep_cliente_before_qstr;
+              $this->nome_tecnico = $this->nome_tecnico_before_qstr;
+              $this->email_tecnico = $this->email_tecnico_before_qstr;
+              $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
@@ -3433,28 +2847,22 @@ else
                   $this->lig_edit_lookup_call = true;
               }
 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['db_changed'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['db_changed'] = true;
               if ($this->NM_ajax_flag) {
                   $this->NM_ajax_info['clearUpload'] = 'S';
               }
 
 
-              if     (isset($NM_val_form) && isset($NM_val_form['nome_cliente'])) { $this->nome_cliente = $NM_val_form['nome_cliente']; }
-              elseif (isset($this->nome_cliente)) { $this->nm_limpa_alfa($this->nome_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['email_cliente'])) { $this->email_cliente = $NM_val_form['email_cliente']; }
-              elseif (isset($this->email_cliente)) { $this->nm_limpa_alfa($this->email_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['fone_cliente'])) { $this->fone_cliente = $NM_val_form['fone_cliente']; }
-              elseif (isset($this->fone_cliente)) { $this->nm_limpa_alfa($this->fone_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['endereco_cliente'])) { $this->endereco_cliente = $NM_val_form['endereco_cliente']; }
-              elseif (isset($this->endereco_cliente)) { $this->nm_limpa_alfa($this->endereco_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['cidade_cliente'])) { $this->cidade_cliente = $NM_val_form['cidade_cliente']; }
-              elseif (isset($this->cidade_cliente)) { $this->nm_limpa_alfa($this->cidade_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['estado_cliente'])) { $this->estado_cliente = $NM_val_form['estado_cliente']; }
-              elseif (isset($this->estado_cliente)) { $this->nm_limpa_alfa($this->estado_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['pais_cliente'])) { $this->pais_cliente = $NM_val_form['pais_cliente']; }
-              elseif (isset($this->pais_cliente)) { $this->nm_limpa_alfa($this->pais_cliente); }
-              if     (isset($NM_val_form) && isset($NM_val_form['cep_cliente'])) { $this->cep_cliente = $NM_val_form['cep_cliente']; }
-              elseif (isset($this->cep_cliente)) { $this->nm_limpa_alfa($this->cep_cliente); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_tecnico'])) { $this->id_tecnico = $NM_val_form['id_tecnico']; }
+              elseif (isset($this->id_tecnico)) { $this->nm_limpa_alfa($this->id_tecnico); }
+              if     (isset($NM_val_form) && isset($NM_val_form['nome_tecnico'])) { $this->nome_tecnico = $NM_val_form['nome_tecnico']; }
+              elseif (isset($this->nome_tecnico)) { $this->nm_limpa_alfa($this->nome_tecnico); }
+              if     (isset($NM_val_form) && isset($NM_val_form['email_tecnico'])) { $this->email_tecnico = $NM_val_form['email_tecnico']; }
+              elseif (isset($this->email_tecnico)) { $this->nm_limpa_alfa($this->email_tecnico); }
+              if     (isset($NM_val_form) && isset($NM_val_form['fone_tecnico'])) { $this->fone_tecnico = $NM_val_form['fone_tecnico']; }
+              elseif (isset($this->fone_tecnico)) { $this->nm_limpa_alfa($this->fone_tecnico); }
+              if     (isset($NM_val_form) && isset($NM_val_form['usuario_login'])) { $this->usuario_login = $NM_val_form['usuario_login']; }
+              elseif (isset($this->usuario_login)) { $this->nm_limpa_alfa($this->usuario_login); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -3462,7 +2870,7 @@ else
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('nome_cliente', 'fone_cliente', 'email_cliente', 'endereco_cliente', 'cidade_cliente', 'estado_cliente', 'pais_cliente', 'cep_cliente'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('id_tecnico', 'nome_tecnico', 'email_tecnico', 'fone_tecnico', 'usuario_login'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -3473,9 +2881,9 @@ else
       { 
           $NM_cmp_auto = "";
           $NM_seq_auto = "";
-          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']))
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']))
           {
-              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key'] as $sFKName => $sFKValue)
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key'] as $sFKName => $sFKValue)
               {
                    if (isset($this->sc_conv_var[$sFKName]))
                    {
@@ -3487,48 +2895,12 @@ else
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
           { 
               $NM_seq_auto = "NULL, ";
-              $NM_cmp_auto = "id_cliente, ";
+              $NM_cmp_auto = "id_tecnico, ";
           } 
           $bInsertOk = true;
           $aInsertOk = array(); 
-              $Cmd_Unique = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where nome_cliente = '" . $this->nome_cliente . "'";
-              $Cmd_Unique = str_replace("'null'", "null", $Cmd_Unique) ; 
-              $Cmd_Unique = str_replace("#null#", "null", $Cmd_Unique) ; 
-              $Cmd_Unique = str_replace($this->Ini->date_delim . "null" . $this->Ini->date_delim1, "null", $Cmd_Unique) ; 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $Cmd_Unique;
-              $rsUni = $this->Db->Execute($Cmd_Unique);
-              if (false === $rsUni)
-              {
-                  $dbErrorMessage = $this->Db->ErrorMsg();
-                  $dbErrorCode = $this->Db->ErrorNo();
-                  $this->handleDbErrorMessage($dbErrorMessage, $dbErrorCode);
-                  $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_inst'], $dbErrorMessage, true);
-                  if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler'])
-                  {
-                      $this->sc_erro_insert = $dbErrorMessage;
-                      $this->nmgp_opcao     = 'refresh_insert';
-                      $this->NM_rollback_db(); 
-                      if ($this->NM_ajax_flag)
-                      {
-                          form_clientes_pack_ajax_response();
-                          exit;
-                      }
-                  }
-              }
-              elseif (0 < $rsUni->fields[0])
-              {
-                  $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_inst_uniq'] . " " . $this->Ini->Nm_lang['lang_clientes_fld_nome_cliente'] . ""); 
-                  $this->nmgp_opcao = "nada"; 
-                  $GLOBALS["erro_incl"] = 1; 
-                  $aInsertOk[] = 'nome_cliente';
-                  $rsUni->Close();
-              }
-              else
-              {
-                  $rsUni->Close();
-              }
           $bInsertOk = $bInsertOk && empty($aInsertOk);
-          if (!isset($_POST['nmgp_ins_valid']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['insert_validation'] != $_POST['nmgp_ins_valid'])
+          if (!isset($_POST['nmgp_ins_valid']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['insert_validation'] != $_POST['nmgp_ins_valid'])
           {
               $bInsertOk = false;
               $this->Erro->mensagem(__FILE__, __LINE__, 'security', $this->Ini->Nm_lang['lang_errm_inst_vald']);
@@ -3537,7 +2909,7 @@ else
                   $this->nmgp_opcao = 'refresh_insert';
                   if ($this->NM_ajax_flag)
                   {
-                      form_clientes_pack_ajax_response();
+                      form_tecnicos_mob_pack_ajax_response();
                       exit;
                   }
               }
@@ -3546,39 +2918,39 @@ else
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES ('$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES ('$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_tecnico, email_tecnico, fone_tecnico, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_tecnico', '$this->email_tecnico', '$this->fone_tecnico', '$this->usuario_login')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -3608,7 +2980,7 @@ else
                           $this->NM_rollback_db(); 
                           if ($this->NM_ajax_flag)
                           {
-                              form_clientes_pack_ajax_response();
+                              form_tecnicos_mob_pack_ajax_response();
                               exit; 
                           }
                       }  
@@ -3626,11 +2998,11 @@ else
                       $this->NM_rollback_db(); 
                       if ($this->NM_ajax_flag)
                       {
-                          form_clientes_pack_ajax_response();
+                          form_tecnicos_mob_pack_ajax_response();
                       }
                       exit; 
                   } 
-                  $this->id_cliente =  $rsy->fields[0];
+                  $this->id_tecnico =  $rsy->fields[0];
                  $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
@@ -3642,7 +3014,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
@@ -3654,7 +3026,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
@@ -3666,7 +3038,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
@@ -3683,7 +3055,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
@@ -3695,7 +3067,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
@@ -3707,7 +3079,7 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
@@ -3719,47 +3091,37 @@ else
                       $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
                       exit; 
                   } 
-                  $this->id_cliente = $rsy->fields[0];
+                  $this->id_tecnico = $rsy->fields[0];
                   $rsy->Close(); 
               } 
-              $this->nome_cliente = $this->nome_cliente_before_qstr;
-              $this->email_cliente = $this->email_cliente_before_qstr;
-              $this->fone_cliente = $this->fone_cliente_before_qstr;
-              $this->endereco_cliente = $this->endereco_cliente_before_qstr;
-              $this->cidade_cliente = $this->cidade_cliente_before_qstr;
-              $this->estado_cliente = $this->estado_cliente_before_qstr;
-              $this->pais_cliente = $this->pais_cliente_before_qstr;
-              $this->cep_cliente = $this->cep_cliente_before_qstr;
+              $this->nome_tecnico = $this->nome_tecnico_before_qstr;
+              $this->email_tecnico = $this->email_tecnico_before_qstr;
+              $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
               }
 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['db_changed'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['db_changed'] = true;
 
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']))
               {
-                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']);
+                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']);
               }
 
               $this->sc_evento = "insert"; 
-              $this->nome_cliente = $this->nome_cliente_before_qstr;
-              $this->email_cliente = $this->email_cliente_before_qstr;
-              $this->fone_cliente = $this->fone_cliente_before_qstr;
-              $this->endereco_cliente = $this->endereco_cliente_before_qstr;
-              $this->cidade_cliente = $this->cidade_cliente_before_qstr;
-              $this->estado_cliente = $this->estado_cliente_before_qstr;
-              $this->pais_cliente = $this->pais_cliente_before_qstr;
-              $this->cep_cliente = $this->cep_cliente_before_qstr;
+              $this->nome_tecnico = $this->nome_tecnico_before_qstr;
+              $this->email_tecnico = $this->email_tecnico_before_qstr;
+              $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
-              if ('refresh_insert' != $this->nmgp_opcao && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_insert']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_redir_insert'] != "S"))
+              if ('refresh_insert' != $this->nmgp_opcao && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_redir_insert']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_redir_insert'] != "S"))
               {
               $this->nmgp_opcao = "novo"; 
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "R")
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "R")
               { 
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['return_edit'] = "new";
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['return_edit'] = "new";
               } 
               }
               $this->nm_flag_iframe = true;
@@ -3771,7 +3133,7 @@ else
       } 
       if ($this->nmgp_opcao == "excluir") 
       { 
-          $this->id_cliente = substr($this->Db->qstr($this->id_cliente), 1, -1); 
+          $this->id_tecnico = substr($this->Db->qstr($this->id_tecnico), 1, -1); 
 
           $bDelecaoOk = true;
           $sMsgErro   = '';
@@ -3781,28 +3143,28 @@ else
 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente"; 
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente"; 
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente"; 
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente"; 
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           else  
           {
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente"; 
-              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
           }  
           if ($rs1 === false)  
           { 
@@ -3826,28 +3188,28 @@ else
               $rs1->Close(); 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
-                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "; 
-                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               {
-                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "; 
-                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "; 
-                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "; 
-                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
               }  
               else  
               {
-                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "; 
-                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_cliente = $this->id_cliente "); 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where id_tecnico = $this->id_tecnico "); 
               }  
               if ($rs === false) 
               { 
@@ -3858,7 +3220,7 @@ else
                       $this->NM_rollback_db(); 
                       if ($this->NM_ajax_flag)
                       {
-                          form_clientes_pack_ajax_response();
+                          form_tecnicos_mob_pack_ajax_response();
                           exit; 
                       }
                   } 
@@ -3869,17 +3231,17 @@ else
               }
               $this->nmgp_opcao = "avanca"; 
               $this->nm_flag_iframe = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']--; 
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] < 0)
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']--; 
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] < 0)
               {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = 0; 
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = 0; 
               }
 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['db_changed'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['db_changed'] = true;
 
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']))
               {
-                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']);
+                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']);
               }
 
               if ($this->lig_edit_lookup)
@@ -3914,51 +3276,51 @@ else
       }
       if ($salva_opcao == "incluir" && $GLOBALS["erro_incl"] != 1) 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['parms'] = "id_cliente?#?$this->id_cliente?@?"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['parms'] = "id_tecnico?#?$this->id_tecnico?@?"; 
       }
       $this->NM_commit_db(); 
       if ($this->sc_evento != "insert" && $this->sc_evento != "update" && $this->sc_evento != "delete")
       { 
-          $this->id_cliente = null === $this->id_cliente ? null : substr($this->Db->qstr($this->id_cliente), 1, -1); 
+          $this->id_tecnico = null === $this->id_tecnico ? null : substr($this->Db->qstr($this->id_tecnico), 1, -1); 
       } 
       if (isset($this->NM_where_filter))
       {
           $this->NM_where_filter = str_replace("@percent@", "%", $this->NM_where_filter);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'] = trim($this->NM_where_filter);
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']))
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'] = trim($this->NM_where_filter);
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']))
           {
-              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']);
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']);
           }
       }
       $sc_where_filter = '';
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form'])
       {
-          $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form'];
+          $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form'];
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'] && $sc_where_filter != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'] && $sc_where_filter != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'])
       {
           if (empty($sc_where_filter))
           {
-              $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'];
+              $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'];
           }
           else
           {
-              $sc_where_filter .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'] . ")";
+              $sc_where_filter .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'] . ")";
           }
       }
 //------------ 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "R")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "R")
       {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['iframe_evento'] == "insert") 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['iframe_evento'] == "insert") 
           { 
                $this->nmgp_opcao = "novo"; 
-               $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['select'] = "";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['select'] = "";
           } 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['iframe_evento'] = $this->sc_evento; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['iframe_evento'] = $this->sc_evento; 
       } 
       if (!isset($this->nmgp_opcao) || empty($this->nmgp_opcao)) 
       { 
-          if (empty($this->id_cliente)) 
+          if (empty($this->id_tecnico)) 
           { 
               $this->nmgp_opcao = "inicio"; 
           } 
@@ -3971,7 +3333,7 @@ else
       { 
           $this->nmgp_opcao = "inicio";
       } 
-      if ($this->nmgp_opcao != "nada" && (trim($this->id_cliente) == "")) 
+      if ($this->nmgp_opcao != "nada" && (trim($this->id_tecnico) == "")) 
       { 
           if ($this->nmgp_opcao == "avanca")  
           { 
@@ -3986,7 +3348,7 @@ else
       { 
           $GLOBALS["NM_ERRO_IBASE"] = 1;  
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" && $this->sc_evento == "insert")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" && $this->sc_evento == "insert")
       {
           $this->nmgp_opcao = "final";
       }
@@ -4003,7 +3365,7 @@ else
       {
           $sc_where = ('' != $sc_where) ? $sc_where . ' and (' . $sc_where_filter . ')' : ' where ' . $sc_where_filter;
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']))
       { 
           $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $sc_where; 
           $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
@@ -4013,30 +3375,30 @@ else
               $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
               exit ; 
           }  
-          $qt_geral_reg_form_clientes = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'] = $qt_geral_reg_form_clientes;
+          $qt_geral_reg_form_tecnicos_mob = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total'] = $qt_geral_reg_form_tecnicos_mob;
           $rt->Close(); 
-          if ($this->nmgp_opcao == "igual" && isset($this->NM_btn_navega) && 'S' == $this->NM_btn_navega && !empty($this->id_cliente))
+          if ($this->nmgp_opcao == "igual" && isset($this->NM_btn_navega) && 'S' == $this->NM_btn_navega && !empty($this->id_tecnico))
           {
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
-                  $Key_Where = "id_cliente < $this->id_cliente "; 
+                  $Key_Where = "id_tecnico < $this->id_tecnico "; 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               {
-                  $Key_Where = "id_cliente < $this->id_cliente "; 
+                  $Key_Where = "id_tecnico < $this->id_tecnico "; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $Key_Where = "id_cliente < $this->id_cliente "; 
+                  $Key_Where = "id_tecnico < $this->id_tecnico "; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $Key_Where = "id_cliente < $this->id_cliente "; 
+                  $Key_Where = "id_tecnico < $this->id_tecnico "; 
               }
               else  
               {
-                  $Key_Where = "id_cliente < $this->id_cliente "; 
+                  $Key_Where = "id_tecnico < $this->id_tecnico "; 
               }
               $Where_Start = (empty($sc_where)) ? " where " . $Key_Where :  $sc_where . " and (" . $Key_Where . ")";
               $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $Where_Start; 
@@ -4047,80 +3409,78 @@ else
                   $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
                   exit ; 
               }  
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = $rt->fields[0];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = $rt->fields[0];
               $rt->Close(); 
           }
       } 
       else 
       { 
-          $qt_geral_reg_form_clientes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'];
+          $qt_geral_reg_form_tecnicos_mob = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total'];
       } 
       if ($this->nmgp_opcao == "inicio") 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = 0; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = 0; 
       } 
       if ($this->nmgp_opcao == "avanca")  
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']++; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] > $qt_geral_reg_form_clientes)
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']++; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] > $qt_geral_reg_form_tecnicos_mob)
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = $qt_geral_reg_form_clientes; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = $qt_geral_reg_form_tecnicos_mob; 
           }
       } 
       if ($this->nmgp_opcao == "retorna") 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']--; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] < 0)
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']--; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] < 0)
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = 0; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = 0; 
           }
       } 
       if ($this->nmgp_opcao == "final") 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = $qt_geral_reg_form_clientes; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = $qt_geral_reg_form_tecnicos_mob; 
       } 
-      if ($this->nmgp_opcao == "navpage" && ($this->nmgp_ordem - 1) <= $qt_geral_reg_form_clientes) 
+      if ($this->nmgp_opcao == "navpage" && ($this->nmgp_ordem - 1) <= $qt_geral_reg_form_tecnicos_mob) 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = $this->nmgp_ordem - 1; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = $this->nmgp_ordem - 1; 
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] = 0;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] = 0;
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] + 1;
-      $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] + 1; 
-      $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_qtd']; 
-      $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'] + 1; 
-      $this->NM_gera_nav_page(); 
-      $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] + 1;
+      $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] + 1; 
+      $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_qtd']; 
+      $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total'] + 1; 
       $GLOBALS["NM_ERRO_IBASE"] = 0;  
 //---------- 
       if ($this->nmgp_opcao != "novo" && $this->nmgp_opcao != "nada" && $this->nmgp_opcao != "refresh_insert") 
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['parms'] = ""; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['parms'] = ""; 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
           { 
               $GLOBALS["NM_ERRO_IBASE"] = 1;  
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -4128,23 +3488,23 @@ else
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
-                  $aWhere[] = "id_cliente = $this->id_cliente"; 
+                  $aWhere[] = "id_tecnico = $this->id_tecnico"; 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               {
-                  $aWhere[] = "id_cliente = $this->id_cliente"; 
+                  $aWhere[] = "id_tecnico = $this->id_tecnico"; 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $aWhere[] = "id_cliente = $this->id_cliente"; 
+                  $aWhere[] = "id_tecnico = $this->id_tecnico"; 
               }  
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $aWhere[] = "id_cliente = $this->id_cliente"; 
+                  $aWhere[] = "id_tecnico = $this->id_tecnico"; 
               }  
               else  
               {
-                  $aWhere[] = "id_cliente = $this->id_cliente"; 
+                  $aWhere[] = "id_tecnico = $this->id_tecnico"; 
               }  
               if (!empty($sc_where_filter))  
               {
@@ -4160,24 +3520,24 @@ else
           } 
           $nmgp_select .= $this->returnWhere($aWhere) . ' ';
           $sc_order_by = "";
-          $sc_order_by = "id_cliente";
+          $sc_order_by = "id_tecnico";
           $sc_order_by = str_replace("order by ", "", $sc_order_by);
           $sc_order_by = str_replace("ORDER BY ", "", trim($sc_order_by));
           if (!empty($sc_order_by))
           {
               $nmgp_select .= " order by $sc_order_by "; 
           }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "R")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "R")
           {
               if ($this->sc_evento == "update")
               {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['select'] = $nmgp_select;
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['select'] = $nmgp_select;
                   $this->nm_gera_html();
               } 
-              elseif (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['select']))
+              elseif (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['select']))
               { 
-                  $nmgp_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['select'];
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['select'] = ""; 
+                  $nmgp_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['select'];
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['select'] = ""; 
               } 
           } 
           if ($this->nmgp_opcao == "igual") 
@@ -4187,18 +3547,18 @@ else
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
           { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']) ; 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']) ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']) ; 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']) ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']) ; 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']) ; 
           } 
           else  
           { 
@@ -4206,7 +3566,7 @@ else
               $rs = $this->Db->Execute($nmgp_select) ; 
               if (!$rs === false && !$rs->EOF) 
               { 
-                  $rs->Move($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start']) ;  
+                  $rs->Move($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start']) ;  
               } 
           } 
           if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
@@ -4222,7 +3582,7 @@ else
           }  
           if ($rs->EOF) 
           { 
-              if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter']))
+              if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter']))
               {
                   $this->nmgp_form_empty        = true;
                   $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['first']   = "off";
@@ -4232,7 +3592,7 @@ else
                   $this->NM_ajax_info['buttonDisplay']['update']  = $this->nmgp_botoes['update']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['delete']  = $this->nmgp_botoes['delete']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['insert']  = "off";
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter'] = true;
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter'] = true;
                   return; 
               }
               if ($this->nmgp_botoes['insert'] != "on")
@@ -4259,36 +3619,26 @@ else
           }  
           if ($this->nmgp_opcao != "novo") 
           { 
-              $this->id_cliente = $rs->fields[0] ; 
-              $this->nmgp_dados_select['id_cliente'] = $this->id_cliente;
-              $this->nome_cliente = $rs->fields[1] ; 
-              $this->nmgp_dados_select['nome_cliente'] = $this->nome_cliente;
-              $this->email_cliente = $rs->fields[2] ; 
-              $this->nmgp_dados_select['email_cliente'] = $this->email_cliente;
-              $this->fone_cliente = $rs->fields[3] ; 
-              $this->nmgp_dados_select['fone_cliente'] = $this->fone_cliente;
-              $this->endereco_cliente = $rs->fields[4] ; 
-              $this->nmgp_dados_select['endereco_cliente'] = $this->endereco_cliente;
-              $this->cidade_cliente = $rs->fields[5] ; 
-              $this->nmgp_dados_select['cidade_cliente'] = $this->cidade_cliente;
-              $this->estado_cliente = $rs->fields[6] ; 
-              $this->nmgp_dados_select['estado_cliente'] = $this->estado_cliente;
-              $this->pais_cliente = $rs->fields[7] ; 
-              $this->nmgp_dados_select['pais_cliente'] = $this->pais_cliente;
-              $this->cep_cliente = $rs->fields[8] ; 
-              $this->nmgp_dados_select['cep_cliente'] = $this->cep_cliente;
-              $this->usuario_login = $rs->fields[9] ; 
+              $this->id_tecnico = $rs->fields[0] ; 
+              $this->nmgp_dados_select['id_tecnico'] = $this->id_tecnico;
+              $this->nome_tecnico = $rs->fields[1] ; 
+              $this->nmgp_dados_select['nome_tecnico'] = $this->nome_tecnico;
+              $this->email_tecnico = $rs->fields[2] ; 
+              $this->nmgp_dados_select['email_tecnico'] = $this->email_tecnico;
+              $this->fone_tecnico = $rs->fields[3] ; 
+              $this->nmgp_dados_select['fone_tecnico'] = $this->fone_tecnico;
+              $this->usuario_login = $rs->fields[4] ; 
               $this->nmgp_dados_select['usuario_login'] = $this->usuario_login;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $this->id_cliente = (string)$this->id_cliente; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['parms'] = "id_cliente?#?$this->id_cliente?@?";
+              $this->id_tecnico = (string)$this->id_tecnico; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['parms'] = "id_tecnico?#?$this->id_tecnico?@?";
           } 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_select'] = $this->nmgp_dados_select;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_select'] = $this->nmgp_dados_select;
           if (!$this->NM_ajax_flag || 'backup_line' != $this->NM_ajax_opcao)
           {
-              $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'];
-              $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] < $qt_geral_reg_form_clientes;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opcao']   = '';
+              $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'];
+              $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['reg_start'] < $qt_geral_reg_form_tecnicos_mob;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opcao']   = '';
           }
       } 
       if ($this->nmgp_opcao == "novo" || $this->nmgp_opcao == "refresh_insert") 
@@ -4302,32 +3652,22 @@ else
           else
           {
               $this->nm_formatar_campos();
-              $this->id_cliente = "";  
-              $this->nmgp_dados_form["id_cliente"] = $this->id_cliente;
-              $this->nome_cliente = "";  
-              $this->nmgp_dados_form["nome_cliente"] = $this->nome_cliente;
-              $this->email_cliente = "";  
-              $this->nmgp_dados_form["email_cliente"] = $this->email_cliente;
-              $this->fone_cliente = "";  
-              $this->nmgp_dados_form["fone_cliente"] = $this->fone_cliente;
-              $this->endereco_cliente = "";  
-              $this->nmgp_dados_form["endereco_cliente"] = $this->endereco_cliente;
-              $this->cidade_cliente = "";  
-              $this->nmgp_dados_form["cidade_cliente"] = $this->cidade_cliente;
-              $this->estado_cliente = "";  
-              $this->nmgp_dados_form["estado_cliente"] = $this->estado_cliente;
-              $this->pais_cliente = "";  
-              $this->nmgp_dados_form["pais_cliente"] = $this->pais_cliente;
-              $this->cep_cliente = "";  
-              $this->nmgp_dados_form["cep_cliente"] = $this->cep_cliente;
+              $this->id_tecnico = "";  
+              $this->nmgp_dados_form["id_tecnico"] = $this->id_tecnico;
+              $this->nome_tecnico = "";  
+              $this->nmgp_dados_form["nome_tecnico"] = $this->nome_tecnico;
+              $this->email_tecnico = "";  
+              $this->nmgp_dados_form["email_tecnico"] = $this->email_tecnico;
+              $this->fone_tecnico = "";  
+              $this->nmgp_dados_form["fone_tecnico"] = $this->fone_tecnico;
               $this->usuario_login = "";  
               $this->nmgp_dados_form["usuario_login"] = $this->usuario_login;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dados_form'] = $this->nmgp_dados_form;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
-          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key']))
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key']))
           {
-              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['foreign_key'] as $sFKName => $sFKValue)
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['foreign_key'] as $sFKName => $sFKValue)
               {
                    if (isset($this->sc_conv_var[$sFKName]))
                    {
@@ -4356,28 +3696,28 @@ else
      $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter); 
      }  
      else  
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente < $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico < $this->id_tecnico" . $str_where_filter); 
      }  
      if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
      { 
@@ -4386,7 +3726,7 @@ else
      }  
      if (isset($rs->fields[0]) && $rs->fields[0] != "") 
      { 
-         $this->id_cliente = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $this->id_tecnico = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
          $rs->Close();  
          $this->nmgp_opcao = "igual";  
          return ;  
@@ -4406,28 +3746,28 @@ else
      $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter); 
      }  
      else  
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " where id_cliente > $this->id_cliente" . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " where id_tecnico > $this->id_tecnico" . $str_where_filter); 
      }  
      if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
      { 
@@ -4436,7 +3776,7 @@ else
      }  
      if (isset($rs->fields[0]) && $rs->fields[0] != "") 
      { 
-         $this->id_cliente = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $this->id_tecnico = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
          $rs->Close();  
          $this->nmgp_opcao = "igual";  
          return ;  
@@ -4474,28 +3814,28 @@ else
      $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      else  
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select min(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
      { 
@@ -4504,7 +3844,7 @@ else
      }  
      if (!isset($rs->fields[0]) || $rs->EOF) 
      { 
-         if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter']))
+         if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter']))
          { 
              $rs->Close();  
              return ; 
@@ -4518,7 +3858,7 @@ else
          }
          return ; 
      } 
-     $this->id_cliente = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $this->id_tecnico = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
      $rs->Close();  
      $this->nmgp_opcao = "igual";  
      return ;  
@@ -4531,28 +3871,28 @@ else
      $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      else  
      {
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
-         $rs = $this->Db->Execute("select max(id_cliente) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(id_tecnico) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
      }  
      if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
      { 
@@ -4570,102 +3910,39 @@ else
          }
          return ; 
      } 
-     $this->id_cliente = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $this->id_tecnico = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
      $rs->Close();  
      $this->nmgp_opcao = "igual";  
      return ;  
    } 
-   function NM_gera_nav_page() 
-   {
-       $this->SC_nav_page = "";
-       $Arr_result        = array();
-       $Ind_result        = 0;
-       $Reg_Page   = 1;
-       $Max_link   = 5;
-       $Mid_link   = ceil($Max_link / 2);
-       $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
-       $rec_tot    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'] + 1;
-       $rec_fim    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['reg_start'] + 1;
-       $rec_fim    = ($rec_fim > $rec_tot) ? $rec_tot : $rec_fim;
-       if ($rec_tot == 0)
-       {
-           return;
-       }
-       $Qtd_Pages  = ceil($rec_tot / $Reg_Page);
-       $Page_Atu   = ceil($rec_fim / $Reg_Page);
-       $Link_ini   = 1;
-       if ($Page_Atu > $Max_link)
-       {
-           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
-       }
-       elseif ($Page_Atu > $Mid_link)
-       {
-           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
-       }
-       if (($Qtd_Pages - $Link_ini) < $Max_link)
-       {
-           $Link_ini = ($Qtd_Pages - $Max_link) + 1;
-       }
-       if ($Link_ini < 1)
-       {
-           $Link_ini = 1;
-       }
-       for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
-       {
-           $rec = (($Link_ini - 1) * $Reg_Page) + 1;
-           if ($Link_ini == $Page_Atu)
-           {
-               $Arr_result[$Ind_result] = '<span class="scFormToolbarNavOpen" style="vertical-align: middle;">' . $Link_ini . '</span>';
-           }
-           else
-           {
-               $Arr_result[$Ind_result] = '<a class="scFormToolbarNav" style="vertical-align: middle;" href="javascript: nm_navpage(' . $rec . ')">' . $Link_ini . '</a>';
-           }
-           $Link_ini++;
-           $Ind_result++;
-           if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
-           {
-               $Arr_result[$Ind_result] = '<img src="' . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . '" align="absmiddle" style="vertical-align: middle;">';
-               $Ind_result++;
-           }
-       }
-       if ($_SESSION['scriptcase']['reg_conf']['css_dir'] == "RTL")
-       {
-           krsort($Arr_result);
-       }
-       foreach ($Arr_result as $Ind_result => $Lin_result)
-       {
-           $this->SC_nav_page .= $Lin_result;
-       }
-   }
         function initializeRecordState() {
-                $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'] = array();
+                $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'] = array();
         }
 
         function storeRecordState($sc_seq_vert = 0) {
-                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'])) {
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'])) {
                         $this->initializeRecordState();
                 }
-                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert])) {
-                        $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert] = array();
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert])) {
+                        $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert] = array();
                 }
 
-                $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert]['buttons'] = array(
+                $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert]['buttons'] = array(
                         'delete' => $this->nmgp_botoes['delete'],
                         'update' => $this->nmgp_botoes['update']
                 );
         }
 
         function loadRecordState($sc_seq_vert = 0) {
-                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert])) {
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert])) {
                         return;
                 }
 
-                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert]['buttons']['delete'])) {
-                        $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert]['buttons']['delete'];
+                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert]['buttons']['delete'])) {
+                        $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert]['buttons']['delete'];
                 }
-                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert]['buttons']['update'])) {
-                        $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['record_state'][$sc_seq_vert]['buttons']['update'];
+                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert]['buttons']['update'])) {
+                        $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['record_state'][$sc_seq_vert]['buttons']['update'];
                 }
         }
 
@@ -4688,10 +3965,10 @@ else
       }
      $HTTP_REFERER = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : ""; 
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-     $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['botoes'] = $this->nmgp_botoes;
+     $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['botoes'] = $this->nmgp_botoes;
      if ($this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form")
      {
-         $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opc_ant'] = $this->nmgp_opcao;
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opc_ant'] = $this->nmgp_opcao;
      }
      else
      {
@@ -4702,43 +3979,43 @@ else
          $this->Erro->mensagem(__FILE__, __LINE__, "critica", $this->Campos_Mens_erro); 
          $this->Campos_Mens_erro = "";
      }
-     if (($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "R") && $this->nm_flag_iframe && empty($this->nm_todas_criticas))
+     if (($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "R") && $this->nm_flag_iframe && empty($this->nm_todas_criticas))
      {
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe_ajax']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe_ajax']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'] = array("edit", "");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'] = array("edit", "");
           }
           else
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'] .= "&nmgp_opcao=edit";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'] .= "&nmgp_opcao=edit";
           }
-          if ($this->sc_evento == "insert" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F")
+          if ($this->sc_evento == "insert" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F")
           {
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe_ajax']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe_ajax']))
               {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'] = array("edit", "fim");
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'] = array("edit", "fim");
               }
               else
               {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'] .= "&rec=fim";
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'] .= "&rec=fim";
               }
           }
           $this->NM_close_db(); 
           $sJsParent = '';
           if ($this->NM_ajax_flag && isset($this->NM_ajax_info['param']['buffer_output']) && $this->NM_ajax_info['param']['buffer_output'])
           {
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe_ajax']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe_ajax']))
               {
-                  $this->NM_ajax_info['ajaxJavascript'][] = array("parent.ajax_navigate", $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit']);
+                  $this->NM_ajax_info['ajaxJavascript'][] = array("parent.ajax_navigate", $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit']);
               }
               else
               {
                   $sJsParent .= 'parent';
                   $this->NM_ajax_info['redir']['metodo'] = 'location';
-                  $this->NM_ajax_info['redir']['action'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'];
+                  $this->NM_ajax_info['redir']['action'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'];
                   $this->NM_ajax_info['redir']['target'] = $sJsParent;
               }
-              form_clientes_pack_ajax_response();
+              form_tecnicos_mob_pack_ajax_response();
               exit;
           }
 ?>
@@ -4749,14 +4026,14 @@ else
          <script type="text/javascript">
 <?php
     
-    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe_ajax']))
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe_ajax']))
     {
-        $opc = ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['run_iframe'] == "F" && $this->sc_evento == "insert") ? "fim" : "";
+        $opc = ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['run_iframe'] == "F" && $this->sc_evento == "insert") ? "fim" : "";
         echo "parent.ajax_navigate('edit', '" .$opc . "');";
     }
     else
     {
-        echo $sJsParent . "parent.location = '" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['retorno_edit'] . "';";
+        echo $sJsParent . "parent.location = '" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['retorno_edit'] . "';";
     }
 ?>
          </script>
@@ -4765,7 +4042,7 @@ else
          exit;
      }
         $this->initFormPages();
-    include_once("form_clientes_form0.php");
+    include_once("form_tecnicos_mob_form0.php");
         $this->hideFormPages();
  }
 
@@ -4794,10 +4071,10 @@ else
     function form_highlight_search_quicksearch(&$result, $field, $value)
     {
         $searchOk = false;
-        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("nome_cliente", "fone_cliente", "email_cliente", "endereco_cliente", "cidade_cliente", "estado_cliente", "pais_cliente", "cep_cliente"))) {
+        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("id_tecnico", "nome_tecnico", "email_tecnico", "fone_tecnico", "usuario_login"))) {
             $searchOk = true;
         }
-        elseif ($field == $this->nmgp_fast_search && in_array($field, array("nome_cliente", "fone_cliente", "email_cliente", "endereco_cliente", "cidade_cliente", "estado_cliente", "pais_cliente", "cep_cliente"))) {
+        elseif ($field == $this->nmgp_fast_search && in_array($field, array("id_tecnico", "nome_tecnico", "email_tecnico", "fone_tecnico", "usuario_login"))) {
             $searchOk = true;
         }
 
@@ -4821,7 +4098,7 @@ else
 
     function form_encode_input($string)
     {
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['table_refresh']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['table_refresh'])
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['table_refresh']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['table_refresh'])
         {
             return NM_encode_input(NM_encode_input($string));
         }
@@ -4834,12 +4111,12 @@ else
 
     function scCsrfGetToken()
     {
-        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['csrf_token']))
+        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['csrf_token']))
         {
-            $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['csrf_token'] = $this->scCsrfGenerateToken();
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['csrf_token'] = $this->scCsrfGenerateToken();
         }
 
-        return $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['csrf_token'];
+        return $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['csrf_token'];
     }
 
     function scCsrfGenerateToken()
@@ -5130,90 +4407,24 @@ function sc_file_size($file, $format = false)
      }
  } // new_date_format
 
-   function Form_lookup_pais_cliente()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array(); 
-}
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'] = array(); 
-    }
-
-   $old_value_fone_cliente = $this->fone_cliente;
-   $old_value_cep_cliente = $this->cep_cliente;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_fone_cliente = $this->fone_cliente;
-   $unformatted_value_cep_cliente = $this->cep_cliente;
-
-   $nm_comando = "SELECT id_pais, nome_pais  FROM pais  ORDER BY nome_pais";
-
-   $this->fone_cliente = $old_value_fone_cliente;
-   $this->cep_cliente = $old_value_cep_cliente;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['Lookup_pais_cliente'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
    function SC_fast_search($in_fields, $arg_search, $data_search)
    {
       $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode(";", $in_fields);
       $this->NM_case_insensitive = false;
       if (empty($data_search)) 
       {
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter']);
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total']);
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['fast_search']);
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal'])) 
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['fast_search']);
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal'])) 
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal'];
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter'])
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter'])
           {
-              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter']);
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter']);
               $this->NM_ajax_info['empty_filter'] = 'ok';
-              form_clientes_pack_ajax_response();
+              form_tecnicos_mob_pack_ajax_response();
               exit;
           }
           return;
@@ -5225,54 +4436,38 @@ else
       }
       $sv_data = $data_search;
       foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp" || $field == "nome_cliente") 
+          if ($field == "SC_all_Cmp" || $field == "id_tecnico") 
           {
-              $this->SC_monta_condicao($comando, "nome_cliente", $arg_search, $data_search);
+              $this->SC_monta_condicao($comando, "id_tecnico", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "fone_cliente") 
+          if ($field == "SC_all_Cmp" || $field == "nome_tecnico") 
           {
-              $this->SC_monta_condicao($comando, "fone_cliente", $arg_search, $data_search);
+              $this->SC_monta_condicao($comando, "nome_tecnico", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "email_cliente") 
+          if ($field == "SC_all_Cmp" || $field == "email_tecnico") 
           {
-              $this->SC_monta_condicao($comando, "email_cliente", $arg_search, $data_search);
+              $this->SC_monta_condicao($comando, "email_tecnico", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "endereco_cliente") 
+          if ($field == "SC_all_Cmp" || $field == "fone_tecnico") 
           {
-              $this->SC_monta_condicao($comando, "endereco_cliente", $arg_search, $data_search);
+              $this->SC_monta_condicao($comando, "fone_tecnico", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "cidade_cliente") 
+          if ($field == "SC_all_Cmp" || $field == "usuario_login") 
           {
-              $this->SC_monta_condicao($comando, "cidade_cliente", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp" || $field == "estado_cliente") 
-          {
-              $this->SC_monta_condicao($comando, "estado_cliente", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp" || $field == "pais_cliente") 
-          {
-              $data_lookup = $this->SC_lookup_pais_cliente($arg_search, $data_search);
-              if (is_array($data_lookup) && !empty($data_lookup)) 
-              {
-                  $this->SC_monta_condicao($comando, "pais_cliente", $arg_search, $data_lookup);
-              }
-          }
-          if ($field == "SC_all_Cmp" || $field == "cep_cliente") 
-          {
-              $this->SC_monta_condicao($comando, "cep_cliente", $arg_search, $data_search);
+              $this->SC_monta_condicao($comando, "usuario_login", $arg_search, $data_search);
           }
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal']) && !empty($comando)) 
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal']) && !empty($comando)) 
       {
-          $comando = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_detal'] . " and (" .  $comando . ")";
+          $comando = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_detal'] . " and (" .  $comando . ")";
       }
       if (empty($comando)) 
       {
           $comando = " 1 <> 1 "; 
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form'])
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form'])
       {
-          $sc_where = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter_form'] . " and (" . $comando . ")";
+          $sc_where = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter_form'] . " and (" . $comando . ")";
       }
       else
       {
@@ -5286,25 +4481,25 @@ else
           $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
           exit ; 
       }  
-      $qt_geral_reg_form_clientes = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['total'] = $qt_geral_reg_form_clientes;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['where_filter'] = $comando;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['fast_search'][0] = $field;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['fast_search'][1] = $arg_search;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['fast_search'][2] = $sv_data;
+      $qt_geral_reg_form_tecnicos_mob = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['total'] = $qt_geral_reg_form_tecnicos_mob;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['where_filter'] = $comando;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['fast_search'][0] = $field;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['fast_search'][1] = $arg_search;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['fast_search'][2] = $sv_data;
       $rt->Close(); 
-      if (isset($rt->fields[0]) && $rt->fields[0] > 0 &&  isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter'])
+      if (isset($rt->fields[0]) && $rt->fields[0] > 0 &&  isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter'])
       {
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter']);
           $this->NM_ajax_info['empty_filter'] = 'ok';
-          form_clientes_pack_ajax_response();
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
       elseif (!isset($rt->fields[0]) || $rt->fields[0] == 0)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['empty_filter'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['empty_filter'] = true;
           $this->NM_ajax_info['empty_filter'] = 'ok';
-          form_clientes_pack_ajax_response();
+          form_tecnicos_mob_pack_ajax_response();
           exit;
       }
    }
@@ -5318,10 +4513,10 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "id_cliente";
+      $nm_numeric[] = "id_tecnico";
       if (in_array($campo_join, $nm_numeric))
       {
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['decimal_db'] == ".")
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['decimal_db'] == ".")
          {
              $nm_aspas  = "";
              $nm_aspas1 = "";
@@ -5430,91 +4625,6 @@ else
             break;
          }
    }
-   function SC_lookup_pais_cliente($condicao, $campo)
-   {
-       $result = array();
-       $campo_orig = $campo;
-       $campo  = substr($this->Db->qstr($campo), 1, -1);
-       $nm_comando = "SELECT nome_pais, id_pais FROM pais WHERE (nome_pais LIKE '%$campo%')" ; 
-       if ($condicao == "ii")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
-       }
-       if ($condicao == "df" || $condicao == "np")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
-       }
-       if ($condicao == "gt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
-       }
-       if ($condicao == "ge")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
-       }
-       if ($condicao == "lt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
-       }
-       if ($condicao == "le")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
-       }
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-       if ($rx = $this->Db->Execute($nm_comando)) 
-       { 
-           $campo = $campo_orig;
-           while (!$rx->EOF) 
-           { 
-               $chave = $rx->fields[1];
-               $label = $rx->fields[0];
-               if ($condicao == "eq" && $campo == $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "qp" && strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "np" && !strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "df" && $campo != $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "gt" && $label > $campo )
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ge" && $label >= $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "lt" && $label < $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "le" && $label <= $campo)
-               {
-                   $result[] = $chave;
-               }
-               $rx->MoveNext() ;
-           }  
-           return $result;
-       }  
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-   }
 function nmgp_redireciona($tipo=0)
 {
    global $nm_apl_dependente;
@@ -5528,17 +4638,17 @@ function nmgp_redireciona($tipo=0)
    }
    if ($tipo == 2)
    {
-       $nmgp_saida_form = "form_clientes_fim.php";
+       $nmgp_saida_form = "form_tecnicos_mob_fim.php";
    }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['redir']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['redir'] == 'redir')
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['redir']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['redir'] == 'redir')
    {
-       unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']);
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']);
    }
-   unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['opc_ant']);
-   if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['nm_run_menu']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['nm_run_menu'] == 1)
+   unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['opc_ant']);
+   if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['nm_run_menu']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['nm_run_menu'] == 1)
    {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['nm_run_menu'] = 2;
-       $nmgp_saida_form = "form_clientes_fim.php";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['nm_run_menu'] = 2;
+       $nmgp_saida_form = "form_tecnicos_mob_fim.php";
    }
    $diretorio = explode("/", $nmgp_saida_form);
    $cont = count($diretorio);
@@ -5564,7 +4674,7 @@ function nmgp_redireciona($tipo=0)
        {
            $this->NM_ajax_info['redir']['nmgp_url_saida'] = $this->nm_location;
        }
-       form_clientes_pack_ajax_response();
+       form_tecnicos_mob_pack_ajax_response();
        exit;
    }
 ?>
@@ -5608,7 +4718,7 @@ function nmgp_redireciona($tipo=0)
       function scLigEditLookupCall()
       {
 <?php
-   if ($this->lig_edit_lookup && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['sc_modal'])
+   if ($this->lig_edit_lookup && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['sc_modal'])
    {
 ?>
         parent.<?php echo $this->lig_edit_lookup_cb; ?>(<?php echo $this->lig_edit_lookup_row; ?>);
@@ -5627,21 +4737,21 @@ function nmgp_redireciona($tipo=0)
         scLigEditLookupCall();
       }
 <?php
-if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue']))
+if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue']))
 {
-    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['under_dashboard']) {
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']) {
 ?>
-var dbParentFrame = $(parent.document).find("[name='<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['dashboard_info']['parent_widget']; ?>']");
+var dbParentFrame = $(parent.document).find("[name='<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['parent_widget']; ?>']");
 if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDetailValue)
 {
 <?php
-        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue'] as $cmp_master => $val_master)
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue'] as $cmp_master => $val_master)
         {
 ?>
     dbParentFrame[0].contentWindow.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
 <?php
         }
-        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue']);
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue']);
 ?>
 }
 <?php
@@ -5651,13 +4761,13 @@ if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDe
 if (parent && parent.scAjaxDetailValue)
 {
 <?php
-        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue'] as $cmp_master => $val_master)
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue'] as $cmp_master => $val_master)
         {
 ?>
     parent.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
 <?php
         }
-        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes']['masterValue']);
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['masterValue']);
 ?>
 }
 <?php
@@ -5674,43 +4784,43 @@ if (parent && parent.scAjaxDetailValue)
     function getButtonIds($buttonName) {
         switch ($buttonName) {
             case "new":
-                return array("sc_b_new_t.sc-unique-btn-1");
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-16");
                 break;
             case "insert":
-                return array("sc_b_ins_t.sc-unique-btn-2");
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-17");
                 break;
             case "bcancelar":
-                return array("sc_b_sai_t.sc-unique-btn-3");
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-18");
                 break;
             case "update":
-                return array("sc_b_upd_t.sc-unique-btn-4");
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-19");
                 break;
             case "delete":
-                return array("sc_b_del_t.sc-unique-btn-5");
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-20");
                 break;
             case "breload":
-                return array("sc_b_reload_t.sc-unique-btn-6");
+                return array("sc_b_reload_t.sc-unique-btn-6", "sc_b_reload_t.sc-unique-btn-21");
                 break;
             case "help":
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11");
+                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
                 break;
             case "birpara":
                 return array("brec_b");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-12");
+                return array("sc_b_ini_b.sc-unique-btn-12", "sc_b_ini_b.sc-unique-btn-27");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-13");
+                return array("sc_b_ret_b.sc-unique-btn-13", "sc_b_ret_b.sc-unique-btn-28");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-14");
+                return array("sc_b_avc_b.sc-unique-btn-14", "sc_b_avc_b.sc-unique-btn-29");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-15");
+                return array("sc_b_fim_b.sc-unique-btn-15", "sc_b_fim_b.sc-unique-btn-30");
                 break;
         }
 

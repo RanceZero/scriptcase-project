@@ -61,7 +61,7 @@ class form_clientes_mob_apl
    var $pais_cliente;
    var $pais_cliente_1;
    var $cep_cliente;
-   var $usuario_cliente;
+   var $usuario_login;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -847,7 +847,7 @@ class form_clientes_mob_apl
       {
           $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['dados_form'];
           if (!isset($this->id_cliente)){$this->id_cliente = $this->nmgp_dados_form['id_cliente'];} 
-          if (!isset($this->usuario_cliente)){$this->usuario_cliente = $this->nmgp_dados_form['usuario_cliente'];} 
+          if (!isset($this->usuario_login)){$this->usuario_login = $this->nmgp_dados_form['usuario_login'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -1698,8 +1698,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'id_cliente':
                return "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
                break;
-           case 'usuario_cliente':
-               return "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_cliente'] . "";
+           case 'usuario_login':
+               return "Usuario Login";
                break;
        }
 
@@ -2122,7 +2122,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['pais_cliente'] = $this->pais_cliente;
     $this->nmgp_dados_form['cep_cliente'] = $this->cep_cliente;
     $this->nmgp_dados_form['id_cliente'] = $this->id_cliente;
-    $this->nmgp_dados_form['usuario_cliente'] = $this->usuario_cliente;
+    $this->nmgp_dados_form['usuario_login'] = $this->usuario_login;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['dados_form'] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -3137,7 +3137,7 @@ else
       $NM_val_form['pais_cliente'] = $this->pais_cliente;
       $NM_val_form['cep_cliente'] = $this->cep_cliente;
       $NM_val_form['id_cliente'] = $this->id_cliente;
-      $NM_val_form['usuario_cliente'] = $this->usuario_cliente;
+      $NM_val_form['usuario_login'] = $this->usuario_login;
       if ($this->id_cliente === "" || is_null($this->id_cliente))  
       { 
           $this->id_cliente = 0;
@@ -3201,12 +3201,12 @@ else
               $this->cep_cliente = "null"; 
               $NM_val_null[] = "cep_cliente";
           } 
-          $this->usuario_cliente_before_qstr = $this->usuario_cliente;
-          $this->usuario_cliente = substr($this->Db->qstr($this->usuario_cliente), 1, -1); 
-          if ($this->usuario_cliente == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          $this->usuario_login_before_qstr = $this->usuario_login;
+          $this->usuario_login = substr($this->Db->qstr($this->usuario_login), 1, -1); 
+          if ($this->usuario_login == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
-              $this->usuario_cliente = "null"; 
-              $NM_val_null[] = "usuario_cliente";
+              $this->usuario_login = "null"; 
+              $NM_val_null[] = "usuario_login";
           } 
       }
       if ($this->nmgp_opcao == "alterar") 
@@ -3339,9 +3339,9 @@ else
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
                   $SC_fields_update[] = "nome_cliente = '$this->nome_cliente', email_cliente = '$this->email_cliente', fone_cliente = '$this->fone_cliente', endereco_cliente = '$this->endereco_cliente', cidade_cliente = '$this->cidade_cliente', estado_cliente = '$this->estado_cliente', pais_cliente = '$this->pais_cliente', cep_cliente = '$this->cep_cliente'"; 
               } 
-              if (isset($NM_val_form['usuario_cliente']) && $NM_val_form['usuario_cliente'] != $this->nmgp_dados_select['usuario_cliente']) 
+              if (isset($NM_val_form['usuario_login']) && $NM_val_form['usuario_login'] != $this->nmgp_dados_select['usuario_login']) 
               { 
-                  $SC_fields_update[] = "usuario_cliente = '$this->usuario_cliente'"; 
+                  $SC_fields_update[] = "usuario_login = '$this->usuario_login'"; 
               } 
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -3409,7 +3409,7 @@ else
               $this->estado_cliente = $this->estado_cliente_before_qstr;
               $this->pais_cliente = $this->pais_cliente_before_qstr;
               $this->cep_cliente = $this->cep_cliente_before_qstr;
-              $this->usuario_cliente = $this->usuario_cliente_before_qstr;
+              $this->usuario_login = $this->usuario_login_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -3536,39 +3536,39 @@ else
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES ('$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES ('$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_cliente')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login) VALUES (" . $NM_seq_auto . "'$this->nome_cliente', '$this->email_cliente', '$this->fone_cliente', '$this->endereco_cliente', '$this->cidade_cliente', '$this->estado_cliente', '$this->pais_cliente', '$this->cep_cliente', '$this->usuario_login')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -3720,7 +3720,7 @@ else
               $this->estado_cliente = $this->estado_cliente_before_qstr;
               $this->pais_cliente = $this->pais_cliente_before_qstr;
               $this->cep_cliente = $this->cep_cliente_before_qstr;
-              $this->usuario_cliente = $this->usuario_cliente_before_qstr;
+              $this->usuario_login = $this->usuario_login_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['db_changed'] = true;
@@ -3739,7 +3739,7 @@ else
               $this->estado_cliente = $this->estado_cliente_before_qstr;
               $this->pais_cliente = $this->pais_cliente_before_qstr;
               $this->cep_cliente = $this->cep_cliente_before_qstr;
-              $this->usuario_cliente = $this->usuario_cliente_before_qstr;
+              $this->usuario_login = $this->usuario_login_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
@@ -4092,23 +4092,23 @@ else
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_cliente from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_cliente, nome_cliente, email_cliente, fone_cliente, endereco_cliente, cidade_cliente, estado_cliente, pais_cliente, cep_cliente, usuario_login from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -4265,8 +4265,8 @@ else
               $this->nmgp_dados_select['pais_cliente'] = $this->pais_cliente;
               $this->cep_cliente = $rs->fields[8] ; 
               $this->nmgp_dados_select['cep_cliente'] = $this->cep_cliente;
-              $this->usuario_cliente = $rs->fields[9] ; 
-              $this->nmgp_dados_select['usuario_cliente'] = $this->usuario_cliente;
+              $this->usuario_login = $rs->fields[9] ; 
+              $this->nmgp_dados_select['usuario_login'] = $this->usuario_login;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->id_cliente = (string)$this->id_cliente; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['parms'] = "id_cliente?#?$this->id_cliente?@?";
@@ -4308,8 +4308,8 @@ else
               $this->nmgp_dados_form["pais_cliente"] = $this->pais_cliente;
               $this->cep_cliente = "";  
               $this->nmgp_dados_form["cep_cliente"] = $this->cep_cliente;
-              $this->usuario_cliente = "";  
-              $this->nmgp_dados_form["usuario_cliente"] = $this->usuario_cliente;
+              $this->usuario_login = "";  
+              $this->nmgp_dados_form["usuario_login"] = $this->usuario_login;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
