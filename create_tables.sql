@@ -27,6 +27,16 @@ CREATE OR REPLACE TABLE tecnicos (
     PRIMARY KEY ( id_tecnico )
 );
 
+CREATE OR REPLACE TABLE horario_trabalho_tecnicos (
+    id_horario_trabalho_tecnico INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id_tecnico INT UNSIGNED NOT NULL,
+    dia_semana_horario_trabalho_tecnico INT UNSIGNED,
+    hora_inicial_horario_trabalho_tecnico TIME,
+    hora_final_horario_trabalho_tecnico TIME,
+    PRIMARY KEY ( id_horario_trabalho_tecnico ),
+    FOREIGN KEY ( id_tecnico ) REFERENCES tecnicos(id_tecnico)
+);
+
 CREATE OR REPLACE TABLE status_agendamento (
     id_status_agendamento INT UNSIGNED NOT NULL AUTO_INCREMENT,
     descr_status_agendamento VARCHAR(40) NOT NULL,
