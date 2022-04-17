@@ -2946,43 +2946,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
   }
 
-  // ---------- Validate id_tecnico
-  function do_ajax_form_tecnicos_mob_validate_id_tecnico()
-  {
-    var nomeCampo_id_tecnico = "id_tecnico";
-    var var_id_tecnico = scAjaxGetFieldHidden(nomeCampo_id_tecnico);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_tecnicos_mob_validate_id_tecnico(var_id_tecnico, var_script_case_init, do_ajax_form_tecnicos_mob_validate_id_tecnico_cb);
-  } // do_ajax_form_tecnicos_mob_validate_id_tecnico
-
-  function do_ajax_form_tecnicos_mob_validate_id_tecnico_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "id_tecnico";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_tecnicos_mob_validate_id_tecnico_cb
-
   // ---------- Validate nome_tecnico
   function do_ajax_form_tecnicos_mob_validate_nome_tecnico()
   {
@@ -3094,20 +3057,20 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_tecnicos_mob_validate_fone_tecnico_cb
 
-  // ---------- Validate usuario_login
-  function do_ajax_form_tecnicos_mob_validate_usuario_login()
+  // ---------- Validate horario_tecnico
+  function do_ajax_form_tecnicos_mob_validate_horario_tecnico()
   {
-    var nomeCampo_usuario_login = "usuario_login";
-    var var_usuario_login = scAjaxGetFieldText(nomeCampo_usuario_login);
+    var nomeCampo_horario_tecnico = "horario_tecnico";
+    var var_horario_tecnico = scAjaxGetFieldText(nomeCampo_horario_tecnico);
     var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_tecnicos_mob_validate_usuario_login(var_usuario_login, var_script_case_init, do_ajax_form_tecnicos_mob_validate_usuario_login_cb);
-  } // do_ajax_form_tecnicos_mob_validate_usuario_login
+    x_ajax_form_tecnicos_mob_validate_horario_tecnico(var_horario_tecnico, var_script_case_init, do_ajax_form_tecnicos_mob_validate_horario_tecnico_cb);
+  } // do_ajax_form_tecnicos_mob_validate_horario_tecnico
 
-  function do_ajax_form_tecnicos_mob_validate_usuario_login_cb(sResp)
+  function do_ajax_form_tecnicos_mob_validate_horario_tecnico_cb(sResp)
   {
     oResp = scAjaxResponse(sResp);
     scAjaxRedir();
-    sFieldValid = "usuario_login";
+    sFieldValid = "horario_tecnico";
     scEventControl_onBlur(sFieldValid);
     scAjaxUpdateFieldErrors(sFieldValid, "valid");
     sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
@@ -3129,7 +3092,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxShowDebug();
     scAjaxSetMaster();
     scAjaxSetFocus();
-  } // do_ajax_form_tecnicos_mob_validate_usuario_login_cb
+  } // do_ajax_form_tecnicos_mob_validate_horario_tecnico_cb
 function scAjaxShowErrorDisplay(sErrorId, sErrorMsg) {
 	if ("table" != sErrorId && !$("id_error_display_" + sErrorId + "_frame").hasClass('scFormToastDivFixed')) {
 		scAjaxShowErrorDisplay_default(sErrorId, sErrorMsg);
@@ -3425,11 +3388,10 @@ function scJs_sweetalert_params(params) {
       return;
     }
     scAjaxHideMessage();
-    var var_id_tecnico = scAjaxGetFieldHidden("id_tecnico");
     var var_nome_tecnico = scAjaxGetFieldText("nome_tecnico");
     var var_email_tecnico = scAjaxGetFieldText("email_tecnico");
     var var_fone_tecnico = scAjaxGetFieldText("fone_tecnico");
-    var var_usuario_login = scAjaxGetFieldText("usuario_login");
+    var var_id_tecnico = scAjaxGetFieldText("id_tecnico");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3439,7 +3401,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_tecnicos_mob_submit_form(var_id_tecnico, var_nome_tecnico, var_email_tecnico, var_fone_tecnico, var_usuario_login, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_tecnicos_mob_submit_form_cb);
+    x_ajax_form_tecnicos_mob_submit_form(var_nome_tecnico, var_email_tecnico, var_fone_tecnico, var_id_tecnico, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_tecnicos_mob_submit_form_cb);
   } // do_ajax_form_tecnicos_mob_submit_form
 
   function do_ajax_form_tecnicos_mob_submit_form_cb(sResp)
@@ -3463,11 +3425,10 @@ function scJs_sweetalert_params(params) {
       scResetFormChanges();
       scAjaxShowMessage("success");
       scAjaxHideErrorDisplay("table");
-      scAjaxHideErrorDisplay("id_tecnico");
       scAjaxHideErrorDisplay("nome_tecnico");
       scAjaxHideErrorDisplay("email_tecnico");
       scAjaxHideErrorDisplay("fone_tecnico");
-      scAjaxHideErrorDisplay("usuario_login");
+      scAjaxHideErrorDisplay("horario_tecnico");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['dashboard_info']['under_dashboard']) {
@@ -3512,6 +3473,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['das
   } // do_ajax_form_tecnicos_mob_submit_form_cb_after_alert
 
   var scStatusDetail = {};
+  scStatusDetail["form_horario_trabalho_tecnicos_mob"] = "off";
 
   function do_ajax_form_tecnicos_mob_navigate_form()
   {
@@ -3530,11 +3492,10 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['das
     }
     scAjaxHideMessage();
     scAjaxHideErrorDisplay("table");
-    scAjaxHideErrorDisplay("id_tecnico");
     scAjaxHideErrorDisplay("nome_tecnico");
     scAjaxHideErrorDisplay("email_tecnico");
     scAjaxHideErrorDisplay("fone_tecnico");
-    scAjaxHideErrorDisplay("usuario_login");
+    scAjaxHideErrorDisplay("horario_tecnico");
     var var_id_tecnico = document.F2.id_tecnico.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -3542,6 +3503,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos_mob']['das
     var var_nmgp_arg_dyn_search = document.F2.nmgp_arg_dyn_search.value;
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn();
+    scStatusDetail["form_horario_trabalho_tecnicos_mob"] = "on";
     x_ajax_form_tecnicos_mob_navigate_form(var_id_tecnico, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_form_tecnicos_mob_navigate_form_cb);
   } // do_ajax_form_tecnicos_mob_navigate_form
 
@@ -3557,7 +3519,6 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
 ?>
   function do_ajax_form_tecnicos_mob_navigate_form_cb(sResp)
   {
-    scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
     scAjaxRedir();
     if (oResp['empty_filter'] && oResp['empty_filter'] == "ok")
@@ -3565,6 +3526,16 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         document.F5.nmgp_opcao.value = "inicio";
         document.F5.nmgp_parms.value = "";
         document.F5.submit();
+    }
+    if ("ERROR" == oResp.result)
+    {
+        scAjaxShowErrorDisplay("table", oResp.errList[0].msgText);
+        scAjaxProcOff();
+        return;
+    }
+    else if (oResp["navSummary"].reg_tot == 0)
+    {
+       scAjax_displayEmptyForm();
     }
     scAjaxClearErrors()
     scResetFormChanges()
@@ -3580,6 +3551,14 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
     scAjaxSetNavStatus("t");
     scAjaxSetNavStatus("b");
     scAjaxSetDisplay(true);
+    if (scMasterDetailIframe && scMasterDetailIframe["nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob"] && "nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob" != scMasterDetailIframe["nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob"]) {
+        scMoveMasterDetail(scMasterDetailIframe["nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob"]);
+    }
+    else {
+        document.getElementById('nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob').contentWindow.nm_move('apl_detalhe', true);
+        document.getElementById('nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob').style.height = "1";
+        document.getElementById('nmsc_iframe_liga_form_horario_trabalho_tecnicos_mob').style.display = "none";
+    }
     scAjaxSetBtnVars();
     $('.sc-js-ui-statusimg').css('display', 'none');
     scAjaxAlert(do_ajax_form_tecnicos_mob_navigate_form_cb_after_alert);
@@ -3611,9 +3590,45 @@ if ($this->Embutida_form)
   } // sc_hide_form_tecnicos_mob_form
 
 
+  function scAjaxDetailStatus(sDetailApp)
+  {
+    if (scStatusDetail[sDetailApp])
+    {
+      scStatusDetail[sDetailApp] = "off";
+      if (document.getElementById("nmsc_iframe_liga_" + sDetailApp)) {
+        document.getElementById("nmsc_iframe_liga_" + sDetailApp).style.display = "";
+      }
+    }
+    else
+    {
+      mobileSuffix = sDetailApp.slice(-4);
+      if ("_mob" != mobileSuffix && scStatusDetail[sDetailApp + "_mob"])
+      {
+        scStatusDetail[sDetailApp + "_mob"] = "off";
+        if (document.getElementById("nmsc_iframe_liga_" + sDetailApp + "_mob")) {
+          document.getElementById("nmsc_iframe_liga_" + sDetailApp + "_mob").style.display = "";
+        }
+      }
+    }
+    if (scAjaxDetailProc())
+    {
+      scAjaxProcOff();
+    }
+  } // scAjaxDetailStatus
+
+  function scAjaxDetailHeight(sDetailApp, iDetailHeight)
+  {
+    $("#nmsc_iframe_liga_" + sDetailApp).css("height", iDetailHeight + "px");
+    $("#nmsc_iframe_liga_" + sDetailApp + "_mob").css("height", iDetailHeight + "px");
+  } // scAjaxDetailHeight
+
   function scAjaxDetailProc()
   {
-    return true;
+    if ("off" == scStatusDetail["form_horario_trabalho_tecnicos_mob"])
+    {
+      return true;
+    }
+    return false;
   } // scAjaxDetailProc
 
 
@@ -3623,59 +3638,56 @@ if ($this->Embutida_form)
 
   var ajax_field_list = new Array();
   var ajax_field_Dt_Hr = new Array();
-  ajax_field_list[0] = "id_tecnico";
-  ajax_field_list[1] = "nome_tecnico";
-  ajax_field_list[2] = "email_tecnico";
-  ajax_field_list[3] = "fone_tecnico";
-  ajax_field_list[4] = "usuario_login";
+  ajax_field_list[0] = "nome_tecnico";
+  ajax_field_list[1] = "email_tecnico";
+  ajax_field_list[2] = "fone_tecnico";
+  ajax_field_list[3] = "horario_tecnico";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
+  ajax_block_list[1] = "1";
 
   var ajax_error_list = {
-    "id_tecnico": {"label": "Id Tecnico", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "nome_tecnico": {"label": "Nome Tecnico", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "email_tecnico": {"label": "Email Tecnico", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "fone_tecnico": {"label": "Fone Tecnico", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "usuario_login": {"label": "Usuario Login", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "nome_tecnico": {"label": "<?php echo $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "email_tecnico": {"label": "<?php echo $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "fone_tecnico": {"label": "<?php echo $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "horario_tecnico": {"label": "<?php echo $this->Ini->Nm_lang['lang_tbl_horario_trabalho_tecnicos'] ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
   var ajax_block_id = {
-    "0": "hidden_bloco_0"
+    "0": "hidden_bloco_0",
+    "1": "hidden_bloco_1"
   };
 
   var ajax_block_tab = {
-    "hidden_bloco_0": ""
+    "hidden_bloco_0": "",
+    "hidden_bloco_1": ""
   };
 
   var ajax_field_mult = {
-    "id_tecnico": new Array(),
     "nome_tecnico": new Array(),
     "email_tecnico": new Array(),
     "fone_tecnico": new Array(),
-    "usuario_login": new Array()
+    "horario_tecnico": new Array()
   };
-  ajax_field_mult["id_tecnico"][1] = "id_tecnico";
   ajax_field_mult["nome_tecnico"][1] = "nome_tecnico";
   ajax_field_mult["email_tecnico"][1] = "email_tecnico";
   ajax_field_mult["fone_tecnico"][1] = "fone_tecnico";
-  ajax_field_mult["usuario_login"][1] = "usuario_login";
+  ajax_field_mult["horario_tecnico"][1] = "horario_tecnico";
 
   var ajax_field_id = {
-    "id_tecnico": new Array("hidden_field_label_id_tecnico", "hidden_field_data_id_tecnico"),
     "nome_tecnico": new Array("hidden_field_label_nome_tecnico", "hidden_field_data_nome_tecnico"),
     "email_tecnico": new Array("hidden_field_label_email_tecnico", "hidden_field_data_email_tecnico"),
     "fone_tecnico": new Array("hidden_field_label_fone_tecnico", "hidden_field_data_fone_tecnico"),
-    "usuario_login": new Array("hidden_field_label_usuario_login", "hidden_field_data_usuario_login")
+    "horario_tecnico": new Array("hidden_field_label_horario_tecnico", "hidden_field_data_horario_tecnico")
   };
 
   var ajax_read_only = {
-    "id_tecnico": "on",
     "nome_tecnico": "off",
     "email_tecnico": "off",
     "fone_tecnico": "off",
-    "usuario_login": "off"
+    "horario_tecnico": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -3687,23 +3699,6 @@ if ($this->Embutida_form)
   {
     var aValue = new Array();
     aValue[0] = {"value" : sValue};
-    if ("id_tecnico" == sIndex)
-    {
-      scAjaxSetFieldLabel(sIndex, aValue);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
     if ("nome_tecnico" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
@@ -3755,7 +3750,7 @@ if ($this->Embutida_form)
 
       return;
     }
-    if ("usuario_login" == sIndex)
+    if ("horario_tecnico" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

@@ -182,6 +182,11 @@ class grid_tecnicos_csv
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->sc_proc_grid = false; 
       $nm_raiz_img  = ""; 
+      $this->New_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
+      $this->New_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
+      $this->New_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+      $this->New_label['id_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+      $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']))
       {
           foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -267,15 +272,7 @@ class grid_tecnicos_csv
           $this->csv_registro = "";
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $Cada_col)
           { 
-              $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico"; 
-              if ($Cada_col == "id_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico"; 
+              $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : ""; 
               if ($Cada_col == "nome_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
@@ -283,7 +280,7 @@ class grid_tecnicos_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico"; 
+              $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : ""; 
               if ($Cada_col == "email_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
@@ -291,7 +288,7 @@ class grid_tecnicos_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico"; 
+              $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : ""; 
               if ($Cada_col == "fone_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
@@ -299,7 +296,15 @@ class grid_tecnicos_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login"; 
+              $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : ""; 
+              if ($Cada_col == "id_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : ""; 
               if ($Cada_col == "usuario_login" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
@@ -316,27 +321,27 @@ class grid_tecnicos_csv
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
@@ -370,11 +375,11 @@ class grid_tecnicos_csv
          }
          $this->csv_registro = "";
          $this->NM_prim_col  = 0;
-         $this->id_tecnico = $rs->fields[0] ;  
+         $this->nome_tecnico = $rs->fields[0] ;  
+         $this->email_tecnico = $rs->fields[1] ;  
+         $this->fone_tecnico = $rs->fields[2] ;  
+         $this->id_tecnico = $rs->fields[3] ;  
          $this->id_tecnico = (string)$this->id_tecnico;
-         $this->nome_tecnico = $rs->fields[1] ;  
-         $this->email_tecnico = $rs->fields[2] ;  
-         $this->fone_tecnico = $rs->fields[3] ;  
          $this->usuario_login = $rs->fields[4] ;  
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $Cada_col)
@@ -498,15 +503,6 @@ class grid_tecnicos_csv
       }
       $rs->Close();
    }
-   //----- id_tecnico
-   function NM_export_id_tecnico()
-   {
-             nmgp_Form_Num_Val($this->id_tecnico, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->id_tecnico);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
    //----- nome_tecnico
    function NM_export_nome_tecnico()
    {
@@ -526,8 +522,21 @@ class grid_tecnicos_csv
    //----- fone_tecnico
    function NM_export_fone_tecnico()
    {
+             if ($this->fone_tecnico !== "&nbsp;") 
+             { 
+                 $this->nm_gera_mask($this->fone_tecnico, "(xx) xxxxx-xxxx"); 
+             } 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->fone_tecnico);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- id_tecnico
+   function NM_export_id_tecnico()
+   {
+             nmgp_Form_Num_Val($this->id_tecnico, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->id_tecnico);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

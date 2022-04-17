@@ -51,20 +51,13 @@ function scSetFocusOnField($oField) {
 } // scSetFocusOnField
 
 function scEventControl_init(iSeqRow) {
-  scEventControl_data["id_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["nome_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["email_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["fone_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["usuario_login" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["horario_tecnico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
-  if (scEventControl_data["id_tecnico" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["id_tecnico" + iSeqRow]["change"]) {
-    return true;
-  }
   if (scEventControl_data["nome_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
@@ -83,10 +76,10 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["fone_tecnico" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["usuario_login" + iSeqRow]["blur"]) {
+  if (scEventControl_data["horario_tecnico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["usuario_login" + iSeqRow]["change"]) {
+  if (scEventControl_data["horario_tecnico" + iSeqRow]["change"]) {
     return true;
   }
   return false;
@@ -120,9 +113,7 @@ function scEventControl_onAutocomp(sFieldName) {
 var scEventControl_data = {};
 
 function scJQEventsAdd(iSeqRow) {
-  $('#id_sc_field_id_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_id_tecnico_onblur(this, iSeqRow) })
-                                        .bind('change', function() { sc_form_tecnicos_id_tecnico_onchange(this, iSeqRow) })
-                                        .bind('focus', function() { sc_form_tecnicos_id_tecnico_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_tecnico' + iSeqRow).bind('change', function() { sc_form_tecnicos_id_tecnico_onchange(this, iSeqRow) });
   $('#id_sc_field_nome_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_nome_tecnico_onblur(this, iSeqRow) })
                                           .bind('change', function() { sc_form_tecnicos_nome_tecnico_onchange(this, iSeqRow) })
                                           .bind('focus', function() { sc_form_tecnicos_nome_tecnico_onfocus(this, iSeqRow) });
@@ -132,23 +123,14 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_fone_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_fone_tecnico_onblur(this, iSeqRow) })
                                           .bind('change', function() { sc_form_tecnicos_fone_tecnico_onchange(this, iSeqRow) })
                                           .bind('focus', function() { sc_form_tecnicos_fone_tecnico_onfocus(this, iSeqRow) });
-  $('#id_sc_field_usuario_login' + iSeqRow).bind('blur', function() { sc_form_tecnicos_usuario_login_onblur(this, iSeqRow) })
-                                           .bind('change', function() { sc_form_tecnicos_usuario_login_onchange(this, iSeqRow) })
-                                           .bind('focus', function() { sc_form_tecnicos_usuario_login_onfocus(this, iSeqRow) });
+  $('#id_sc_field_usuario_login' + iSeqRow).bind('change', function() { sc_form_tecnicos_usuario_login_onchange(this, iSeqRow) });
+  $('#id_sc_field_horario_tecnico' + iSeqRow).bind('blur', function() { sc_form_tecnicos_horario_tecnico_onblur(this, iSeqRow) })
+                                             .bind('change', function() { sc_form_tecnicos_horario_tecnico_onchange(this, iSeqRow) })
+                                             .bind('focus', function() { sc_form_tecnicos_horario_tecnico_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
-
-function sc_form_tecnicos_id_tecnico_onblur(oThis, iSeqRow) {
-  do_ajax_form_tecnicos_validate_id_tecnico();
-  scCssBlur(oThis);
-}
 
 function sc_form_tecnicos_id_tecnico_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_tecnicos_id_tecnico_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
 }
 
 function sc_form_tecnicos_nome_tecnico_onblur(oThis, iSeqRow) {
@@ -193,16 +175,20 @@ function sc_form_tecnicos_fone_tecnico_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_tecnicos_usuario_login_onblur(oThis, iSeqRow) {
-  do_ajax_form_tecnicos_validate_usuario_login();
-  scCssBlur(oThis);
-}
-
 function sc_form_tecnicos_usuario_login_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_tecnicos_usuario_login_onfocus(oThis, iSeqRow) {
+function sc_form_tecnicos_horario_tecnico_onblur(oThis, iSeqRow) {
+  do_ajax_form_tecnicos_validate_horario_tecnico();
+  scCssBlur(oThis);
+}
+
+function sc_form_tecnicos_horario_tecnico_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_tecnicos_horario_tecnico_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -211,28 +197,29 @@ function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
 	}
+	if ("1" == block) {
+		displayChange_block_1(status);
+	}
 }
 
 function displayChange_block_0(status) {
-	displayChange_field("id_tecnico", "", status);
 	displayChange_field("nome_tecnico", "", status);
 	displayChange_field("email_tecnico", "", status);
 	displayChange_field("fone_tecnico", "", status);
-	displayChange_field("usuario_login", "", status);
+}
+
+function displayChange_block_1(status) {
+	displayChange_field("horario_tecnico", "", status);
 }
 
 function displayChange_row(row, status) {
-	displayChange_field_id_tecnico(row, status);
 	displayChange_field_nome_tecnico(row, status);
 	displayChange_field_email_tecnico(row, status);
 	displayChange_field_fone_tecnico(row, status);
-	displayChange_field_usuario_login(row, status);
+	displayChange_field_horario_tecnico(row, status);
 }
 
 function displayChange_field(field, row, status) {
-	if ("id_tecnico" == field) {
-		displayChange_field_id_tecnico(row, status);
-	}
 	if ("nome_tecnico" == field) {
 		displayChange_field_nome_tecnico(row, status);
 	}
@@ -242,12 +229,9 @@ function displayChange_field(field, row, status) {
 	if ("fone_tecnico" == field) {
 		displayChange_field_fone_tecnico(row, status);
 	}
-	if ("usuario_login" == field) {
-		displayChange_field_usuario_login(row, status);
+	if ("horario_tecnico" == field) {
+		displayChange_field_horario_tecnico(row, status);
 	}
-}
-
-function displayChange_field_id_tecnico(row, status) {
 }
 
 function displayChange_field_nome_tecnico(row, status) {
@@ -259,7 +243,10 @@ function displayChange_field_email_tecnico(row, status) {
 function displayChange_field_fone_tecnico(row, status) {
 }
 
-function displayChange_field_usuario_login(row, status) {
+function displayChange_field_horario_tecnico(row, status) {
+	if ("on" == status && typeof $("#nmsc_iframe_liga_form_horario_trabalho_tecnicos")[0].contentWindow.scRecreateSelect2 === "function") {
+		$("#nmsc_iframe_liga_form_horario_trabalho_tecnicos")[0].contentWindow.scRecreateSelect2();
+	}
 }
 
 function scRecreateSelect2() {

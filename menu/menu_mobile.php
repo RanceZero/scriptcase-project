@@ -47,7 +47,7 @@
 </style>
 <div class="scMenuHHeader" style="height: 54px; padding: 17px 15px; box-sizing: border-box;margin: -1px 0px 0px 0px;width: 100%;">
     <div class="scMenuHHeaderFont" style="float: left; text-transform: uppercase;"><?php echo "Menu Agendamento" ?></div>
-    <div class="scMenuHHeaderFont" style="float: right;"></div>
+    <div class="scMenuHHeaderFont" style="float: right;"><?php echo "" ?></div>
 </div>
     <?php
         escreveMenuMobile($menu_menuData["data"], $this->path_imag_apl);

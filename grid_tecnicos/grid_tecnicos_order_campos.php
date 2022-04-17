@@ -94,21 +94,15 @@ function Ord_cmp_init()
    $tab_ger_campos = array();
    $tab_def_campos = array();
    $tab_labels     = array();
-   $tab_ger_campos['id_tecnico'] = "on";
-   $tab_def_campos['id_tecnico'] = "id_tecnico";
-   $tab_labels["id_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["id_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["id_tecnico"] : "Id Tecnico";
    $tab_ger_campos['nome_tecnico'] = "on";
    $tab_def_campos['nome_tecnico'] = "nome_tecnico";
-   $tab_labels["nome_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["nome_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["nome_tecnico"] : "Nome Tecnico";
+   $tab_labels["nome_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["nome_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["nome_tecnico"] : "" . $this->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
    $tab_ger_campos['email_tecnico'] = "on";
    $tab_def_campos['email_tecnico'] = "email_tecnico";
-   $tab_labels["email_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["email_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["email_tecnico"] : "Email Tecnico";
+   $tab_labels["email_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["email_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["email_tecnico"] : "" . $this->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
    $tab_ger_campos['fone_tecnico'] = "on";
    $tab_def_campos['fone_tecnico'] = "fone_tecnico";
-   $tab_labels["fone_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["fone_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["fone_tecnico"] : "Fone Tecnico";
-   $tab_ger_campos['usuario_login'] = "on";
-   $tab_def_campos['usuario_login'] = "usuario_login";
-   $tab_labels["usuario_login"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["usuario_login"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["usuario_login"] : "Usuario Login";
+   $tab_labels["fone_tecnico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["fone_tecnico"])) ? $_SESSION['sc_session'][$sc_init]['grid_tecnicos']['labels']["fone_tecnico"] : "" . $this->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display'] as $NM_cada_field => $NM_cada_opc)

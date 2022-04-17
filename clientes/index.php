@@ -303,8 +303,8 @@ class form_clientes_ini
       $this->nm_dt_criacao   = "20220331"; 
       $this->nm_hr_criacao   = "234358"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220403"; 
-      $this->nm_hr_ult_alt   = "005659"; 
+      $this->nm_dt_ult_alt   = "20220404"; 
+      $this->nm_hr_ult_alt   = "001012"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -537,8 +537,8 @@ class form_clientes_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_clientes']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -820,7 +820,7 @@ class form_clientes_ini
               else 
               { 
 ?>
-                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="<?php echo $this->Nm_lang['lang_btns_exit_hint'] ?>" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
+                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="__NM_HINT__ (Alt + Q)" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
 
 <?php
               } 
@@ -962,7 +962,7 @@ class form_clientes_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSFUHABYV5JwHgvsVIB/H5B7VEraHQJmZSBqHIrwZMB/HgrKVkJGDWX7HMX7HQXODuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwDMvCHErCHEXCHMJsHQXODQFaZ1vCD5F7DMvsVcFeDuX7HMFaHQNwZ1FGHAvmV5X7HgBYHArCH5FYHIraHQJKZ9XGHAvmD5F7DMvmV9BUHEX/VEX7HQBsH9BqHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMvOZSJqH5XCHMraHQNwH9BqDSvmV5X7HgBeDkB/DWFqHMJwHQNwZ9XGD1vOD5F7DMzGDkBsH5FqVoBiDcNmZSBOHAvCV5X7HgBOHENiDuJeHIBOHQJKZSBiD1NKV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHArCV5XCHIX7DcBiDQFaHINaD5F7DMzGZSNiDWF/HMX7HQNwVIJsHIBOV5X7HgBYHArCH5FGZuBOHQNwZSFUHAvmD5F7DMBOZSJqH5B7VoX7HQBqZ1BOHAvCD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQFYDQJwHANOV5JwHgrKDkFCDWJeVoB/D9BsZkFUHArKHQraDEBeHEXeDuFYVoB/D9NwZ9rqZ1rwHQBOHgrKVcFCH5XCHIF7DcBqZ1B/DSBeV5FaHgvCZSJGDWB3ZuXGHQXGDQFGHAveD5BOHuzGVcBUDuFGVoFGHQFYH9FaHIBeZMBODEvsZSJGDWr/DoB/D9XsZSFGD1NKV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raDMNOVcFeDWFYHIXGHQXOH9BOD1rKHuJeHgNOHEFKV5B7DoBqHQXsZSFUHAN7HuraDMvOVcB/DWF/HMFaHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoBqHQNmDQJsHIrKD5NUDMrYVIFCH5XCVEF7D9BiZ1BiD1vsZMB/DMBYZSJqDWX7VoFaHQXOZ9F7D1veD5NUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwV5FGHuNOVcFKHEFYDoraD9BsZSFaD1rKV5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXODuFaDSrwV5XGHuNOZSJqDWFaHMFaHQNmZkFGZ1NOD5rqDMBYHEJqHEXCDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoNUDcJUZ1B/Z1rYD5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5BqHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNOVIBOHEF/HMFaHQBiZ1FGDSrYHuBqHgBeHArCDuFaDoB/DcBiH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1F7HArYV5X7DEBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoBOD9NmDQX7HANOV5raHuBYVIBODWFaDoJeD9JmZ1B/D1rKHQJwHgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYVcBUDWB3VoFG";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSX7Z1N7D5B/HgvsDkBODur/HIFGHQNmZkBiHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEF/HIJsHQXOZSBOHAvsZMB/HgvsDkFeV5B7ZuJeHQXsZSBiHAvCVWJsDMNOZSrCV5X/VEFGHQJmH9BqHIBeHQFGHgveDkFeV5FqHIJwHQJeDuBqHIrKHuFUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqHgrKHErsHEB3DoXGHQXODQB/D1vOVWXGDMzGZSrCV5FYHMXGHQNwZ1BOHABYHuB/HgNKHAFKV5FqHMB/HQJKZSFUDSN7V5FaDMBOZSrCV5FYHMJsDcNmZ1X7HANOHQX7HgBOHEFKH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEFGHQBiZSBqHAN7HQXGHgBODkBsV5FqHMFaHQXOH9FUHIvsVWXGDMrYZSJ3V5X/VEFGHQBsZkBiHANOHuFaHgNODkFeV5FqHMFGHQBiZ9F7HAvmVWBqDMBOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5X7HMXGHQBqVIraZ1BeHuJwDErKVkXeV5FaVoBqD9NwH9X7HArYD5F7HgNKVcFeDWF/DoFGD9BsZ1F7HArYD5JeHgvCZSJ3V5XCVoB/D9NmDQFaZ1BYV5FUHuvmDkBOH5XKVoraD9BiVINUDSvOV5X7DErKHEFiDuJeDoBOHQXOZ9F7D1BOV5JwHuBYDkFCDuX7VEF7D9XOZSB/Z1BeD5FaDEvsHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaHIBiHQXsDQFUD1BeHQJwHgrwVcFeV5X7HIBiHQFYZkBiHABYHQNUDMvCVkJ3H5FGDoBqDcXGH9BiHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiD1vsD5BOHgBOZSJqDWB3ZuBqHQNwDQFUHIvsV5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwV5FGHuNOVcFKHEFYDoraD9BsZSFaD1rKV5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYDuFaHANOD5JwHgrKDkBOHEFYHMJsHQBsZ1X7HArYV5BOHgNOZSJGDWFqDoBqD9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1F7HArYV5X7DEBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMB/HgveHErsDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcrsHEX/VENUD9XOZSBqD1rwD5JwDEBeHEBUDWBmDoBOHQFYDQJsHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rKV5FaDEBOHEXeV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwDQJwHABYV5X7HgrYDkFCDWF/VoB/D9BsZ1F7DSrYV5B/HgBeHErCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUH5B3VoF7HQNwVIF7Z1veZMNU";
 $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 108, 101, 61, 34, 102, 111, 110, 116, 45, 102, 97, 109, 105, 108, 121, 58, 32, 84, 97, 104, 111, 109, 97, 44, 32, 65, 114, 105, 97, 108, 44, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 59, 32, 102, 111, 110, 116, 45, 115, 105, 122, 101, 58, 32, 49, 51, 112, 120, 59, 32, 102, 111, 110, 116, 45, 119, 101, 105, 103, 104, 116, 58, 32, 98, 111, 108, 100, 59, 32, 116, 101, 120, 116, 45, 97, 108, 105, 103, 110, 58, 32, 99, 101, 110, 116, 101, 114, 34, 62, 84, 104, 105, 115, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 32, 119, 97, 115, 32, 100, 101, 118, 101, 108, 111, 112, 101, 100, 32, 97, 110, 100, 32, 112, 117, 98, 108, 105, 115, 104, 101, 100, 32, 117, 115, 105, 110, 103, 32, 97, 32, 116, 114, 105, 97, 108, 32, 118, 101, 114, 115, 105, 111, 110, 32, 111, 102, 32, 83, 99, 114, 105, 112, 116, 67, 97, 115, 101, 32, 97, 110, 100, 32, 105, 116, 115, 32, 116, 114, 105, 97, 108, 32, 112, 101, 114, 105, 111, 100, 32, 104, 97, 115, 32, 101, 120, 112, 105, 114, 101, 100, 46, 60, 47, 100, 105, 118, 62);
       $this->prep_conect();
       $this->conectDB();
@@ -1362,7 +1362,7 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
               else 
               { 
 ?>
-                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="<?php echo $this->Nm_lang['lang_btns_exit_hint'] ?>" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
+                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="__NM_HINT__ (Alt + Q)" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
 
 <?php
               } 

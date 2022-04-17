@@ -2474,6 +2474,7 @@ function nm_open_popup(parms)
       $this->New_label['estado_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_estado_cliente'] . "";
       $this->New_label['pais_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_pais_cliente'] . "";
       $this->New_label['cep_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . "";
+      $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_login'] . "";
       $this->aba_iframe = false;
       if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
       {

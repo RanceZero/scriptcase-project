@@ -293,27 +293,27 @@ class grid_tecnicos_xml
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
@@ -358,11 +358,11 @@ class grid_tecnicos_xml
          {
              $this->xml_registro = "<grid_tecnicos";
          }
-         $this->id_tecnico = $rs->fields[0] ;  
+         $this->nome_tecnico = $rs->fields[0] ;  
+         $this->email_tecnico = $rs->fields[1] ;  
+         $this->fone_tecnico = $rs->fields[2] ;  
+         $this->id_tecnico = $rs->fields[3] ;  
          $this->id_tecnico = (string)$this->id_tecnico;
-         $this->nome_tecnico = $rs->fields[1] ;  
-         $this->email_tecnico = $rs->fields[2] ;  
-         $this->fone_tecnico = $rs->fields[3] ;  
          $this->usuario_login = $rs->fields[4] ;  
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $Cada_col)
@@ -600,28 +600,6 @@ class grid_tecnicos_xml
       }
       $rs->Close();
    }
-   //----- id_tecnico
-   function NM_export_id_tecnico()
-   {
-             nmgp_Form_Num_Val($this->id_tecnico, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico"; 
-         }
-         else
-         {
-             $SC_Label = "id_tecnico"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->id_tecnico) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->id_tecnico) . "\"";
-         }
-   }
    //----- nome_tecnico
    function NM_export_nome_tecnico()
    {
@@ -631,7 +609,7 @@ class grid_tecnicos_xml
          }
          if ($this->Xml_tag_label)
          {
-             $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico"; 
+             $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . ""; 
          }
          else
          {
@@ -656,7 +634,7 @@ class grid_tecnicos_xml
          }
          if ($this->Xml_tag_label)
          {
-             $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico"; 
+             $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . ""; 
          }
          else
          {
@@ -675,13 +653,17 @@ class grid_tecnicos_xml
    //----- fone_tecnico
    function NM_export_fone_tecnico()
    {
+             if ($this->fone_tecnico !== "&nbsp;") 
+             { 
+                 $this->nm_gera_mask($this->fone_tecnico, "(xx) xxxxx-xxxx"); 
+             } 
          if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->fone_tecnico))
          {
              $this->fone_tecnico = sc_convert_encoding($this->fone_tecnico, "UTF-8", $_SESSION['scriptcase']['charset']);
          }
          if ($this->Xml_tag_label)
          {
-             $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico"; 
+             $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . ""; 
          }
          else
          {
@@ -697,6 +679,28 @@ class grid_tecnicos_xml
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->fone_tecnico) . "\"";
          }
    }
+   //----- id_tecnico
+   function NM_export_id_tecnico()
+   {
+             nmgp_Form_Num_Val($this->id_tecnico, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . ""; 
+         }
+         else
+         {
+             $SC_Label = "id_tecnico"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->id_tecnico) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->id_tecnico) . "\"";
+         }
+   }
    //----- usuario_login
    function NM_export_usuario_login()
    {
@@ -706,7 +710,7 @@ class grid_tecnicos_xml
          }
          if ($this->Xml_tag_label)
          {
-             $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login"; 
+             $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . ""; 
          }
          else
          {

@@ -969,10 +969,6 @@ class form_clientes_mob_apl
       }
       $this->Erro      = new form_clientes_mob_erro();
       $this->Erro->Ini = $this->Ini;
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['sc_max_reg']) && strtolower($_SESSION['sc_session'][$this->Ini->sc_page]['form_clientes_mob']['sc_max_reg']) == "all")
-      {
-          $this->form_paginacao = "total";
-      }
       $this->proc_fast_search = false;
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
@@ -1699,7 +1695,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                return "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
                break;
            case 'usuario_login':
-               return "Usuario Login";
+               return "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_login'] . "";
                break;
        }
 

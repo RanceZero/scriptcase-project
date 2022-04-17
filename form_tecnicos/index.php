@@ -187,6 +187,7 @@ class form_tecnicos_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
+   var $link_form_horario_trabalho_tecnicos_edit;
    var $link_form_tecnicos_inline;
    var $nm_cont_lin;
    var $nm_limite_lin;
@@ -303,8 +304,8 @@ class form_tecnicos_ini
       $this->nm_dt_criacao   = "20220403"; 
       $this->nm_hr_criacao   = "012657"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220403"; 
-      $this->nm_hr_ult_alt   = "012724"; 
+      $this->nm_dt_ult_alt   = "20220406"; 
+      $this->nm_hr_ult_alt   = "221555"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -643,6 +644,23 @@ class form_tecnicos_ini
           echo "</html>";
           exit;
       }
+      $Tmp_apl_lig = "form_horario_trabalho_tecnicos";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_horario_trabalho_tecnicos_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_horario_trabalho_tecnicos_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_horario_trabalho_tecnicos_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_horario_trabalho_tecnicos_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_horario_trabalho_tecnicos"] = 'S';
+          }
+      }
       $PHP_ver = str_replace(".", "", phpversion()); 
       if (substr($PHP_ver, 0, 3) < 434)
       {
@@ -820,7 +838,7 @@ class form_tecnicos_ini
               else 
               { 
 ?>
-                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="<?php echo $this->Nm_lang['lang_btns_exit_hint'] ?>" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
+                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="__NM_HINT__ (Alt + Q)" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
 
 <?php
               } 
@@ -894,6 +912,9 @@ class form_tecnicos_ini
       {
           $_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
+      $this->link_form_horario_trabalho_tecnicos_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_horario_trabalho_tecnicos') . "/";
+      $this->sc_lig_target["C_@scinf_horario_tecnico"] = 'nmsc_iframe_liga_form_horario_trabalho_tecnicos';
+      $this->sc_lig_iframe["nmsc_iframe_liga_form_horario_trabalho_tecnicos"] = 'nmsc_iframe_liga_form_horario_trabalho_tecnicos';
       $this->link_form_tecnicos_inline = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_tecnicos') . "/form_tecnicos_inline.php";
       if ($_SESSION['sc_session'][$this->sc_page]['form_tecnicos']['dashboard_info']['under_dashboard'])
       {
@@ -962,7 +983,7 @@ class form_tecnicos_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYH9FGDSzGV5XGHgvsV9BUHEFYDoJeD9BiZ1FaHIBeHQNUDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiDcFYZ1FGDSNOHuJwHgNKHErCV5B3VoFGHQJeDQFaHIrwHuBiDMrYVcFeDWBmDoXGHQBqZkFGD1rwHQNUHgBeDkXKDWrGVoFGHQJKDuBqDSzGVWBODMNODkBsDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DurmZuJsHQBiZ9F7D1veHuJwDMrYDkBsHEBmDoXGHQJmVIJsHArYHuJsHgrKDkXKH5FGVoFGHQNwZSBiD1BeV5FaHgvOVIB/DWrmDoXGHQBsZ1X7HIveHQBqHgBeZSJ3H5BmDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZkFGZ1NOHQFGDMveHErCDuXKVoFGHQNwZ9XGHAN7HuBODMrYZSJqDuFGDoXGHQBqZkFGD1zGZMBqHgrKZSJqDWrGVoFGHQFYZ9F7D1BOV5BODMvsVcB/DWrmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQJmVIJsDSvmD5FaHgNOHEBUDWr/DoB/DcBwZSFGHANOV5FUHuNOV9FiDWXCHMFaD9JmZ1B/HIrwV5FaDErKDkBsV5FaHMJeDcBwDQFGD1veHQXGHgvsVcBOHEX7DoraHQFYH9FaHAvmZMJeHgvCHEJGDWF/VoJeD9NwDQBqHINaV5BqDMrwDkFCDuX7VEF7D9BiH9FaHAN7D5FaDEBOZSJGH5BmDoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUHQXsDQFaHABYHQF7DMzGDkB/H5XCHIFGHQXGZ1FUZ1vOD5BOHgBOZSJqDWXCHIFUHQBiDQFUHAN7HuBiDMvmVcFKV5BmVoBqD9BsZkFGHArKHQNUHgvsZSXeH5FYHMB/HQJeDQFaD1BeD5rqHuzGVIBOH5XCVoraHQXGZSBqHIBeV5BODMvCHEFiDWB3ZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaZuFaDcBwDQX7D1BeD5NUHuvmVcBOH5FqVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMvCZSJ3DWr/ZuB/HQXOH9FGHIrwV5BODMzGVIBsV5X7DoJeHQBqZ1FGHArYHQFGDEvsZSJGDWX7VoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoNUDcJUZ1B/Z1rYD5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5BqHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgvsVcBOH5FqDoFGD9XGZ1BiD1rKHuJeHgNOHEFiH5F/ZuBqDcXGH9BiZ1BYV5FaDMvmVcFKV5BmVoBqD9BsZkFGHArKV5B/DMzGHEXeV5FqDoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHArKHQJwDEBODkFeH5FYVoFGHQJKDQJwHAveVWJwHgvsVIB/V5X7VErqDcBqZ1B/HIrwV5JeDMzGHErCDWF/HIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VENUHQNmZ1BiD1NaZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSX7Z1zGV5BODMNODkBODWFYHINUD9XOZkFGHAN7HQFUDEBOZSJqH5FYVoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoFGHQJKZSBiZ1N7D5JsDMNOVcFCHEF/HMJsDcNmZSBqHIrwD5XGHgBeHArCHEXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5XCDoraD9BsZ1B/Z1BeHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuNODkFCDWJeDoXGDcNwH9FaD1rKV5FaDMBYZSXeV5XCVoXGDcJeZSX7Z1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXODuFaD1veV5JwHuBOV9FeH5FqDorqDcFYZSBqDSNOHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaHgrwVcFeHEF/HIBiHQNwZ1FGZ1vmV5X7HgBYHErCDuFaHINUHQXODQFaHAvCD5F7DMvsV9FeH5FqHMB/HQJmVINUHAvCV5X7HgBeHArsHEB7ZuJeHQXsZSBiHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINKZMJwHgveDkB/H5F/HIB/HQXOZSBiDSvCD5F7DMvmZSJqDWFYHIFUHQXOVINUD1zGV5X7HgrKZSJ3H5FYDoJsDcBiH9FUHAvmD5F7DMNOVcXKDur/HMrqHQJmH9BqD1vsD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsV9FeV5F/HMJeDcNmZ1FGHIBOV5X7HgrKDkXKDWXCHIJeHQXOZ9F7HINaD5F7DMvsV9FeH5XKVErqHQXOH9BOHAvCV5X7HgNODkB/H5X/DoJeHQJeDQFUHAvmV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMvmZSJqHEBmVoraHQXGZ1rqHAN7D5FaDMzGZSJGDWr/DoraD9XsDuBOHAveHuBiHuvmVcBODuFqDoraD9XOVIJwZ1BeHuXGDMzGHEJGH5F/HMBqDcJeDQX7DSrwD5JwDMrwDkFCDWBmVEFGHQFYZ1FaHArKV5XGDErKHErsDuXKDoXGHQXGZSFGHIrwVWXGHuBYDkFCDWJeVoraD9BsH9FaD1vsD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiHgBOHErCDWFqHMFGHQNwZSFUD1veHQBqDMBOVcFiV5X/VoF7HQBsH9BOHANOHQBiHgveHEJqDWXCHINUHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5BmDoBqHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiDcFYZ1X7HArYV5FGDMBYVkXeHEFaDoBOHQFYZSBiHIrwV5JeDMzGVcFeHEFYVEBiHQBsZSFaHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsD1veD5JwHuNOVcBOV5X7HMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XOZ1rqHArYD5F7DMNKZSJGDWXCDoraD9XsDQJsDSBYD5JsDMvmVcFeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5BmDoBqHQXOZ9JsZ1rKVWFU";
 $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 108, 101, 61, 34, 102, 111, 110, 116, 45, 102, 97, 109, 105, 108, 121, 58, 32, 84, 97, 104, 111, 109, 97, 44, 32, 65, 114, 105, 97, 108, 44, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 59, 32, 102, 111, 110, 116, 45, 115, 105, 122, 101, 58, 32, 49, 51, 112, 120, 59, 32, 102, 111, 110, 116, 45, 119, 101, 105, 103, 104, 116, 58, 32, 98, 111, 108, 100, 59, 32, 116, 101, 120, 116, 45, 97, 108, 105, 103, 110, 58, 32, 99, 101, 110, 116, 101, 114, 34, 62, 84, 104, 105, 115, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 32, 119, 97, 115, 32, 100, 101, 118, 101, 108, 111, 112, 101, 100, 32, 97, 110, 100, 32, 112, 117, 98, 108, 105, 115, 104, 101, 100, 32, 117, 115, 105, 110, 103, 32, 97, 32, 116, 114, 105, 97, 108, 32, 118, 101, 114, 115, 105, 111, 110, 32, 111, 102, 32, 83, 99, 114, 105, 112, 116, 67, 97, 115, 101, 32, 97, 110, 100, 32, 105, 116, 115, 32, 116, 114, 105, 97, 108, 32, 112, 101, 114, 105, 111, 100, 32, 104, 97, 115, 32, 101, 120, 112, 105, 114, 101, 100, 46, 60, 47, 100, 105, 118, 62);
       $this->prep_conect();
       $this->conectDB();
@@ -1362,7 +1383,7 @@ $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 1
               else 
               { 
 ?>
-                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="<?php echo $this->Nm_lang['lang_btns_exit_hint'] ?>" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
+                  <input type="button" id="sai" onClick="window.location='<?php echo $nm_url_saida ?>'; return false" class="scButton_danger" value="<?php echo $this->Nm_lang['lang_btns_exit'] ?>" title="__NM_HINT__ (Alt + Q)" style="<?php echo $sCondStyle; ?>vertical-align: middle;display: ''">
 
 <?php
               } 
@@ -1724,11 +1745,6 @@ ob_start();
 
     if (isset($_POST['rs']) && !is_array($_POST['rs']) && 'ajax_' == substr($_POST['rs'], 0, 5) && isset($_POST['rsargs']) && !empty($_POST['rsargs']) && !isset($_SESSION['scriptcase']['form_tecnicos']['session_timeout']['redir']))
     {
-        if ('ajax_form_tecnicos_validate_id_tecnico' == $_POST['rs'])
-        {
-            $id_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
         if ('ajax_form_tecnicos_validate_nome_tecnico' == $_POST['rs'])
         {
             $nome_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1744,26 +1760,24 @@ ob_start();
             $fone_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_tecnicos_validate_usuario_login' == $_POST['rs'])
+        if ('ajax_form_tecnicos_validate_horario_tecnico' == $_POST['rs'])
         {
-            $usuario_login = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $horario_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_tecnicos_submit_form' == $_POST['rs'])
         {
-            $id_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nome_tecnico = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $email_tecnico = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $fone_tecnico = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $usuario_login = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $nome_tecnico = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $email_tecnico = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $fone_tecnico = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][10]);
         }
         if ('ajax_form_tecnicos_navigate_form' == $_POST['rs'])
         {
@@ -2234,11 +2248,10 @@ ob_start();
     $sajax_request_type = "POST";
     sajax_init();
     //$sajax_debug_mode = 1;
-    sajax_export("ajax_form_tecnicos_validate_id_tecnico");
     sajax_export("ajax_form_tecnicos_validate_nome_tecnico");
     sajax_export("ajax_form_tecnicos_validate_email_tecnico");
     sajax_export("ajax_form_tecnicos_validate_fone_tecnico");
-    sajax_export("ajax_form_tecnicos_validate_usuario_login");
+    sajax_export("ajax_form_tecnicos_validate_horario_tecnico");
     sajax_export("ajax_form_tecnicos_submit_form");
     sajax_export("ajax_form_tecnicos_navigate_form");
     sajax_handle_client_request();
@@ -2269,25 +2282,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
             }
         }
     }
-
-    function ajax_form_tecnicos_validate_id_tecnico($id_tecnico, $script_case_init)
-    {
-        global $inicial_form_tecnicos;
-        //register_shutdown_function("form_tecnicos_pack_ajax_response");
-        $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_flag          = true;
-        $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_opcao         = 'validate_id_tecnico';
-        $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_info['param'] = array(
-                  'id_tecnico' => NM_utf8_urldecode($id_tecnico),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_tecnicos->contr_form_tecnicos->controle();
-        exit;
-    } // ajax_validate_id_tecnico
 
     function ajax_form_tecnicos_validate_nome_tecnico($nome_tecnico, $script_case_init)
     {
@@ -2346,14 +2340,14 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_fone_tecnico
 
-    function ajax_form_tecnicos_validate_usuario_login($usuario_login, $script_case_init)
+    function ajax_form_tecnicos_validate_horario_tecnico($horario_tecnico, $script_case_init)
     {
         global $inicial_form_tecnicos;
         //register_shutdown_function("form_tecnicos_pack_ajax_response");
         $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_flag          = true;
-        $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_opcao         = 'validate_usuario_login';
+        $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_opcao         = 'validate_horario_tecnico';
         $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_info['param'] = array(
-                  'usuario_login' => NM_utf8_urldecode($usuario_login),
+                  'horario_tecnico' => NM_utf8_urldecode($horario_tecnico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
@@ -2363,20 +2357,18 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
         $inicial_form_tecnicos->contr_form_tecnicos->controle();
         exit;
-    } // ajax_validate_usuario_login
+    } // ajax_validate_horario_tecnico
 
-    function ajax_form_tecnicos_submit_form($id_tecnico, $nome_tecnico, $email_tecnico, $fone_tecnico, $usuario_login, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_tecnicos_submit_form($nome_tecnico, $email_tecnico, $fone_tecnico, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_tecnicos;
         //register_shutdown_function("form_tecnicos_pack_ajax_response");
         $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_flag          = true;
         $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_opcao         = 'submit_form';
         $inicial_form_tecnicos->contr_form_tecnicos->NM_ajax_info['param'] = array(
-                  'id_tecnico' => NM_utf8_urldecode($id_tecnico),
                   'nome_tecnico' => NM_utf8_urldecode($nome_tecnico),
                   'email_tecnico' => NM_utf8_urldecode($email_tecnico),
                   'fone_tecnico' => NM_utf8_urldecode($fone_tecnico),
-                  'usuario_login' => NM_utf8_urldecode($usuario_login),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

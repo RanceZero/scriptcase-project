@@ -320,7 +320,19 @@ class menu_form_php
       {
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_2")
       {
-          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_4")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_tecnicos") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_5")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_status_agendamento") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_6")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_tipos_agendamento") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
       }
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_3")
       {
@@ -329,7 +341,11 @@ class menu_form_php
       }
       if ($_SESSION['scriptcase']['sc_item_menu'] == "btn_1")
       {
-          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_clientes") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "btn_2")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_tecnicos") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
       }
       }
       if (!$link_url)

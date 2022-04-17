@@ -181,7 +181,7 @@ class grid_clientes_det
     $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_clientes']['where_pesq_filtro'];
     $this->nm_field_dinamico = array();
     $this->nm_order_dinamico = array();
-    $this->nm_data = new nm_data("pt_br");
+    $this->nm_data = new nm_data("en_US");
     $this->NM_raiz_img  = ""; 
     if ($this->Ini->sc_export_ajax_img)
     { 
@@ -283,6 +283,7 @@ class grid_clientes_det
    $this->New_label['pais_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_pais_cliente'] . "";
    $this->New_label['cep_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . "";
    $this->New_label['id_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
+   $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_login'] . "";
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_clientes']['cmp_acum']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_clientes']['cmp_acum']))
    {
        $parms_acum = explode(";", $_SESSION['sc_session'][$this->Ini->sc_page]['grid_clientes']['cmp_acum']);
@@ -510,7 +511,7 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" >\r\n");
        $nm_saida->saida("     <TR>\r\n");
        $nm_saida->saida("       <TD>\r\n");
-       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("       </TD>\r\n");
        $nm_saida->saida("     </TR>\r\n");
@@ -820,7 +821,7 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "";
    }
-   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login"; 
+   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : ""; 
    $conteudo = trim(sc_strip_script($this->usuario_login)); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 

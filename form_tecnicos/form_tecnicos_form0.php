@@ -660,6 +660,9 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
   }
 
   if (show_block[block_id]) {
+    if ("hidden_bloco_1" == block_id) {
+      scAjaxDetailHeight("form_horario_trabalho_tecnicos", $($("#nmsc_iframe_liga_form_horario_trabalho_tecnicos")[0].contentWindow.document).innerHeight());
+    }
   }
  }
 
@@ -847,21 +850,6 @@ sc_userSweetAlertDisplayed = false;
   <td>
   <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
    <table width='100%' cellspacing=0 cellpadding=0>
-<?php
-  if (!$this->Embutida_call && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['mostra_cab']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['mostra_cab'] != "N") && (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['under_dashboard'] || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['compact_mode'] || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['maximized']))
-  {
-?>
-<tr><td>
-<style>
-    .scMenuTHeaderFont img, .scGridHeaderFont img , .scFormHeaderFont img , .scTabHeaderFont img , .scContainerHeaderFont img , .scFilterHeaderFont img { height:23px;}
-</style>
-<div class="scFormHeader" style="height: 54px; padding: 17px 15px; box-sizing: border-box;margin: -1px 0px 0px 0px;width: 100%;">
-    <div class="scFormHeaderFont" style="float: left; text-transform: uppercase;"><?php if ($this->nmgp_opcao == "novo") { echo "" . $this->Ini->Nm_lang['lang_othr_frmi_title'] . " tecnicos"; } else { echo "" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " tecnicos"; } ?></div>
-    <div class="scFormHeaderFont" style="float: right;"><?php echo date($this->dateDefaultFormat()); ?></div>
-</div></td></tr>
-<?php
-  }
-?>
 <tr><td>
 <?php
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] != "R")
@@ -904,11 +892,10 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
           <select id='fast_search_f0_t' multiple=multiple  class="scFormToolbarInput" style="vertical-align: middle;" name="nmgp_fast_search_t" onChange="change_fast_t = 'CH';">
 <?php 
           $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
-          $SC_Label_atu['id_tecnico'] = (isset($this->nm_new_label['id_tecnico'])) ? $this->nm_new_label['id_tecnico'] : 'Id Tecnico'; 
-          $SC_Label_atu['nome_tecnico'] = (isset($this->nm_new_label['nome_tecnico'])) ? $this->nm_new_label['nome_tecnico'] : 'Nome Tecnico'; 
-          $SC_Label_atu['email_tecnico'] = (isset($this->nm_new_label['email_tecnico'])) ? $this->nm_new_label['email_tecnico'] : 'Email Tecnico'; 
-          $SC_Label_atu['fone_tecnico'] = (isset($this->nm_new_label['fone_tecnico'])) ? $this->nm_new_label['fone_tecnico'] : 'Fone Tecnico'; 
-          $SC_Label_atu['usuario_login'] = (isset($this->nm_new_label['usuario_login'])) ? $this->nm_new_label['usuario_login'] : 'Usuario Login'; 
+          $SC_Label_atu['nome_tecnico'] = (isset($this->nm_new_label['nome_tecnico'])) ? $this->nm_new_label['nome_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . ''; 
+          $SC_Label_atu['email_tecnico'] = (isset($this->nm_new_label['email_tecnico'])) ? $this->nm_new_label['email_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . ''; 
+          $SC_Label_atu['fone_tecnico'] = (isset($this->nm_new_label['fone_tecnico'])) ? $this->nm_new_label['fone_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . ''; 
+          $SC_Label_atu['horario_tecnico'] = (isset($this->nm_new_label['horario_tecnico'])) ? $this->nm_new_label['horario_tecnico'] : '' . $this->Ini->Nm_lang['lang_tbl_horario_trabalho_tecnicos'] . ''; 
           foreach ($SC_Label_atu as $CMP => $LABEL)
           {
               if($CMP == 'SC_all_Cmp')
@@ -960,7 +947,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['new'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bnovo", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_new_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bnovo", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_new_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Enter)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -979,7 +966,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['insert'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bincluir", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_ins_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bincluir", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_ins_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Enter)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -998,7 +985,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['bcancelar'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bcancelar", "scBtnFn_sys_format_cnl()", "scBtnFn_sys_format_cnl()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bcancelar", "scBtnFn_sys_format_cnl()", "scBtnFn_sys_format_cnl()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Escape)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1017,7 +1004,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['update'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "balterar", "scBtnFn_sys_format_alt()", "scBtnFn_sys_format_alt()", "sc_b_upd_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "balterar", "scBtnFn_sys_format_alt()", "scBtnFn_sys_format_alt()", "sc_b_upd_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + S)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1036,7 +1023,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['delete'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bexcluir", "scBtnFn_sys_format_exc()", "scBtnFn_sys_format_exc()", "sc_b_del_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bexcluir", "scBtnFn_sys_format_exc()", "scBtnFn_sys_format_exc()", "sc_b_del_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Delete)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1076,7 +1063,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['help'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1133,7 +1120,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['exit'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1171,11 +1158,24 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['exit'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
     }
+      $tst_conf_reg = $this->Ini->str_lang . ";" . $this->Ini->str_conf_reg;
+      echo "<select name=\"nmgp_idioma_t\" class=\"scFormToolbarInput\" onChange=\"document.F1.nmgp_opcao.value='change_lang_t'; setLocale(this); document.F1.submit(); return false\">";
+      foreach ($this->Ini->Nm_lang_conf_region as $cada_idioma => $cada_descr)
+      {
+         $tmp_idioma = explode(";", $cada_idioma);
+          if (is_file($this->Ini->path_lang . $tmp_idioma[0] . ".lang.php"))
+          {
+             $obj_sel = ($tst_conf_reg == $cada_idioma) ? " selected" : "";
+             echo "  <option value=\"" . $cada_idioma . "\"" .  $obj_sel . ">" . $cada_descr . "</option>";
+          }
+      }
+      echo "</select>";
+      $NM_btn = true;
 }
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] != "R")
 {
@@ -1216,73 +1216,14 @@ unset($NM_ult_sep);
 <div id="div_hidden_bloco_0"><!-- bloco_c -->
 <?php
 ?>
-<TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
-           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['id_tecnico']))
-           {
-               $this->nmgp_cmp_readonly['id_tecnico'] = 'on';
-           }
-?>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['id_tecnico']))
-    {
-        $this->nm_new_label['id_tecnico'] = "Id Tecnico";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $id_tecnico = $this->id_tecnico;
-   $sStyleHidden_id_tecnico = '';
-   if (isset($this->nmgp_cmp_hidden['id_tecnico']) && $this->nmgp_cmp_hidden['id_tecnico'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['id_tecnico']);
-       $sStyleHidden_id_tecnico = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_id_tecnico = 'display: none;';
-   $sStyleReadInp_id_tecnico = '';
-   if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["id_tecnico"]) &&  $this->nmgp_cmp_readonly["id_tecnico"] == "on"))
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['id_tecnico']);
-       $sStyleReadLab_id_tecnico = '';
-       $sStyleReadInp_id_tecnico = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['id_tecnico']) && $this->nmgp_cmp_hidden['id_tecnico'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="id_tecnico" value="<?php echo $this->form_encode_input($id_tecnico) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php if ((isset($this->Embutida_form) && $this->Embutida_form) || ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir")) { ?>
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_id_tecnico_label" id="hidden_field_label_id_tecnico" style="<?php echo $sStyleHidden_id_tecnico; ?>"><span id="id_label_id_tecnico"><?php echo $this->nm_new_label['id_tecnico']; ?></span></TD>
-    <TD class="scFormDataOdd css_id_tecnico_line" id="hidden_field_data_id_tecnico" style="<?php echo $sStyleHidden_id_tecnico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_tecnico_line" style="vertical-align: top;padding: 0px"><span id="id_read_on_id_tecnico" class="css_id_tecnico_line" style="<?php echo $sStyleReadLab_id_tecnico; ?>"><?php echo $this->form_format_readonly("id_tecnico", $this->form_encode_input($this->id_tecnico)); ?></span><span id="id_read_off_id_tecnico" class="css_read_off_id_tecnico" style="<?php echo $sStyleReadInp_id_tecnico; ?>"><input type="hidden" name="id_tecnico" value="<?php echo $this->form_encode_input($id_tecnico) . "\">"?><span id="id_ajax_label_id_tecnico"><?php echo nl2br($id_tecnico); ?></span>
-</span></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_tecnico_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_tecnico_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }
-      else
-      {
-         $sc_hidden_no--;
-      }
-?>
-<?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
     if (!isset($this->nm_new_label['nome_tecnico']))
     {
-        $this->nm_new_label['nome_tecnico'] = "Nome Tecnico";
+        $this->nm_new_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
     }
 ?>
 <?php
@@ -1311,7 +1252,7 @@ unset($NM_ult_sep);
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormLabelOdd scUiLabelWidthFix css_nome_tecnico_label" id="hidden_field_label_nome_tecnico" style="<?php echo $sStyleHidden_nome_tecnico; ?>"><span id="id_label_nome_tecnico"><?php echo $this->nm_new_label['nome_tecnico']; ?></span></TD>
-    <TD class="scFormDataOdd css_nome_tecnico_line" id="hidden_field_data_nome_tecnico" style="<?php echo $sStyleHidden_nome_tecnico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nome_tecnico_line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOdd css_nome_tecnico_line" id="hidden_field_data_nome_tecnico" style="<?php echo $sStyleHidden_nome_tecnico; ?>vertical-align: top;"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nome_tecnico_line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nome_tecnico"]) &&  $this->nmgp_cmp_readonly["nome_tecnico"] == "on") { 
 
  ?>
@@ -1336,7 +1277,7 @@ unset($NM_ult_sep);
    <?php
     if (!isset($this->nm_new_label['email_tecnico']))
     {
-        $this->nm_new_label['email_tecnico'] = "Email Tecnico";
+        $this->nm_new_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
     }
 ?>
 <?php
@@ -1365,7 +1306,7 @@ unset($NM_ult_sep);
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormLabelOdd scUiLabelWidthFix css_email_tecnico_label" id="hidden_field_label_email_tecnico" style="<?php echo $sStyleHidden_email_tecnico; ?>"><span id="id_label_email_tecnico"><?php echo $this->nm_new_label['email_tecnico']; ?></span></TD>
-    <TD class="scFormDataOdd css_email_tecnico_line" id="hidden_field_data_email_tecnico" style="<?php echo $sStyleHidden_email_tecnico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_email_tecnico_line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOdd css_email_tecnico_line" id="hidden_field_data_email_tecnico" style="<?php echo $sStyleHidden_email_tecnico; ?>vertical-align: top;"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_email_tecnico_line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["email_tecnico"]) &&  $this->nmgp_cmp_readonly["email_tecnico"] == "on") { 
 
  ?>
@@ -1390,7 +1331,7 @@ unset($NM_ult_sep);
    <?php
     if (!isset($this->nm_new_label['fone_tecnico']))
     {
-        $this->nm_new_label['fone_tecnico'] = "Fone Tecnico";
+        $this->nm_new_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
     }
 ?>
 <?php
@@ -1419,7 +1360,7 @@ unset($NM_ult_sep);
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormLabelOdd scUiLabelWidthFix css_fone_tecnico_label" id="hidden_field_label_fone_tecnico" style="<?php echo $sStyleHidden_fone_tecnico; ?>"><span id="id_label_fone_tecnico"><?php echo $this->nm_new_label['fone_tecnico']; ?></span></TD>
-    <TD class="scFormDataOdd css_fone_tecnico_line" id="hidden_field_data_fone_tecnico" style="<?php echo $sStyleHidden_fone_tecnico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_fone_tecnico_line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOdd css_fone_tecnico_line" id="hidden_field_data_fone_tecnico" style="<?php echo $sStyleHidden_fone_tecnico; ?>vertical-align: top;"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_fone_tecnico_line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["fone_tecnico"]) &&  $this->nmgp_cmp_readonly["fone_tecnico"] == "on") { 
 
  ?>
@@ -1427,7 +1368,7 @@ unset($NM_ult_sep);
 <?php } else { ?>
 <span id="id_read_on_fone_tecnico" class="sc-ui-readonly-fone_tecnico css_fone_tecnico_line" style="<?php echo $sStyleReadLab_fone_tecnico; ?>"><?php echo $this->form_format_readonly("fone_tecnico", $this->form_encode_input($this->fone_tecnico)); ?></span><span id="id_read_off_fone_tecnico" class="css_read_off_fone_tecnico<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_fone_tecnico; ?>">
  <input class="sc-js-input scFormObjectOdd css_fone_tecnico_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_fone_tecnico" type=text name="fone_tecnico" value="<?php echo $this->form_encode_input($fone_tecnico) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=35 alt="{datatype: 'mask', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', maskList: '(99) 99999-9999', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_fone_tecnico_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_fone_tecnico_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
@@ -1437,59 +1378,114 @@ unset($NM_ult_sep);
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+
+
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_1"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
-    if (!isset($this->nm_new_label['usuario_login']))
+    if (!isset($this->nm_new_label['horario_tecnico']))
     {
-        $this->nm_new_label['usuario_login'] = "Usuario Login";
+        $this->nm_new_label['horario_tecnico'] = "" . $this->Ini->Nm_lang['lang_tbl_horario_trabalho_tecnicos'] . "";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $usuario_login = $this->usuario_login;
-   $sStyleHidden_usuario_login = '';
-   if (isset($this->nmgp_cmp_hidden['usuario_login']) && $this->nmgp_cmp_hidden['usuario_login'] == 'off')
+   $horario_tecnico = $this->horario_tecnico;
+   $sStyleHidden_horario_tecnico = '';
+   if (isset($this->nmgp_cmp_hidden['horario_tecnico']) && $this->nmgp_cmp_hidden['horario_tecnico'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['usuario_login']);
-       $sStyleHidden_usuario_login = 'display: none;';
+       unset($this->nmgp_cmp_hidden['horario_tecnico']);
+       $sStyleHidden_horario_tecnico = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_usuario_login = 'display: none;';
-   $sStyleReadInp_usuario_login = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['usuario_login']) && $this->nmgp_cmp_readonly['usuario_login'] == 'on')
+   $sStyleReadLab_horario_tecnico = 'display: none;';
+   $sStyleReadInp_horario_tecnico = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['horario_tecnico']) && $this->nmgp_cmp_readonly['horario_tecnico'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['usuario_login']);
-       $sStyleReadLab_usuario_login = '';
-       $sStyleReadInp_usuario_login = 'display: none;';
+       unset($this->nmgp_cmp_readonly['horario_tecnico']);
+       $sStyleReadLab_horario_tecnico = '';
+       $sStyleReadInp_horario_tecnico = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['usuario_login']) && $this->nmgp_cmp_hidden['usuario_login'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="usuario_login" value="<?php echo $this->form_encode_input($usuario_login) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['horario_tecnico']) && $this->nmgp_cmp_hidden['horario_tecnico'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="horario_tecnico" value="<?php echo $this->form_encode_input($horario_tecnico) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_usuario_login_label" id="hidden_field_label_usuario_login" style="<?php echo $sStyleHidden_usuario_login; ?>"><span id="id_label_usuario_login"><?php echo $this->nm_new_label['usuario_login']; ?></span></TD>
-    <TD class="scFormDataOdd css_usuario_login_line" id="hidden_field_data_usuario_login" style="<?php echo $sStyleHidden_usuario_login; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_usuario_login_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["usuario_login"]) &&  $this->nmgp_cmp_readonly["usuario_login"] == "on") { 
-
- ?>
-<input type="hidden" name="usuario_login" value="<?php echo $this->form_encode_input($usuario_login) . "\">" . $usuario_login . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_usuario_login" class="sc-ui-readonly-usuario_login css_usuario_login_line" style="<?php echo $sStyleReadLab_usuario_login; ?>"><?php echo $this->form_format_readonly("usuario_login", $this->form_encode_input($this->usuario_login)); ?></span><span id="id_read_off_usuario_login" class="css_read_off_usuario_login<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_usuario_login; ?>">
- <input class="sc-js-input scFormObjectOdd css_usuario_login_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_usuario_login" type=text name="usuario_login" value="<?php echo $this->form_encode_input($usuario_login) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=32"; } ?> maxlength=32 alt="{datatype: 'text', maxLength: 32, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_usuario_login_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_usuario_login_text"></span></td></tr></table></td></tr></table></TD>
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_horario_tecnico_label" id="hidden_field_label_horario_tecnico" style="<?php echo $sStyleHidden_horario_tecnico; ?>"><span id="id_label_horario_tecnico"><?php echo $this->nm_new_label['horario_tecnico']; ?></span></TD>
+    <TD class="scFormDataOdd css_horario_tecnico_line" id="hidden_field_data_horario_tecnico" style="<?php echo $sStyleHidden_horario_tecnico; ?>vertical-align: top;"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td width="100%" class="scFormDataFontOdd css_horario_tecnico_line" style="vertical-align: top;padding: 0px">
+<?php
+ if (isset($_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'] ]) && '' != $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'] ]) {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] = $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'] ];
+ }
+ else {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] = $this->Ini->sc_page;
+ }
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_proc']  = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_form']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_call']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_multi'] = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_form_insert'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_form_update'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_form_delete'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_form_btn_nav'] = 'off';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_grid_edit'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_grid_edit_link'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_qtd_reg'] = '10';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_liga_tp_pag'] = 'parcial';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_parms'] = "NM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['foreign_key']['id_tecnico'] = $this->nmgp_dados_form['id_tecnico'];
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_filter'] = "id_tecnico = " . $this->nmgp_dados_form['id_tecnico'] . "";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_detal']  = "id_tecnico = " . $this->nmgp_dados_form['id_tecnico'] . "";
+ if ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_tecnicos']['total'] < 0)
+ {
+     $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_filter'] = "1 <> 1";
+ }
+ $sDetailSrc = ('novo' == $this->nmgp_opcao) ? 'form_tecnicos_empty.htm' : $this->Ini->link_form_horario_trabalho_tecnicos_edit . '?script_case_init=' . $this->form_encode_input($this->Ini->sc_page) . '&script_case_detail=Y';
+if (isset($this->Ini->sc_lig_target['C_@scinf_horario_tecnico']) && 'nmsc_iframe_liga_form_horario_trabalho_tecnicos' != $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'])
+{
+    if ('novo' != $this->nmgp_opcao)
+    {
+        $sDetailSrc .= '&under_dashboard=1&dashboard_app=' . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['dashboard_app'] . '&own_widget=' . $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'] . '&parent_widget=' . $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dashboard_info']['own_widget'];
+        $sDetailSrc  = $this->addUrlParam($sDetailSrc, 'script_case_init', $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init']);
+    }
+?>
+<script type="text/javascript">
+$(function() {
+    scOpenMasterDetail("<?php echo $this->Ini->sc_lig_target['C_@scinf_horario_tecnico'] ?>", "<?php echo $sDetailSrc; ?>");
+});
+</script>
+<?php
+}
+else
+{
+?>
+<iframe border="0" id="nmsc_iframe_liga_form_horario_trabalho_tecnicos"  marginWidth="0" marginHeight="0" frameborder="0" valign="top" height="100" width="100%" name="nmsc_iframe_liga_form_horario_trabalho_tecnicos"  scrolling="auto" src="<?php echo $sDetailSrc; ?>"></iframe>
+<?php
+}
+?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_horario_tecnico_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_horario_tecnico_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
-<?php if ($sc_hidden_yes > 0) { ?>
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
 
 
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } ?>
+<?php } 
+?> 
+
+
    </td></tr></table>
    </tr>
 </TABLE></div><!-- bloco_f -->
@@ -1548,7 +1544,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['first'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "binicio", "scBtnFn_sys_format_ini()", "scBtnFn_sys_format_ini()", "sc_b_ini_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "binicio", "scBtnFn_sys_format_ini()", "scBtnFn_sys_format_ini()", "sc_b_ini_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1567,7 +1563,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['back'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bretorna", "scBtnFn_sys_format_ret()", "scBtnFn_sys_format_ret()", "sc_b_ret_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bretorna", "scBtnFn_sys_format_ret()", "scBtnFn_sys_format_ret()", "sc_b_ret_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1592,7 +1588,7 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['navpage'] == "on")
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['forward'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bavanca", "scBtnFn_sys_format_ava()", "scBtnFn_sys_format_ava()", "sc_b_avc_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bavanca", "scBtnFn_sys_format_ava()", "scBtnFn_sys_format_ava()", "sc_b_avc_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8594;)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1611,7 +1607,7 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['navpage'] == "on")
             $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['btn_label']['last'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bfinal", "scBtnFn_sys_format_fim()", "scBtnFn_sys_format_fim()", "sc_b_fim_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "bfinal", "scBtnFn_sys_format_fim()", "scBtnFn_sys_format_fim()", "sc_b_fim_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8594;)", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1665,13 +1661,13 @@ unset($NM_ult_sep);
 </form> 
 <script> 
 <?php
-  $nm_sc_blocos_da_pag = array(0);
+  $nm_sc_blocos_da_pag = array(0,1);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {
       if ($hidden == "off" && in_array($bloco, $nm_sc_blocos_da_pag))
       {
-          echo "document.getElementById('hidden_bloco_" . $bloco . "').style.display = 'none';";
+          echo "document.getElementById('hidden_bloco_" . $bloco . "').style.visibility = 'hidden';";
           if (isset($nm_sc_blocos_aba[$bloco]))
           {
                echo "document.getElementById('id_tabs_" . $nm_sc_blocos_aba[$bloco] . "_" . $bloco . "').style.display = 'none';";
@@ -1679,6 +1675,20 @@ unset($NM_ult_sep);
       }
   }
 ?>
+$(window).bind("load", function() {
+<?php
+  $nm_sc_blocos_da_pag = array(0,1);
+
+  foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
+  {
+      if ($hidden == "off" && in_array($bloco, $nm_sc_blocos_da_pag))
+      {
+          echo "document.getElementById('hidden_bloco_" . $bloco . "').style.display = 'none';";
+          echo "document.getElementById('hidden_bloco_" . $bloco . "').style.visibility = '';";
+      }
+  }
+?>
+});
 </script> 
 <script>
 <?php

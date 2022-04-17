@@ -1705,7 +1705,7 @@ class grid_tecnicos_pesq
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
- <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> tecnicos</TITLE>
+ <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_title'] ?> tecnicos</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1747,7 +1747,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> tecnicos</TITLE>
+ <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_title'] ?> tecnicos</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -2437,7 +2437,7 @@ function nm_open_popup(parms)
     .scMenuTHeaderFont img, .scGridHeaderFont img , .scFormHeaderFont img , .scTabHeaderFont img , .scContainerHeaderFont img , .scFilterHeaderFont img { height:23px;}
 </style>
 <div class="scFilterHeader" style="height: 54px; padding: 17px 15px; box-sizing: border-box;margin: -1px 0px 0px 0px;width: 100%;">
-    <div class="scFilterHeaderFont" style="float: left; text-transform: uppercase;"><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> tecnicos</div>
+    <div class="scFilterHeaderFont" style="float: left; text-transform: uppercase;"><?php echo $this->Ini->Nm_lang['lang_othr_grid_title'] ?> tecnicos</div>
     <div class="scFilterHeaderFont" style="float: right;"><?php echo $nm_data_fixa; ?></div>
 </div>  </TD>
  </TR>
@@ -2469,6 +2469,7 @@ function nm_open_popup(parms)
               $this->nmgp_botoes[$NM_cada_btn] = $NM_cada_opc;
           }
       }
+      $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
       $this->aba_iframe = false;
       if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
       {
@@ -2603,7 +2604,7 @@ function nm_open_popup(parms)
 
 
 
-      <TD id='SC_fone_tecnico_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico"; ?></TD>
+      <TD id='SC_fone_tecnico_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . ""; ?></TD>
      <TD class="scFilterFieldOdd"> 
       <SELECT class="scFilterObjectOdd" id="SC_fone_tecnico_cond" name="fone_tecnico_cond" onChange="nm_campos_between(document.getElementById('id_vis_fone_tecnico'), this, 'fone_tecnico')">
        <OPTION value="qp" <?php if ("qp" == $fone_tecnico_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_like'] ?></OPTION>
@@ -2617,7 +2618,7 @@ function nm_open_popup(parms)
        <TR id="id_hide_fone_tecnico" <?php echo $str_hide_fone_tecnico?> valign="top">
         <TD class="scFilterFieldFontOdd">
            <?php
- $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico";
+ $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
  $nmgp_tab_label .= "fone_tecnico?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -2674,7 +2675,7 @@ function nm_open_popup(parms)
 
 
 
-      <TD id='SC_id_tecnico_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico"; ?></TD>
+      <TD id='SC_id_tecnico_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . ""; ?></TD>
      <TD class="scFilterFieldEven"> 
       <SELECT class="scFilterObjectEven" id="SC_id_tecnico_cond" name="id_tecnico_cond" onChange="nm_campos_between(document.getElementById('id_vis_id_tecnico'), this, 'id_tecnico')">
        <OPTION value="gt" <?php if ("gt" == $id_tecnico_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
@@ -2687,7 +2688,7 @@ function nm_open_popup(parms)
        <TR id="id_hide_id_tecnico" <?php echo $str_hide_id_tecnico?> valign="top">
         <TD class="scFilterFieldFontEven">
            <?php
- $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico";
+ $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
  $nmgp_tab_label .= "id_tecnico?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -2708,7 +2709,7 @@ function nm_open_popup(parms)
 
 
 
-      <TD id='SC_nome_tecnico_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico"; ?></TD>
+      <TD id='SC_nome_tecnico_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . ""; ?></TD>
      <TD class="scFilterFieldOdd"> 
       <SELECT class="scFilterObjectOdd" id="SC_nome_tecnico_cond" name="nome_tecnico_cond" onChange="nm_campos_between(document.getElementById('id_vis_nome_tecnico'), this, 'nome_tecnico')">
        <OPTION value="qp" <?php if ("qp" == $nome_tecnico_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_like'] ?></OPTION>
@@ -2722,7 +2723,7 @@ function nm_open_popup(parms)
        <TR id="id_hide_nome_tecnico" <?php echo $str_hide_nome_tecnico?> valign="top">
         <TD class="scFilterFieldFontOdd">
            <?php
- $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico";
+ $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
  $nmgp_tab_label .= "nome_tecnico?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -2779,7 +2780,7 @@ function nm_open_popup(parms)
 
 
 
-      <TD id='SC_email_tecnico_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico"; ?></TD>
+      <TD id='SC_email_tecnico_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . ""; ?></TD>
      <TD class="scFilterFieldEven"> 
       <SELECT class="scFilterObjectEven" id="SC_email_tecnico_cond" name="email_tecnico_cond" onChange="nm_campos_between(document.getElementById('id_vis_email_tecnico'), this, 'email_tecnico')">
        <OPTION value="qp" <?php if ("qp" == $email_tecnico_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_like'] ?></OPTION>
@@ -2793,7 +2794,7 @@ function nm_open_popup(parms)
        <TR id="id_hide_email_tecnico" <?php echo $str_hide_email_tecnico?> valign="top">
         <TD class="scFilterFieldFontEven">
            <?php
- $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico";
+ $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
  $nmgp_tab_label .= "email_tecnico?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -3744,6 +3745,7 @@ function nm_open_popup(parms)
       {
           $email_tecnico_input_2 = $email_tecnico;
       }
+      $this->nm_tira_mask($fone_tecnico, "(xx) xxxxx-xxxx");
       if ($id_tecnico_cond != "in")
       {
           nm_limpa_numero($id_tecnico, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
@@ -4207,6 +4209,61 @@ function nm_open_popup(parms)
       }
       $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
    } 
+   function nm_tira_mask(&$nm_campo, $nm_mask)
+   { 
+      $mask_dados = $nm_campo;
+      $trab_mask  = $nm_mask;
+      $tam_campo  = strlen($nm_campo);
+      $tam_mask   = strlen($nm_mask);
+      $trab_saida = "";
+      if ($tam_mask > $tam_campo)
+      {
+         $mask_desfaz = "";
+         for ($mask_ind = 0; $tam_mask > $tam_campo; $mask_ind++)
+         {
+              $mask_char = substr($trab_mask, $mask_ind, 1);
+              if ($mask_char == "z" || $mask_char == "#")
+              {
+                  $tam_mask--;
+              }
+              else
+              {
+                  $mask_desfaz .= $mask_char;
+              }
+              if ($mask_ind == $tam_campo)
+              {
+                  $tam_mask = $tam_campo;
+              }
+         }
+         $trab_mask = $mask_desfaz . substr($trab_mask, $mask_ind);
+      }
+      $mask_saida = "";
+      for ($mask_ind = strlen($trab_mask); $mask_ind > 0; $mask_ind--)
+      {
+          $mask_char = substr($trab_mask, $mask_ind - 1, 1);
+          if ($mask_char == "x" || $mask_char == "z" || $mask_char == "#")
+          {
+              if ($tam_campo > 0)
+              {
+                  $mask_saida = substr($mask_dados, $tam_campo - 1, 1) . $mask_saida;
+              }
+          }
+          else
+          {
+              if ($mask_char != substr($mask_dados, $tam_campo - 1, 1) && $tam_campo > 0)
+              {
+                  $mask_saida = substr($mask_dados, $tam_campo - 1, 1) . $mask_saida;
+                  $mask_ind--;
+              }
+          }
+          $tam_campo--;
+      }
+      if ($tam_campo > 0)
+      {
+         $mask_saida = substr($mask_dados, 0, $tam_campo) . $mask_saida;
+      }
+      $nm_campo = $mask_saida;
+   }
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;

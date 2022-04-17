@@ -160,10 +160,10 @@ function Sel_cmp_process()
       $tab_ger_campos = array();
       $tab_blk_campos = array();
 
-            $tab_ger_campos['id_tecnico'] = "on";
-      $tab_ger_campos['nome_tecnico'] = "on";
+            $tab_ger_campos['nome_tecnico'] = "on";
       $tab_ger_campos['email_tecnico'] = "on";
       $tab_ger_campos['fone_tecnico'] = "on";
+      $tab_ger_campos['id_tecnico'] = "on";
       $tab_ger_campos['usuario_login'] = "on";
 
 

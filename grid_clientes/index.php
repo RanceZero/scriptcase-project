@@ -234,8 +234,8 @@ class grid_clientes_ini
       $this->nm_dt_criacao   = "20220403"; 
       $this->nm_hr_criacao   = "010302"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220403"; 
-      $this->nm_hr_ult_alt   = "012217"; 
+      $this->nm_dt_ult_alt   = "20220406"; 
+      $this->nm_hr_ult_alt   = "223702"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -601,6 +601,67 @@ class grid_clientes_ini
              $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
          }
       }
+      $sc_change_lang = false;
+      $sc_fil_date = array();
+      if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['sc_change_lang'])) {
+          $sc_change_lang = true;
+          foreach ($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro'] as $imens => $str_mens) {
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'])) {
+                  foreach ($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'] as $cmp_fil => $opc_fil) {
+                      $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['descr'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['descr']);
+                      $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['hint']  = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['hint']);
+                  }
+              }
+          }
+          foreach ($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'] as $imens => $str_mens) {
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_pesq']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['cond_dyn_search']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'])) {
+                  foreach ($_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'] as $cmp_fil => $opc_fil) {
+                      if (in_array($cmp_fil, $sc_fil_date)) {
+                          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['descr'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['descr']);
+                          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['hint']  = str_replace($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_clientes']['grid_pesq'][$cmp_fil]['hint']);
+                      }
+                  }
+              }
+          }
+          unset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['sc_change_lang']);
+      }
+      if (!isset($_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']) || $sc_change_lang) {
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']    = array();
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt'] = array();
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_equl']      = $this->Nm_lang['lang_srch_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_strt']      = $this->Nm_lang['lang_srch_strt'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_diff']      = $this->Nm_lang['lang_srch_diff'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_grtr']      = $this->Nm_lang['lang_srch_grtr'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_grtr_equl'] = $this->Nm_lang['lang_srch_grtr_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_less']      = $this->Nm_lang['lang_srch_less'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_less_equl'] = $this->Nm_lang['lang_srch_less_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_betw']      = $this->Nm_lang['lang_srch_betw'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_like']      = $this->Nm_lang['lang_srch_like'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_not_like']  = $this->Nm_lang['lang_srch_not_like'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_null']      = $this->Nm_lang['lang_srch_null'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_nnul']      = $this->Nm_lang['lang_srch_nnul'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_empty']     = $this->Nm_lang['lang_srch_empty'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro']['lang_srch_nempty']    = $this->Nm_lang['lang_srch_nempty'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_and_cond'] = $this->Nm_lang['lang_srch_and_cond'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_year']     = $this->Nm_lang['lang_srch_year'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_mnth']     = $this->Nm_lang['lang_srch_mnth'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_days']     = $this->Nm_lang['lang_srch_days'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_time']     = $this->Nm_lang['lang_srch_time'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_mint']     = $this->Nm_lang['lang_srch_mint'];
+          $_SESSION['sc_session'][$script_case_init]['grid_clientes']['Sc_mens_filtro_dt']['lang_srch_scnd']     = $this->Nm_lang['lang_srch_scnd'];
+      }
       $_SESSION['sc_session']['SC_download_violation'] = $this->Nm_lang['lang_errm_fnfd'];
       if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['grid_clientes']['session_timeout']['redir']))
       {
@@ -849,6 +910,7 @@ class grid_clientes_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
       {
@@ -972,7 +1034,7 @@ class grid_clientes_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_clientes']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_clientes']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiZ9XGD1BeHuFGHuBYV9FiV5FYHIraHQNwH9BOHArKV5BOHgBeDkXKDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqZSBOD1rKHuB/HgNOHErsH5F/HMJeHQXGDuBqHIrKHuFUDMNOZSNiH5XCHMFaHQFYZkBiDSrYHQX7HgBOZSJ3DWrGDoJeHQXGDuFaHAvOVWBqDMvsVcFeDuX7HMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIrqHQJeZ9XGD1BOVWJsHgrwV9BUDuX7HINUHQFYZkFGD1NaZMFaHgNOHArCHEB3ZuB/HQXGDuFaDSrwHuF7HgvOVIB/HEF/HIJeHQFYZkFGD1rKHQXGDMvCVkJ3H5FYHIBiDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUDSrYHuXGHgBeVkJqDuJeHIraHQXGDuFaDSvCVWJeHgvOVcBUDuFGVEF7HQFYZkBiDSrYHQBiHgNKVkJ3HEFaHMX7HQXGDQFUD1BOV5BqDMvOZSNiHEFYHIJeDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwH9BqD1NaZMJwHgvCZSJqDWF/DoJeD9XsZSX7HIrwV5BOHgvsVcBOV5X/VoFaHQBsZSB/DSrYV5FGDMzGHEJGH5X/DoB/HQNmH9X7HABYVWJsDMBYVcBODWFaDoFUDcJUZkFUZ1BeZMBqHgBYHAFKV5FqDoBOD9JKDQJwHANKVWXGDMvOZSJ3V5X7VEF7D9BiH9FaHIBeD5XGDEBOZSXeV5FaZuFaHQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSBiD1veHuraDMBODkBsHEX7HIJsHQBiH9BOHAvsV5X7HgveHArCDuFaHIBOHQXsDuBqHArYHuJeDMNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgrKVkJqDWFqHMFaHQFYH9BiHIBeHuJwDMvsVcXKDur/HINUDcJUZSB/D1rKV5FUHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5rqDEBOHEFiHEFqVoB/D9XsH9FGD1veD5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1BiD1rwHQFaHgvsHEJGDWBmDoXGDcXGDQJsZ1rwVWBqDMBODkB/V5X7VoBODcJUZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQJsHABYD5F7HuNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJsDMvOVcBUH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiV5FaDoJsDcBiDQFUHIvsVWBqDMvOVcFeH5XCVEFGDcNmZSB/D1rwV5JsHgvsHArCV5FqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5XCDoraD9BsZ1B/Z1BeHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDErKHEBUDWFqDorqDcXOZSFGHAN7V5FUHuNOVcFKHEFYDoNUHQJmZ1FGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1NKV5JeDMvOZSBOV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDuBqHAveV5FaDMNODkBODurGVoF7HQNmZ1FaHANOD5F7HgvsZSXeHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqZSBOD1rKHuB/HgNOHErsH5F/HMJeHQXGDuBqHIrKHuFUDMNOZSNiH5XCHMFaHQFYZkBiDSrYHQX7HgBOZSJ3DWrGDoJeHQXGDuFaHAvOVWBqDMvsVcFeDuX7HMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIrqHQJeZ9XGD1BOVWJsHgrwV9BUDuX7HINUHQFYZkFGD1NaZMFaHgNOHArCHEB3ZuB/HQXGDuFaDSrwHuF7HgvOVIB/HEF/HIJeHQFYZkFGD1rKHQXGDMvCVkJ3H5FYHIBiDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUDSrYHuXGHgBeVkJqDuJeHIraHQXGDuFaDSvCVWJeHgvOVcBUDuFGVEF7HQFYZkBiDSrYHQBiHgNKVkJ3HEFaHMX7HQXGDQFUD1BOV5BqDMvOZSNiHEFYHIJeDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwH9BqD1NaZMJwHgvCZSJqDWF/DoJeD9XsZSX7HIrwV5BOHgvsVcBOV5X/VoFaHQBsZSB/DSrYV5FGDMzGHEJGH5X/DoB/HQNmH9X7HABYVWJsDMBYVcBODWFaDoFUDcJUZkFUZ1BeZMBqHgBYHAFKV5FqDoBOD9JKDQJwHANKVWXGDMvOZSJ3V5X7VEF7D9BiH9FaHIBeD5XGDEBOZSXeV5FaZuFaHQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSBiD1veHuraDMBODkBsHEX7HIJsHQBiH9BOHAvsV5X7HgveHArCDuFaHIBOHQXsDuBqHArYHuJeDMNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDErKVkJ3V5XCHMJwHQXODQB/HABYHuB/DMvmDkFCHEFYVoFGDcJUZ1FGD1rwD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5rqDEBOHEFiHEFqVoB/D9XsH9FGD1veD5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsZ1BOD1rKV5B/HgrKHEJqDuJeDoBqD9XsH9X7Z1rwHQFaDMvmVIBODuFqHMBiD9BsVIraD1rwV5X7HgBeHEFiH5F/VoB/D9XsDQX7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQXODQBqHAvOVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BqHgNKHEFiDWX7DoraHQBiDQB/Z1rwHuB/HgrYDkFCDWJeVoBODcFYZkFGDSBeHQJwDEBODkFeH5FYVoFGHQJKDQJsD1veD5JwHuNOVcBOV5X7HMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XOZ1rqHArYD5F7DMNKZSJGDWXCDoraD9XsDQJsDSBYD5JsDMvmVcFeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5BmDoBqHQXOZ9JsZ1rKVWFU";
 $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 108, 101, 61, 34, 102, 111, 110, 116, 45, 102, 97, 109, 105, 108, 121, 58, 32, 84, 97, 104, 111, 109, 97, 44, 32, 65, 114, 105, 97, 108, 44, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 59, 32, 102, 111, 110, 116, 45, 115, 105, 122, 101, 58, 32, 49, 51, 112, 120, 59, 32, 102, 111, 110, 116, 45, 119, 101, 105, 103, 104, 116, 58, 32, 98, 111, 108, 100, 59, 32, 116, 101, 120, 116, 45, 97, 108, 105, 103, 110, 58, 32, 99, 101, 110, 116, 101, 114, 34, 62, 84, 104, 105, 115, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 32, 119, 97, 115, 32, 100, 101, 118, 101, 108, 111, 112, 101, 100, 32, 97, 110, 100, 32, 112, 117, 98, 108, 105, 115, 104, 101, 100, 32, 117, 115, 105, 110, 103, 32, 97, 32, 116, 114, 105, 97, 108, 32, 118, 101, 114, 115, 105, 111, 110, 32, 111, 102, 32, 83, 99, 114, 105, 112, 116, 67, 97, 115, 101, 32, 97, 110, 100, 32, 105, 116, 115, 32, 116, 114, 105, 97, 108, 32, 112, 101, 114, 105, 111, 100, 32, 104, 97, 115, 32, 101, 120, 112, 105, 114, 101, 100, 46, 60, 47, 100, 105, 118, 62);
       $this->prep_conect();
       $this->conectDB();

@@ -225,6 +225,11 @@ class grid_tecnicos_xls
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->sc_proc_grid = false; 
       $nm_raiz_img  = ""; 
+      $this->New_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
+      $this->New_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
+      $this->New_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+      $this->New_label['id_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+      $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display']))
       {
           foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -323,27 +328,27 @@ class grid_tecnicos_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
@@ -372,11 +377,11 @@ class grid_tecnicos_xls
          }
          $this->Xls_col = 0;
          $this->Xls_row++;
-         $this->id_tecnico = $rs->fields[0] ;  
+         $this->nome_tecnico = $rs->fields[0] ;  
+         $this->email_tecnico = $rs->fields[1] ;  
+         $this->fone_tecnico = $rs->fields[2] ;  
+         $this->id_tecnico = $rs->fields[3] ;  
          $this->id_tecnico = (string)$this->id_tecnico;
-         $this->nome_tecnico = $rs->fields[1] ;  
-         $this->email_tecnico = $rs->fields[2] ;  
-         $this->fone_tecnico = $rs->fields[3] ;  
          $this->usuario_login = $rs->fields[4] ;  
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'])
@@ -577,35 +582,7 @@ class grid_tecnicos_xls
    { 
       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $Cada_col)
       { 
-          $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico"; 
-          if ($Cada_col == "id_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico"; 
+          $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : ""; 
           if ($Cada_col == "nome_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
@@ -633,7 +610,7 @@ class grid_tecnicos_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico"; 
+          $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : ""; 
           if ($Cada_col == "email_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
@@ -661,7 +638,7 @@ class grid_tecnicos_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico"; 
+          $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : ""; 
           if ($Cada_col == "fone_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
@@ -689,7 +666,35 @@ class grid_tecnicos_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login"; 
+          $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : ""; 
+          if ($Cada_col == "id_tecnico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : ""; 
           if ($Cada_col == "usuario_login" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
@@ -721,23 +726,6 @@ class grid_tecnicos_xls
       $this->Xls_col = 0;
       $this->Xls_row++;
    } 
-   //----- id_tecnico
-   function NM_export_id_tecnico()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->id_tecnico = NM_charset_to_utf8($this->id_tecnico);
-         if (is_numeric($this->id_tecnico))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
-         }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->id_tecnico);
-         $this->Xls_col++;
-   }
    //----- nome_tecnico
    function NM_export_nome_tecnico()
    {
@@ -787,6 +775,13 @@ class grid_tecnicos_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+      if (!empty($this->fone_tecnico))
+      {
+             if ($this->fone_tecnico !== "&nbsp;") 
+             { 
+                 $this->nm_gera_mask($this->fone_tecnico, "(xx) xxxxx-xxxx"); 
+             } 
+      }
          $this->fone_tecnico = html_entity_decode($this->fone_tecnico, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
          $this->fone_tecnico = strip_tags($this->fone_tecnico);
          $this->fone_tecnico = NM_charset_to_utf8($this->fone_tecnico);
@@ -796,6 +791,23 @@ class grid_tecnicos_xls
          else {
              $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->fone_tecnico, PHPExcel_Cell_DataType::TYPE_STRING);
          }
+         $this->Xls_col++;
+   }
+   //----- id_tecnico
+   function NM_export_id_tecnico()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->id_tecnico = NM_charset_to_utf8($this->id_tecnico);
+         if (is_numeric($this->id_tecnico))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
+         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->id_tecnico);
          $this->Xls_col++;
    }
    //----- usuario_login
@@ -816,16 +828,6 @@ class grid_tecnicos_xls
          else {
              $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->usuario_login, PHPExcel_Cell_DataType::TYPE_STRING);
          }
-         $this->Xls_col++;
-   }
-   //----- id_tecnico
-   function NM_sub_cons_id_tecnico()
-   {
-         $this->id_tecnico = NM_charset_to_utf8($this->id_tecnico);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->id_tecnico;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
    //----- nome_tecnico
@@ -855,6 +857,13 @@ class grid_tecnicos_xls
    //----- fone_tecnico
    function NM_sub_cons_fone_tecnico()
    {
+      if (!empty($this->fone_tecnico))
+      {
+         if ($this->fone_tecnico !== "&nbsp;") 
+         { 
+             $this->nm_gera_mask($this->fone_tecnico, "(xx) xxxxx-xxxx"); 
+         } 
+      }
          $this->fone_tecnico = html_entity_decode($this->fone_tecnico, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
          $this->fone_tecnico = strip_tags($this->fone_tecnico);
          $this->fone_tecnico = NM_charset_to_utf8($this->fone_tecnico);
@@ -862,6 +871,16 @@ class grid_tecnicos_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- id_tecnico
+   function NM_sub_cons_id_tecnico()
+   {
+         $this->id_tecnico = NM_charset_to_utf8($this->id_tecnico);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->id_tecnico;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
    //----- usuario_login

@@ -27,7 +27,6 @@ class grid_tecnicos_grid
    var $NM_raiz_img; 
    var $NM_opcao; 
    var $NM_flag_antigo; 
-   var $nm_campos_cab = array();
    var $NM_cmp_hidden   = array();
    var $nmgp_botoes     = array();
    var $nm_btn_exist    = array();
@@ -53,10 +52,10 @@ class grid_tecnicos_grid
    var $progress_res;
    var $progress_graf;
    var $count_ger;
-   var $id_tecnico;
    var $nome_tecnico;
    var $email_tecnico;
    var $fone_tecnico;
+   var $id_tecnico;
    var $usuario_login;
 //--- 
  function monta_grid($linhas = 0)
@@ -117,16 +116,6 @@ class grid_tecnicos_grid
        $this->Res->Ini    = $this->Ini;
        $this->Res->Lookup = $this->Lookup;
       }
-       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pdf_res'])
-       {
-            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf_vert'])
-            {
-            } 
-            else
-            {
-                $this->cabecalho();
-            } 
-       } 
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf_vert'])
             {
             } 
@@ -287,10 +276,10 @@ class grid_tecnicos_grid
    if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label']))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] = "";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "fone_tecnico?#?" . "Fone Tecnico" . "?@?";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "id_tecnico?#?" . "Id Tecnico" . "?@?";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "nome_tecnico?#?" . "Nome Tecnico" . "?@?";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "email_tecnico?#?" . "Email Tecnico" . "?@?";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "fone_tecnico?#?" . "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "" . "?@?";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "id_tecnico?#?" . "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "" . "?@?";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "nome_tecnico?#?" . "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "" . "?@?";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['pesq_tab_label'] .= "email_tecnico?#?" . "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "" . "?@?";
    }
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['grid_search_add']))
    {
@@ -467,10 +456,10 @@ class grid_tecnicos_grid
    $this->nmgp_botoes['gridsave'] = "on";
    $this->nmgp_botoes['gridsavesession'] = "on";
    $this->nmgp_botoes['reload'] = "on";
-   $this->Cmps_ord_def['id_tecnico'] = " desc";
    $this->Cmps_ord_def['nome_tecnico'] = " asc";
    $this->Cmps_ord_def['email_tecnico'] = " asc";
    $this->Cmps_ord_def['fone_tecnico'] = " asc";
+   $this->Cmps_ord_def['id_tecnico'] = " desc";
    $this->Cmps_ord_def['usuario_login'] = " asc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['btn_display']))
    {
@@ -548,6 +537,11 @@ class grid_tecnicos_grid
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] = "muda_qt_linhas";
    } 
    $this->sc_where_Max = "f" . "u" . "ll";
+   $this->New_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
+   $this->New_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
+   $this->New_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+   $this->New_label['id_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+   $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['maximized']) {
        $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['dashboard_app'];
@@ -904,27 +898,27 @@ class grid_tecnicos_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT id_tecnico, nome_tecnico, email_tecnico, fone_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nome_tecnico, email_tecnico, fone_tecnico, id_tecnico, usuario_login from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -1002,11 +996,11 @@ class grid_tecnicos_grid
    }  
    else 
    { 
-       $this->id_tecnico = $this->rs_grid->fields[0] ;  
+       $this->nome_tecnico = $this->rs_grid->fields[0] ;  
+       $this->email_tecnico = $this->rs_grid->fields[1] ;  
+       $this->fone_tecnico = $this->rs_grid->fields[2] ;  
+       $this->id_tecnico = $this->rs_grid->fields[3] ;  
        $this->id_tecnico = (string)$this->id_tecnico;
-       $this->nome_tecnico = $this->rs_grid->fields[1] ;  
-       $this->email_tecnico = $this->rs_grid->fields[2] ;  
-       $this->fone_tecnico = $this->rs_grid->fields[3] ;  
        $this->usuario_login = $this->rs_grid->fields[4] ;  
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
@@ -1016,10 +1010,10 @@ class grid_tecnicos_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['final']++ ; 
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['final']; 
            $this->rs_grid->MoveNext(); 
-           $this->id_tecnico = $this->rs_grid->fields[0] ;  
-           $this->nome_tecnico = $this->rs_grid->fields[1] ;  
-           $this->email_tecnico = $this->rs_grid->fields[2] ;  
-           $this->fone_tecnico = $this->rs_grid->fields[3] ;  
+           $this->nome_tecnico = $this->rs_grid->fields[0] ;  
+           $this->email_tecnico = $this->rs_grid->fields[1] ;  
+           $this->fone_tecnico = $this->rs_grid->fields[2] ;  
+           $this->id_tecnico = $this->rs_grid->fields[3] ;  
            $this->usuario_login = $this->rs_grid->fields[4] ;  
        } 
    } 
@@ -2116,7 +2110,7 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $nm_saida->saida("           $Cod_Btn \r\n");
            $nm_saida->saida("       </TD>\r\n");
            $nm_saida->saida("     </TR>\r\n");
@@ -2292,192 +2286,17 @@ $nm_saida->saida("}\r\n");
 
    $compl_css_emb = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida']) ? "grid_tecnicos_" : "";
    $this->css_sep = " ";
-   $this->css_id_tecnico_label = $compl_css_emb . "css_id_tecnico_label";
-   $this->css_id_tecnico_grid_line = $compl_css_emb . "css_id_tecnico_grid_line";
    $this->css_nome_tecnico_label = $compl_css_emb . "css_nome_tecnico_label";
    $this->css_nome_tecnico_grid_line = $compl_css_emb . "css_nome_tecnico_grid_line";
    $this->css_email_tecnico_label = $compl_css_emb . "css_email_tecnico_label";
    $this->css_email_tecnico_grid_line = $compl_css_emb . "css_email_tecnico_grid_line";
    $this->css_fone_tecnico_label = $compl_css_emb . "css_fone_tecnico_label";
    $this->css_fone_tecnico_grid_line = $compl_css_emb . "css_fone_tecnico_grid_line";
+   $this->css_id_tecnico_label = $compl_css_emb . "css_id_tecnico_label";
+   $this->css_id_tecnico_grid_line = $compl_css_emb . "css_id_tecnico_grid_line";
    $this->css_usuario_login_label = $compl_css_emb . "css_usuario_login_label";
    $this->css_usuario_login_grid_line = $compl_css_emb . "css_usuario_login_grid_line";
  }  
- function cabecalho()
- {
-     if($_SESSION['scriptcase']['proc_mobile'] && method_exists($this, 'cabecalho_mobile'))
-     {
-         $this->cabecalho_mobile();
-     }
-     else if(method_exists($this, 'cabecalho_normal'))
-     {
-         $this->cabecalho_normal();
-     }
- }
-// 
-//----- 
- function cabecalho_normal()
- {
-   global
-          $nm_saida;
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['under_dashboard'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['compact_mode'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['dashboard_info']['maximized'])
-   {
-       return; 
-   }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opc_liga']['cab']))
-   {
-       return; 
-   }
-   $nm_cab_filtro   = ""; 
-   $nm_cab_filtrobr = ""; 
-   $Str_date = strtolower($_SESSION['scriptcase']['reg_conf']['date_format']);
-   $Lim   = strlen($Str_date);
-   $Ult   = "";
-   $Arr_D = array();
-   for ($I = 0; $I < $Lim; $I++)
-   {
-       $Char = substr($Str_date, $I, 1);
-       if ($Char != $Ult)
-       {
-           $Arr_D[] = $Char;
-       }
-       $Ult = $Char;
-   }
-   $Prim = true;
-   $Str  = "";
-   foreach ($Arr_D as $Cada_d)
-   {
-       $Str .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['date_sep'] : "";
-       $Str .= $Cada_d;
-       $Prim = false;
-   }
-   $Str = str_replace("a", "Y", $Str);
-   $Str = str_replace("y", "Y", $Str);
-   $nm_data_fixa = date($Str); 
-   $this->sc_proc_grid = false; 
-   $HTTP_REFERER = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : ""; 
-   $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_orig'];
-   $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
-   $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq_filtro'];
-   if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cond_pesq']))
-   {  
-       $pos       = 0;
-       $trab_pos  = false;
-       $pos_tmp   = true; 
-       $tmp       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cond_pesq'];
-       while ($pos_tmp)
-       {
-          $pos = strpos($tmp, "##*@@", $pos);
-          if ($pos !== false)
-          {
-              $trab_pos = $pos;
-              $pos += 4;
-          }
-          else
-          {
-              $pos_tmp = false;
-          }
-       }
-       $nm_cond_filtro_or  = (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cond_pesq'], $trab_pos + 5) == "or")  ? " " . trim($this->Ini->Nm_lang['lang_srch_orr_cond']) . " " : "";
-       $nm_cond_filtro_and = (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cond_pesq'], $trab_pos + 5) == "and") ? " " . trim($this->Ini->Nm_lang['lang_srch_and_cond']) . " " : "";
-       $nm_cab_filtro   = substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cond_pesq'], 0, $trab_pos);
-       $nm_cab_filtrobr = str_replace("##*@@", ", " . $nm_cond_filtro_or . $nm_cond_filtro_and . "<br />", $nm_cab_filtro);
-       $pos       = 0;
-       $trab_pos  = false;
-       $pos_tmp   = true; 
-       $tmp       = $nm_cab_filtro;
-       while ($pos_tmp)
-       {
-          $pos = strpos($tmp, "##*@@", $pos);
-          if ($pos !== false)
-          {
-              $trab_pos = $pos;
-              $pos += 4;
-          }
-          else
-          {
-              $pos_tmp = false;
-          }
-       }
-       if ($trab_pos === false)
-       {
-       }
-       else  
-       {  
-          $nm_cab_filtro = substr($nm_cab_filtro, 0, $trab_pos) . " " .  $nm_cond_filtro_or . $nm_cond_filtro_and . substr($nm_cab_filtro, $trab_pos + 5);
-          $nm_cab_filtro = str_replace("##*@@", ", " . $nm_cond_filtro_or . $nm_cond_filtro_and, $nm_cab_filtro);
-       }   
-   }   
-   $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS"); 
-   $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
-   if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head']))
-   { 
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head'] = array();
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head']['fix'] = $nm_data_fixa;
-       $nm_refresch_cab_rod = true;
-   } 
-   else 
-   { 
-       $nm_refresch_cab_rod = false;
-   } 
-   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head'] as $ind => $val)
-   {
-       $tmp_var = "sc_data_cab" . $ind;
-       if ($$tmp_var != $val)
-       {
-           $nm_refresch_cab_rod = true;
-           break;
-       }
-   }
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head']['fix'] != $nm_data_fixa)
-   {
-       $nm_refresch_cab_rod = true;
-   }
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['ajax_nav'] && $nm_refresch_cab_rod)
-   { 
-       $_SESSION['scriptcase']['saida_html'] = "";
-   } 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sv_dt_head']['fix'] = $nm_data_fixa;
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != "pdf")
-   { 
-       $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . " " . $this->css_scGridPage . "\" colspan=3 style=\"vertical-align: top\">\r\n");
-   } 
-   else 
-   { 
-     if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) 
-     { 
-         $this->NM_calc_span();
-           $nm_saida->saida("   <TD colspan=\"" . $this->NM_colspan . "\" class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
-     } 
-     else if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf_vert']) 
-     {
-         if($this->Tem_tab_vert)
-         {
-           $nm_saida->saida("   <TD colspan=\"2\" class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
-         }
-         else{
-           $nm_saida->saida("   <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
-         }
-     }
-     else{
-           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
-     }
-   } 
-   $nm_saida->saida("<style>\r\n");
-   $nm_saida->saida("    .scMenuTHeaderFont img, .scGridHeaderFont img , .scFormHeaderFont img , .scTabHeaderFont img , .scContainerHeaderFont img , .scFilterHeaderFont img { height:23px;}\r\n");
-   $nm_saida->saida("</style>\r\n");
-   $nm_saida->saida("<div class=\"" . $this->css_scGridHeader . "\" style=\"height: 54px; padding: 17px 15px; box-sizing: border-box;margin: -1px 0px 0px 0px;width: 100%;\">\r\n");
-   $nm_saida->saida("    <div class=\"" . $this->css_scGridHeaderFont . "\" style=\"float: left; text-transform: uppercase;\">" . $this->Ini->Nm_lang['lang_othr_grid_title'] . " tecnicos</div>\r\n");
-   $nm_saida->saida("    <div class=\"" . $this->css_scGridHeaderFont . "\" style=\"float: right;\">" . $nm_data_fixa . "</div>\r\n");
-   $nm_saida->saida("</div>\r\n");
-   $nm_saida->saida("  </TD>\r\n");
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['ajax_nav'] && $nm_refresch_cab_rod)
-   { 
-       $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_head', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
-       $_SESSION['scriptcase']['saida_html'] = "";
-   } 
-   $nm_saida->saida(" </TR>\r\n");
- }
 // 
  function label_grid($linhas = 0)
  {
@@ -2486,6 +2305,14 @@ $nm_saida->saida("}\r\n");
    static $nm_seq_titulos   = 0; 
    $contr_embutida = false;
    $salva_htm_emb  = "";
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida_label'])
+   { 
+       $this->New_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
+       $this->New_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
+       $this->New_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+       $this->New_label['id_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+       $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
+   } 
    if (1 < $linhas)
    {
       $this->Lin_impressas++;
@@ -2584,59 +2411,10 @@ $nm_saida->saida("}\r\n");
      } 
    } 
  }
- function NM_label_id_tecnico()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico";
-   $classColFld = "";
-   $classColTitle = "";
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
-     $classColFld = " sc-col-fld sc-col-fld-" . $this->grid_fixed_column_no;
-     $classColTitle = " sc-col-title";
-   }
-   if (!isset($this->NM_cmp_hidden['id_tecnico']) || $this->NM_cmp_hidden['id_tecnico'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_inherit_bg . ' ' . $this->css_scGridLabelFont . $this->css_sep . $this->css_id_tecnico_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_tecnico_label'] . "\" >\r\n");
-    $label_fieldName = nl2br($SC_Label);
-    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
-        // label & order
-        $divLabelStyle = '; justify-content: right';
-        $fieldSortRule = $this->scGetColumnOrderRule('id_tecnico');
-        $fieldSortIcon = $this->scGetColumnOrderIcon('id_tecnico', $fieldSortRule);
-        if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == 'right') {
-            $this->Ini->Label_sort_pos = 'right_field';
-        }
-        if (empty($fieldSortIcon)) {
-            $label_labelContent = "<div style=\"flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>";
-        } elseif ($this->Ini->Label_sort_pos == 'right_field') {
-            $label_labelContent = "<div style=\"display: flex" . $divLabelStyle . "\"><div style=\"display: flex; white-space: nowrap\">" . $label_fieldName . "</div>" . $fieldSortIcon . "</div>";
-        } elseif ($this->Ini->Label_sort_pos == 'left_field') {
-            $label_labelContent = "<div style=\"display: flex" . $divLabelStyle . "\">" . $fieldSortIcon . "\<div style=\"display: flex; white-space: nowrap\">" . $label_fieldName . "</div></div>";
-        } elseif ($this->Ini->Label_sort_pos == 'right_cell') {
-            $label_labelContent = "<div style=\"display: flex; justify-content: space-between\"><div style=\"display: flex; flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>" . $fieldSortIcon . "</div>";
-        } elseif ($this->Ini->Label_sort_pos == 'left_cell') {
-            $label_labelContent = "<div style=\"display: flex; justify-content: space-between\">" . $fieldSortIcon . "<div style=\"display: flex; flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div></div>";
-        } else {
-            $label_labelContent = "<div style=\"flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>";
-        }
-        $label_labelContent = "<a href=\"javascript:nm_gp_submit2('id_tecnico')\" class=\"" . $this->css_scGridLabelLink . "\">". $label_labelContent . "</a>";
-        $label_divLabel = "<div style=\"flex-grow: 1\">". $label_labelContent . "</div>";
-        // controls
-        $label_chart = '';
-        $label_fixedColumn = '';
-        $label_divControl = '<div style="display: flex; flex-wrap: nowrap; align-items: baseline">' . $label_chart . $label_fixedColumn . '</div>';
-        // final label
-        $label_final = '<div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: baseline">' . $label_divLabel . $label_divControl . '</div>';
-    } else {
-        $label_final = $label_fieldName;
-    }
-   $nm_saida->saida("" . $label_final . "\r\n");
-   $nm_saida->saida("</TD>\r\n");
-   } 
- }
  function NM_label_nome_tecnico()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico";
+   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
    $classColFld = "";
    $classColTitle = "";
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
@@ -2685,7 +2463,7 @@ $nm_saida->saida("}\r\n");
  function NM_label_email_tecnico()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico";
+   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
    $classColFld = "";
    $classColTitle = "";
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
@@ -2734,7 +2512,7 @@ $nm_saida->saida("}\r\n");
  function NM_label_fone_tecnico()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico";
+   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
    $classColFld = "";
    $classColTitle = "";
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
@@ -2780,10 +2558,59 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_id_tecnico()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+   $classColFld = "";
+   $classColTitle = "";
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
+     $classColFld = " sc-col-fld sc-col-fld-" . $this->grid_fixed_column_no;
+     $classColTitle = " sc-col-title";
+   }
+   if (!isset($this->NM_cmp_hidden['id_tecnico']) || $this->NM_cmp_hidden['id_tecnico'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_inherit_bg . ' ' . $this->css_scGridLabelFont . $this->css_sep . $this->css_id_tecnico_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_tecnico_label'] . "\" >\r\n");
+    $label_fieldName = nl2br($SC_Label);
+    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
+        // label & order
+        $divLabelStyle = '; justify-content: right';
+        $fieldSortRule = $this->scGetColumnOrderRule('id_tecnico');
+        $fieldSortIcon = $this->scGetColumnOrderIcon('id_tecnico', $fieldSortRule);
+        if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == 'right') {
+            $this->Ini->Label_sort_pos = 'right_field';
+        }
+        if (empty($fieldSortIcon)) {
+            $label_labelContent = "<div style=\"flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>";
+        } elseif ($this->Ini->Label_sort_pos == 'right_field') {
+            $label_labelContent = "<div style=\"display: flex" . $divLabelStyle . "\"><div style=\"display: flex; white-space: nowrap\">" . $label_fieldName . "</div>" . $fieldSortIcon . "</div>";
+        } elseif ($this->Ini->Label_sort_pos == 'left_field') {
+            $label_labelContent = "<div style=\"display: flex" . $divLabelStyle . "\">" . $fieldSortIcon . "\<div style=\"display: flex; white-space: nowrap\">" . $label_fieldName . "</div></div>";
+        } elseif ($this->Ini->Label_sort_pos == 'right_cell') {
+            $label_labelContent = "<div style=\"display: flex; justify-content: space-between\"><div style=\"display: flex; flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>" . $fieldSortIcon . "</div>";
+        } elseif ($this->Ini->Label_sort_pos == 'left_cell') {
+            $label_labelContent = "<div style=\"display: flex; justify-content: space-between\">" . $fieldSortIcon . "<div style=\"display: flex; flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div></div>";
+        } else {
+            $label_labelContent = "<div style=\"flex-grow: 1; white-space: nowrap" . $divLabelStyle . "\">" . $label_fieldName . "</div>";
+        }
+        $label_labelContent = "<a href=\"javascript:nm_gp_submit2('id_tecnico')\" class=\"" . $this->css_scGridLabelLink . "\">". $label_labelContent . "</a>";
+        $label_divLabel = "<div style=\"flex-grow: 1\">". $label_labelContent . "</div>";
+        // controls
+        $label_chart = '';
+        $label_fixedColumn = '';
+        $label_divControl = '<div style="display: flex; flex-wrap: nowrap; align-items: baseline">' . $label_chart . $label_fixedColumn . '</div>';
+        // final label
+        $label_final = '<div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: baseline">' . $label_divLabel . $label_divControl . '</div>';
+    } else {
+        $label_final = $label_fieldName;
+    }
+   $nm_saida->saida("" . $label_final . "\r\n");
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_usuario_login()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login";
+   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
    $classColFld = "";
    $classColTitle = "";
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
@@ -2902,15 +2729,15 @@ $nm_saida->saida("}\r\n");
    $this->sc_where_atual   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq'];
    $this->sc_where_filtro  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq_filtro'];
 // 
-   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['id_tecnico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico";
+   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "";
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['nome_tecnico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico";
+   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "";
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['email_tecnico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico";
+   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "";
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['fone_tecnico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login";
+   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['id_tecnico'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "";
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['labels']['usuario_login'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['lig_edit'] != '')
    {
@@ -3059,13 +2886,7 @@ else
        $nm_saida->saida("        </div> \r\n");
    } 
 if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) { 
-    if ($this->pdf_all_cab != "S") {
-        $this->cabecalho();
-    }
     $nm_saida->saida("              <thead>\r\n");
-    if ($this->pdf_all_cab == "S") {
-        $this->cabecalho();
-    }
     if ($this->pdf_all_label == "S") {
         $this->label_grid();
     }
@@ -3171,11 +2992,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               }
           }
           $this->Lin_impressas++;
-          $this->id_tecnico = $this->rs_grid->fields[0] ;  
+          $this->nome_tecnico = $this->rs_grid->fields[0] ;  
+          $this->email_tecnico = $this->rs_grid->fields[1] ;  
+          $this->fone_tecnico = $this->rs_grid->fields[2] ;  
+          $this->id_tecnico = $this->rs_grid->fields[3] ;  
           $this->id_tecnico = (string)$this->id_tecnico;
-          $this->nome_tecnico = $this->rs_grid->fields[1] ;  
-          $this->email_tecnico = $this->rs_grid->fields[2] ;  
-          $this->fone_tecnico = $this->rs_grid->fields[3] ;  
           $this->usuario_login = $this->rs_grid->fields[4] ;  
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['SC_Ind_Groupby'] != "sc_free_total")
          {
@@ -3396,43 +3217,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao']       = "igual" ; 
    } 
  }
- function NM_grid_id_tecnico()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['id_tecnico']) || $this->NM_cmp_hidden['id_tecnico'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->id_tecnico)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->id_tecnico)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          else    
-          { 
-              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'id_tecnico', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'id_tecnico', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          $classColFld = "";
-          if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
-              $classColFld = " sc-col-fld sc-col-fld-" . $this->grid_fixed_column_no;
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_tecnico_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_tecnico_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_tecnico_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_nome_tecnico()
  {
       global $nm_saida;
@@ -3510,6 +3294,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
+          if ($conteudo !== "&nbsp;")    
+          { 
+              $this->nm_gera_mask($conteudo, "(xx) xxxxx-xxxx"); 
+          } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && !empty($conteudo)) 
           { 
@@ -3530,6 +3318,43 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $this->SC_nowrap = "";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_fone_tecnico_grid_line . "\"  style=\"" . $this->Css_Cmp['css_fone_tecnico_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_fone_tecnico_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_id_tecnico()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['id_tecnico']) || $this->NM_cmp_hidden['id_tecnico'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->id_tecnico)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->id_tecnico)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          else    
+          { 
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'id_tecnico', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'id_tecnico', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          $classColFld = "";
+          if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao_print'] != 'print' && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opcao'] != 'pdf') {
+              $classColFld = " sc-col-fld sc-col-fld-" . $this->grid_fixed_column_no;
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_tecnico_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_tecnico_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_tecnico_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_usuario_login()
@@ -3616,36 +3441,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
         {
             $nm_saida->saida("</table><div style=\"page-break-after: always;\"><span style=\"display: none;\">&nbsp;</span></div><table width='100%' cellspacing=0 cellpadding=0>\r\n");
         }
-        if ($nm_parms != "resumo" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'])
-        {
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) { 
-           }
-           else
-           {
-               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf_vert']) { 
-                $nm_saida->saida("     <thead>\r\n");
-               }
-               $this->cabecalho();
-               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf_vert']) { 
-                $nm_saida->saida("     </thead>\r\n");
-               }
-           }
-        }
         $nm_saida->saida(" <TR> \r\n");
         $nm_saida->saida("  <TD style=\"padding: 0px; vertical-align: top;\"> \r\n");
         $nm_saida->saida("   <TABLE class=\"" . $this->css_scGridTabela . "\" align=\"center\" " . $nm_id_aplicacao . " width=\"100%\">\r\n");
-        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && ($this->pdf_all_cab == "S" || $this->pdf_all_label == "S")) { 
-            $nm_saida->saida(" <thead> \r\n");
-            if ($this->pdf_all_cab == "S")
-            {
-                $this->cabecalho();
-            }
-            if ($this->pdf_all_label == "S" && $nm_parms != "resumo" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida_grid'])
-            {
-                $this->label_grid();
-            }
-            $nm_saida->saida(" </thead> \r\n");
-        }
         if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && $nm_parms != "resumo" && $nm_parms != "pagina" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida_grid'])
         {
             $this->label_grid();
@@ -3711,6 +3509,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       $nm_saida->saida("      <input type=\"text\" id=\"id_sc_truta_f0_top\" name=\"sc_truta_f0_top\" value=\"\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_top\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_top\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
+      $nm_saida->saida("      <input type=\"hidden\" name=\"nmgp_idioma\" value=\"\"/> \r\n");
       $nm_saida->saida("      </td></tr><tr id=\"sc_grid_toobar_top_tr\">\r\n");
       $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  colspan=3 class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['ajax_nav'])
@@ -3765,11 +3564,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
           $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
-          $SC_Label_atu['id_tecnico'] = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : 'Id Tecnico'; 
-          $SC_Label_atu['nome_tecnico'] = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : 'Nome Tecnico'; 
-          $SC_Label_atu['email_tecnico'] = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : 'Email Tecnico'; 
-          $SC_Label_atu['fone_tecnico'] = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : 'Fone Tecnico'; 
-          $SC_Label_atu['usuario_login'] = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : 'Usuario Login'; 
+          $SC_Label_atu['nome_tecnico'] = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . ''; 
+          $SC_Label_atu['email_tecnico'] = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . ''; 
+          $SC_Label_atu['fone_tecnico'] = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . ''; 
+          $SC_Label_atu['id_tecnico'] = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . ''; 
+          $SC_Label_atu['usuario_login'] = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . ''; 
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $cada_field)
           { 
                   if($cada_field == 'SC_all_Cmp')
@@ -3879,7 +3678,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       }
               $this->nm_btn_exist['pdf'][] = "pdf_top";
           $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&password=n&summary_export_columns=S&pdf_zip=N&origem=cons&language=pt_br&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + P)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&password=n&summary_export_columns=S&pdf_zip=N&origem=cons&language=pt_br&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -3898,7 +3697,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['word'][] = "word_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_cor=CO&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + W)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_cor=CO&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -3917,7 +3716,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['xls'][] = "xls_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + X)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -3936,7 +3735,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['xml'][] = "xml_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "", "", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_xml_res . "&nm_ini_xml_res=grid,resume&nm_all_modules=grid,resume,chart&nm_xml_tag=tag&nm_xml_label=S&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "", "", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + M)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_xml_res . "&nm_ini_xml_res=grid,resume&nm_all_modules=grid,resume,chart&nm_xml_tag=tag&nm_xml_label=S&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -3974,7 +3773,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['csv'][] = "csv_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "", "", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_csv_res . "&nm_ini_csv_res=grid,resume&nm_all_modules=grid,resume,chart&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "", "", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + C)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_csv_res . "&nm_ini_csv_res=grid,resume&nm_all_modules=grid,resume,chart&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -3984,7 +3783,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['rtf'][] = "rtf_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + R)", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4008,7 +3807,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['print'][] = "print_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_opc=RC&nm_cor=CO&password=n&language=pt_br&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid,resume&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_opc=RC&nm_cor=CO&password=n&language=pt_br&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid,resume&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4032,7 +3831,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
       {
            $this->nm_btn_exist['filter'][] = "pesq_top";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + F)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $nm_saida->saida("           $Cod_Btn \r\n");
            $NM_btn = true;
       }
@@ -4059,10 +3858,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           {
               $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_resumo'])) {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Enter)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               else { 
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Enter)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               $nm_saida->saida("           $Cod_Btn \r\n");
                   $NM_btn = true;
@@ -4086,7 +3885,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
@@ -4102,13 +3901,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $this->nm_btn_exist['exit'][] = "sai_top";
          if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
          elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
@@ -4117,14 +3916,30 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       {
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sc_modal'])
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
         }
         else
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
         }
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
+      }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $tst_conf_reg = $this->Ini->str_lang . ";" . $this->Ini->str_conf_reg;
+          $nm_saida->saida("          <select class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" name=\"nmgp_idioma_x\" onChange=\"document.F0_top.nmgp_opcao.value='change_lang'; sc_ind = this.selectedIndex; document.F0_top.nmgp_idioma.value=this.options[sc_ind].value; document.F0_top.submit(); return false\">\r\n");
+          foreach ($this->Ini->Nm_lang_conf_region as $cada_idioma => $cada_descr)
+          {
+              $tmp_idioma = explode(";", $cada_idioma);
+              if (is_file($this->Ini->path_lang . $tmp_idioma[0] . ".lang.php"))
+              {
+                 $obj_sel = ($tst_conf_reg == "$cada_idioma") ? " selected" : "";
+                 $nm_saida->saida("           <option value=\"" . NM_encode_input($cada_idioma) . "\"" . $obj_sel . ">" . $cada_descr . "</option>\r\n");
+              }
+          }
+          $nm_saida->saida("          </select>\r\n");
+          $NM_btn = true;
       }
       }
       $nm_saida->saida("         </td> \r\n");
@@ -4207,12 +4022,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -4222,12 +4037,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -4279,14 +4094,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opc_liga']['nav']))
           {
               $this->nm_btn_exist['forward'][] = "forward_bot";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opc_liga']['nav']))
           {
               $this->nm_btn_exist['last'][] = "last_bot";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
@@ -4320,7 +4135,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
@@ -4420,11 +4235,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
           $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
-          $SC_Label_atu['id_tecnico'] = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : 'Id Tecnico'; 
-          $SC_Label_atu['nome_tecnico'] = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : 'Nome Tecnico'; 
-          $SC_Label_atu['email_tecnico'] = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : 'Email Tecnico'; 
-          $SC_Label_atu['fone_tecnico'] = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : 'Fone Tecnico'; 
-          $SC_Label_atu['usuario_login'] = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : 'Usuario Login'; 
+          $SC_Label_atu['nome_tecnico'] = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . ''; 
+          $SC_Label_atu['email_tecnico'] = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . ''; 
+          $SC_Label_atu['fone_tecnico'] = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . ''; 
+          $SC_Label_atu['id_tecnico'] = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . ''; 
+          $SC_Label_atu['usuario_login'] = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : '' . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . ''; 
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'] as $cada_field)
           { 
                   if($cada_field == 'SC_all_Cmp')
@@ -4532,7 +4347,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       }
               $this->nm_btn_exist['pdf'][] = "pdf_top";
           $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&password=n&summary_export_columns=S&pdf_zip=N&origem=cons&language=pt_br&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + P)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&password=n&summary_export_columns=S&pdf_zip=N&origem=cons&language=pt_br&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4551,7 +4366,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['word'][] = "word_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_cor=CO&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + W)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_cor=CO&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4570,7 +4385,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['xls'][] = "xls_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + X)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_tecnicos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=cons&language=pt_br&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4589,7 +4404,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['xml'][] = "xml_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "", "", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_xml_res . "&nm_ini_xml_res=grid,resume&nm_all_modules=grid,resume,chart&nm_xml_tag=tag&nm_xml_label=S&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "", "", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + M)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_xml_res . "&nm_ini_xml_res=grid,resume&nm_all_modules=grid,resume,chart&nm_xml_tag=tag&nm_xml_label=S&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4627,7 +4442,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           }
           $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['csv'][] = "csv_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "", "", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_csv_res . "&nm_ini_csv_res=grid,resume&nm_all_modules=grid,resume,chart&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "", "", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + C)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&password=n&nm_res_cons=" . $Tem_csv_res . "&nm_ini_csv_res=grid,resume&nm_all_modules=grid,resume,chart&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4637,7 +4452,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
           $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['rtf'][] = "rtf_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + R)", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4661,7 +4476,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
           $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $this->nm_btn_exist['print'][] = "print_top";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_opc=RC&nm_cor=CO&password=n&language=pt_br&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid,resume&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "thickbox", "" . $this->Ini->path_link . "grid_tecnicos/grid_tecnicos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&nm_opc=RC&nm_cor=CO&password=n&language=pt_br&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid,resume&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
@@ -4685,7 +4500,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
       {
            $this->nm_btn_exist['filter'][] = "pesq_top";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + F)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $nm_saida->saida("           $Cod_Btn \r\n");
            $NM_btn = true;
       }
@@ -4710,10 +4525,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           {
               $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_resumo'])) {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Enter)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               else { 
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Enter)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               $nm_saida->saida("           $Cod_Btn \r\n");
                   $NM_btn = true;
@@ -4737,7 +4552,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
@@ -4753,13 +4568,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           $this->nm_btn_exist['exit'][] = "sai_top";
          if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
          elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
@@ -4768,11 +4583,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
       {
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['sc_modal'])
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
         }
         else
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
         }
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -4833,12 +4648,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -4848,12 +4663,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
               $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -4877,14 +4692,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opc_liga']['nav']))
           {
               $this->nm_btn_exist['forward'][] = "forward_bot";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['opc_liga']['nav']))
           {
               $this->nm_btn_exist['last'][] = "last_bot";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
@@ -4900,7 +4715,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
@@ -6394,7 +6209,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf']) {
                 (
                     (
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0] == 'SC_all_Cmp' &&
-                    in_array($field, array('id_tecnico', 'nome_tecnico', 'email_tecnico', 'fone_tecnico', 'usuario_login'))
+                    in_array($field, array('nome_tecnico', 'email_tecnico', 'fone_tecnico', 'id_tecnico', 'usuario_login'))
                     ) ||
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0] == $field ||
                     strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0], $field . '_VLS_') !== false ||

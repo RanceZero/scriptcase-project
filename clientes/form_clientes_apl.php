@@ -1729,7 +1729,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                return "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
                break;
            case 'usuario_login':
-               return "Usuario Login";
+               return "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_login'] . "";
                break;
        }
 

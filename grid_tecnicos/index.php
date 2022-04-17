@@ -234,8 +234,8 @@ class grid_tecnicos_ini
       $this->nm_dt_criacao   = "20220403"; 
       $this->nm_hr_criacao   = "012657"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = ""; 
-      $this->nm_hr_ult_alt   = ""; 
+      $this->nm_dt_ult_alt   = "20220406"; 
+      $this->nm_hr_ult_alt   = "221333"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -601,6 +601,67 @@ class grid_tecnicos_ini
              $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
          }
       }
+      $sc_change_lang = false;
+      $sc_fil_date = array();
+      if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['sc_change_lang'])) {
+          $sc_change_lang = true;
+          foreach ($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro'] as $imens => $str_mens) {
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'])) {
+                  foreach ($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'] as $cmp_fil => $opc_fil) {
+                      $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['descr'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['descr']);
+                      $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['hint']  = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['hint']);
+                  }
+              }
+          }
+          foreach ($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'] as $imens => $str_mens) {
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_pesq']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search'])) {
+                  $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['cond_dyn_search']);
+              }
+              if (isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'])) {
+                  foreach ($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'] as $cmp_fil => $opc_fil) {
+                      if (in_array($cmp_fil, $sc_fil_date)) {
+                          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['descr'] = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['descr']);
+                          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['hint']  = str_replace($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'][$imens], $this->Nm_lang[$imens], $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['grid_pesq'][$cmp_fil]['hint']);
+                      }
+                  }
+              }
+          }
+          unset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['sc_change_lang']);
+      }
+      if (!isset($_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']) || $sc_change_lang) {
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']    = array();
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt'] = array();
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_equl']      = $this->Nm_lang['lang_srch_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_strt']      = $this->Nm_lang['lang_srch_strt'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_diff']      = $this->Nm_lang['lang_srch_diff'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_grtr']      = $this->Nm_lang['lang_srch_grtr'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_grtr_equl'] = $this->Nm_lang['lang_srch_grtr_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_less']      = $this->Nm_lang['lang_srch_less'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_less_equl'] = $this->Nm_lang['lang_srch_less_equl'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_betw']      = $this->Nm_lang['lang_srch_betw'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_like']      = $this->Nm_lang['lang_srch_like'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_not_like']  = $this->Nm_lang['lang_srch_not_like'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_null']      = $this->Nm_lang['lang_srch_null'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_nnul']      = $this->Nm_lang['lang_srch_nnul'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_empty']     = $this->Nm_lang['lang_srch_empty'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro']['lang_srch_nempty']    = $this->Nm_lang['lang_srch_nempty'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_and_cond'] = $this->Nm_lang['lang_srch_and_cond'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_year']     = $this->Nm_lang['lang_srch_year'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_mnth']     = $this->Nm_lang['lang_srch_mnth'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_days']     = $this->Nm_lang['lang_srch_days'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_time']     = $this->Nm_lang['lang_srch_time'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_mint']     = $this->Nm_lang['lang_srch_mint'];
+          $_SESSION['sc_session'][$script_case_init]['grid_tecnicos']['Sc_mens_filtro_dt']['lang_srch_scnd']     = $this->Nm_lang['lang_srch_scnd'];
+      }
       $_SESSION['sc_session']['SC_download_violation'] = $this->Nm_lang['lang_errm_fnfd'];
       if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['grid_tecnicos']['session_timeout']['redir']))
       {
@@ -849,6 +910,7 @@ class grid_tecnicos_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
       {
@@ -972,7 +1034,7 @@ class grid_tecnicos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_tecnicos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_tecnicos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZ9rqZ1BYVWBqHgvOVcFiV5FYDoF7HQXOZ1rqD1rwHuXGDErKDkB/H5F/HIJeHQXsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQBqD1veHQrqDMvmDkB/H5XCDoJsDcJUZ1rqHANOHQFaHgNOVkXeDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5XCDoraD9BsZ1B/Z1BeHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9FaD1rKV5FaDMBYZSXeV5XCVoXGDcJeZSX7Z1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXsZSFGD1veD5JwDMBODkB/DWFaVoraHQBsZ1BiHANOD5JwDMBYHArCH5F/HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqZSBOD1rKHuB/HgNOHErsH5F/HMJeHQXGDuBqHIrKHuFUDMNOZSNiH5XCHMFaHQFYZkBiDSrYHQX7HgBOZSJ3DWrGDoJeHQXGDuFaHAvOVWBqDMvsVcFeDuX7HMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIrqHQJeZ9XGD1BOVWJsHgrwV9BUDuX7HINUHQFYZkFGD1NaZMFaHgNOHArCHEB3ZuB/HQXGDuFaDSrwHuF7HgvOVIB/HEF/HIJeHQFYZkFGD1rKHQXGDMvCVkJ3H5FYHIBiDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUDSrYHuXGHgBeVkJqDuJeHIraHQXGDuFaDSvCVWJeHgvOVcBUDuFGVEF7HQFYZkBiDSrYHQBiHgNKVkJ3HEFaHMX7HQXGDQFUD1BOV5BqDMvOZSNiHEFYHIJeDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwH9BqD1NaZMJwHgvCZSJqDWF/DoJeD9XsZSX7HIrwV5BOHgvsVcBOV5X/VoFaHQBsZSB/DSrYV5FGDMzGHEJGH5X/DoB/HQNmH9X7HABYVWJsDMBYVcBODWFaDoFUDcJUZkFUZ1BeZMBqHgBYHAFKV5FqDoBOD9JKDQJwHANKVWXGDMvOZSJ3V5X7VEF7D9BiH9FaHIBeD5XGDEBOZSXeV5FaZuFaHQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSBiD1veHuraDMBODkBsHEX7HIJsHQBiH9BOHAvsV5X7HgveHArCDuFaHIBOHQXsDuBqHArYHuJeDMNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJsDMvOVcBUH5FqHMBiD9BsVIraD1rwV5X7HgBeHErCH5FYDoB/HQBiDQJwHAveHuFGHgrwVcFKDur/HIX7HQXOZSFaHABYD5JwHgveVkJGH5F/HMBOD9NwDQJwHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rKV5FaDEBOHEXeV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwDQJwHABYV5X7HgrYDkFCDWF/VoB/D9BsZ1F7DSrYV5B/HgBeHErCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUH5B3VorqHQNmVIB/Z1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9FUHIrKVWJeHgvOVIFCH5FqDoXGHQNwZkBiD1NaZMBqDMzGZSXeV5FqZuFaD9NwH9X7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJwD1veD5JsDMBOZSJqDWFaHMFaHQJmZSFaHANOV5FUDEvsDkXKDWXCVoBiDcXGDQFGHANOD5B/HgvOVcXKDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiH5F/VoB/D9XsDQX7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGD1veD5JwHgvsDkBOV5F/DoFGDcBqH9B/Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcNwVIJsHABYHuX7DMBYHEJGHEFqDorqHQNmH9X7Z1BYD5B/HgvOV9BUH5B7DoXGHQFYZkBiHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaHgrwVcFeHEF/HIBiHQNwZ1FGZ1vmV5X7HgBYHErCDuFaHINUHQXODQFaHAvCD5F7DMvsV9FeH5FqHMB/HQJmVINUHAvCV5X7HgBeHArsHEB7ZuJeHQXsZSBiHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINKZMJwHgveDkB/H5F/HIB/HQXOZSBiDSvCD5F7DMvmZSJqDWFYHIFUHQXOVINUD1zGV5X7HgrKZSJ3H5FYDoJsDcBiH9FUHAvmD5F7DMNOVcXKDur/HMrqHQJmH9BqD1vsD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsV9FeV5F/HMJeDcNmZ1FGHIBOV5X7HgrKDkXKDWXCHIJeHQXOZ9F7HINaD5F7DMvsV9FeH5XKVErqHQXOH9BOHAvCV5X7HgNODkB/H5X/DoJeHQJeDQFUHAvmV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMvmZSJqHEBmVoraHQXGZ1rqHAN7D5FaDMzGZSJGDWr/DoraD9XsDuBOHAveHuBiHuvmVcBODuFqDoraD9XOVIJwZ1BeHuXGDMzGHEJGH5F/HMBqDcJeDQX7DSrwD5JwDMrwDkFCDWBmVEFGHQFYZ1FaHArKV5XGDErKHErsDuXKDoXGHQXGZSFGHIrwVWXGHuBYDkFCDWJeVoraD9BsH9FaD1vsD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiHgBOHErCDWFqHMFGHQNwZSFUD1veHQBqDMBOVcFiV5X/VoF7HQBsH9BOHANOHQBiHgveHEJqDWXCHINUHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5BmDoBqHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiHQXGZ1BOHIveHQNUHgvsDkB/DWFqHIX7HQFYH9BiHIrwD5XGDMzGVcFCH5XCVoBiHQBqZ1F7HIBeHQXGHgrKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFKDWFYDoXGD9BsH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKD5BqDEvsHEXeDWr/DoFUD9NmH9X7HArYD5rqHuvmVcBOH5XCHMBiHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQXODQBqHAvOVWJe";
 $_SESSION['scriptcase']['nmamp'] = array(60, 100, 105, 118, 32, 115, 116, 121, 108, 101, 61, 34, 102, 111, 110, 116, 45, 102, 97, 109, 105, 108, 121, 58, 32, 84, 97, 104, 111, 109, 97, 44, 32, 65, 114, 105, 97, 108, 44, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 59, 32, 102, 111, 110, 116, 45, 115, 105, 122, 101, 58, 32, 49, 51, 112, 120, 59, 32, 102, 111, 110, 116, 45, 119, 101, 105, 103, 104, 116, 58, 32, 98, 111, 108, 100, 59, 32, 116, 101, 120, 116, 45, 97, 108, 105, 103, 110, 58, 32, 99, 101, 110, 116, 101, 114, 34, 62, 84, 104, 105, 115, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 32, 119, 97, 115, 32, 100, 101, 118, 101, 108, 111, 112, 101, 100, 32, 97, 110, 100, 32, 112, 117, 98, 108, 105, 115, 104, 101, 100, 32, 117, 115, 105, 110, 103, 32, 97, 32, 116, 114, 105, 97, 108, 32, 118, 101, 114, 115, 105, 111, 110, 32, 111, 102, 32, 83, 99, 114, 105, 112, 116, 67, 97, 115, 101, 32, 97, 110, 100, 32, 105, 116, 115, 32, 116, 114, 105, 97, 108, 32, 112, 101, 114, 105, 111, 100, 32, 104, 97, 115, 32, 101, 120, 112, 105, 114, 101, 100, 46, 60, 47, 100, 105, 118, 62);
       $this->prep_conect();
       $this->conectDB();
@@ -2575,16 +2637,18 @@ class grid_tecnicos_apl
       } 
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "id_tecnico";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "nome_tecnico";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "email_tecnico";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "fone_tecnico";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "id_tecnico";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'][] = "usuario_login";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel'] = array();
           } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel']['id_tecnico'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel']['usuario_login'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_tecnicos']['exit'] != '')
@@ -3844,10 +3908,6 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
       }
       $sv_data = $data_search;
       foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp" || $field == "id_tecnico") 
-          {
-              $this->SC_monta_condicao($comando, "id_tecnico", $arg_search, str_replace(",", ".", $data_search));
-          }
           if ($field == "SC_all_Cmp" || $field == "nome_tecnico") 
           {
               $this->SC_monta_condicao($comando, "nome_tecnico", $arg_search, $data_search);
@@ -3859,6 +3919,10 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           if ($field == "SC_all_Cmp" || $field == "fone_tecnico") 
           {
               $this->SC_monta_condicao($comando, "fone_tecnico", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp" || $field == "id_tecnico") 
+          {
+              $this->SC_monta_condicao($comando, "id_tecnico", $arg_search, str_replace(",", ".", $data_search));
           }
           if ($field == "SC_all_Cmp" || $field == "usuario_login") 
           {

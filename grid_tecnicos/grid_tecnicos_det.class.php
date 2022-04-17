@@ -12,10 +12,10 @@ class grid_tecnicos_det
    var $nm_btn_label    = array(); 
    var $nm_btn_disabled = array(); 
    var $nm_location;
-   var $id_tecnico;
    var $nome_tecnico;
    var $email_tecnico;
    var $fone_tecnico;
+   var $id_tecnico;
    var $usuario_login;
     function getFieldHighlight($filter_type, $field, $str_value, $str_value_original='')
     {
@@ -78,7 +78,7 @@ class grid_tecnicos_det
                 (
                     (
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0] == 'SC_all_Cmp' &&
-                    in_array($field, array('id_tecnico', 'nome_tecnico', 'email_tecnico', 'fone_tecnico', 'usuario_login'))
+                    in_array($field, array('nome_tecnico', 'email_tecnico', 'fone_tecnico', 'id_tecnico', 'usuario_login'))
                     ) ||
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0] == $field ||
                     strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['fast_search'][0], $field . '_VLS_') !== false ||
@@ -176,7 +176,7 @@ class grid_tecnicos_det
     $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['where_pesq_filtro'];
     $this->nm_field_dinamico = array();
     $this->nm_order_dinamico = array();
-    $this->nm_data = new nm_data("pt_br");
+    $this->nm_data = new nm_data("en_us");
     $this->NM_raiz_img  = ""; 
     if ($this->Ini->sc_export_ajax_img)
     { 
@@ -264,6 +264,11 @@ class grid_tecnicos_det
    $this->email_tecnico = $rs->fields[2] ;  
    $this->fone_tecnico = $rs->fields[3] ;  
    $this->usuario_login = $rs->fields[4] ;  
+   $this->New_label['nome_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
+   $this->New_label['email_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
+   $this->New_label['fone_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+   $this->New_label['id_tecnico'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
+   $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cmp_acum']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cmp_acum']))
    {
        $parms_acum = explode(";", $_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['cmp_acum']);
@@ -278,7 +283,7 @@ class grid_tecnicos_det
    $nm_saida->saida("            \"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
    $nm_saida->saida("<html" . $_SESSION['scriptcase']['reg_conf']['html_dir'] . ">\r\n");
    $nm_saida->saida("<HEAD>\r\n");
-   $nm_saida->saida("   <TITLE>" . $this->Ini->Nm_lang['lang_othr_detl_title'] . " tecnicos</TITLE>\r\n");
+   $nm_saida->saida("   <TITLE>" . $this->Ini->Nm_lang['lang_othr_grid_title'] . " tecnicos</TITLE>\r\n");
    $nm_saida->saida(" <META http-equiv=\"Content-Type\" content=\"text/html; charset=" . $_SESSION['scriptcase']['charset_html'] . "\" />\r\n");
    $nm_saida->saida(" <META http-equiv=\"Expires\" content=\"Fri, Jan 01 1900 00:00:00 GMT\"/>\r\n");
    $nm_saida->saida(" <META http-equiv=\"Last-Modified\" content=\"" . gmdate("D, d M Y H:i:s") . " GMT\"/>\r\n");
@@ -491,7 +496,7 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" >\r\n");
        $nm_saida->saida("     <TR>\r\n");
        $nm_saida->saida("       <TD>\r\n");
-       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("       </TD>\r\n");
        $nm_saida->saida("     </TR>\r\n");
@@ -545,7 +550,7 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "NOWRAP";
    }
-   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : "Id Tecnico"; 
+   $SC_Label = (isset($this->New_label['id_tecnico'])) ? $this->New_label['id_tecnico'] : ""; 
    $conteudo = trim(NM_encode_input(sc_strip_script($this->id_tecnico))); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 
@@ -576,7 +581,7 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "";
    }
-   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : "Nome Tecnico"; 
+   $SC_Label = (isset($this->New_label['nome_tecnico'])) ? $this->New_label['nome_tecnico'] : ""; 
    $conteudo = trim(sc_strip_script($this->nome_tecnico)); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 
@@ -603,7 +608,7 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "";
    }
-   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : "Email Tecnico"; 
+   $SC_Label = (isset($this->New_label['email_tecnico'])) ? $this->New_label['email_tecnico'] : ""; 
    $conteudo = trim(sc_strip_script($this->email_tecnico)); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 
@@ -630,12 +635,16 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "";
    }
-   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : "Fone Tecnico"; 
+   $SC_Label = (isset($this->New_label['fone_tecnico'])) ? $this->New_label['fone_tecnico'] : ""; 
    $conteudo = trim(sc_strip_script($this->fone_tecnico)); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 
           { 
               $conteudo = "&nbsp;" ; 
+          } 
+          if ($conteudo !== "&nbsp;")    
+          { 
+              $this->nm_gera_mask($conteudo, "(xx) xxxxx-xxxx"); 
           } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_tecnicos']['embutida'] && !empty($conteudo)) 
@@ -657,7 +666,7 @@ $nm_saida->saida("</script>\r\n");
    {
        $this->SC_nowrap = "";
    }
-   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : "Usuario Login"; 
+   $SC_Label = (isset($this->New_label['usuario_login'])) ? $this->New_label['usuario_login'] : ""; 
    $conteudo = trim(sc_strip_script($this->usuario_login)); 
    $conteudo_original = $conteudo; 
           if ($conteudo === "") 

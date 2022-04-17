@@ -141,6 +141,7 @@ class grid_clientes_rtf
       $this->New_label['pais_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_pais_cliente'] . "";
       $this->New_label['cep_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_cep_cliente'] . "";
       $this->New_label['id_cliente'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_id_cliente'] . "";
+      $this->New_label['usuario_login'] = "" . $this->Ini->Nm_lang['lang_clientes_fld_usuario_login'] . "";
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_clientes']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_clientes']['field_display']))
       {
           foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_clientes']['field_display'] as $NM_cada_field => $NM_cada_opc)

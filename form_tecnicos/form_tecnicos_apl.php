@@ -56,6 +56,7 @@ class form_tecnicos_apl
    var $email_tecnico;
    var $fone_tecnico;
    var $usuario_login;
+   var $horario_tecnico;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -113,6 +114,10 @@ class form_tecnicos_apl
           {
               $this->fone_tecnico = $this->NM_ajax_info['param']['fone_tecnico'];
           }
+          if (isset($this->NM_ajax_info['param']['horario_tecnico']))
+          {
+              $this->horario_tecnico = $this->NM_ajax_info['param']['horario_tecnico'];
+          }
           if (isset($this->NM_ajax_info['param']['id_tecnico']))
           {
               $this->id_tecnico = $this->NM_ajax_info['param']['id_tecnico'];
@@ -168,10 +173,6 @@ class form_tecnicos_apl
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
-          }
-          if (isset($this->NM_ajax_info['param']['usuario_login']))
-          {
-              $this->usuario_login = $this->NM_ajax_info['param']['usuario_login'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -335,6 +336,11 @@ class form_tecnicos_apl
               $_SESSION['sc_session'][$script_case_init]['form_tecnicos']['where_filter_form'] = $this->NM_where_filter_form;
               unset($_SESSION['sc_session'][$script_case_init]['form_tecnicos']['total']);
           }
+          if (!isset($_SESSION['sc_session'][$script_case_init]['form_tecnicos']['total']))
+          {
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$script_case_init]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['reg_start'] = "";
+              unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$script_case_init]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['total']);
+          }
           if (isset($this->sc_redir_atualiz))
           {
               $_SESSION['sc_session'][$script_case_init]['form_tecnicos']['sc_redir_atualiz'] = $this->sc_redir_atualiz;
@@ -457,6 +463,11 @@ class form_tecnicos_apl
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
+      $this->nm_new_label['nome_tecnico'] = '' . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . '';
+      $this->nm_new_label['email_tecnico'] = '' . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . '';
+      $this->nm_new_label['fone_tecnico'] = '' . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . '';
+      $this->nm_new_label['horario_tecnico'] = '' . $this->Ini->Nm_lang['lang_tbl_horario_trabalho_tecnicos'] . '';
+
       $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -821,6 +832,8 @@ class form_tecnicos_apl
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dados_form']))
       {
           $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dados_form'];
+          if (!isset($this->id_tecnico)){$this->id_tecnico = $this->nmgp_dados_form['id_tecnico'];} 
+          if (!isset($this->usuario_login)){$this->usuario_login = $this->nmgp_dados_form['usuario_login'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -1006,6 +1019,17 @@ class form_tecnicos_apl
           $this->nm_flag_saida_novo = "S";
       }
 //
+      if ($this->nmgp_opcao == "excluir")
+      {
+          $GLOBALS['script_case_init'] = $this->Ini->sc_page;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_form'] = false;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['embutida_proc'] = true;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['reg_start'] = "";
+          unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['total']);
+          require_once($this->Ini->root . $this->Ini->path_link  . SC_dir_app_name('form_horario_trabalho_tecnicos') . "/index.php");
+          require_once($this->Ini->root . $this->Ini->path_link  . SC_dir_app_name('form_horario_trabalho_tecnicos') . "/form_horario_trabalho_tecnicos_apl.php");
+          $this->form_horario_trabalho_tecnicos = new form_horario_trabalho_tecnicos_apl;
+      }
       $this->NM_case_insensitive = false;
       $this->sc_evento = $this->nmgp_opcao;
       $this->sc_insert_on = false;
@@ -1039,11 +1063,10 @@ class form_tecnicos_apl
             echo $out1_img_cache;
                exit;
             }
-      if (isset($this->id_tecnico)) { $this->nm_limpa_alfa($this->id_tecnico); }
       if (isset($this->nome_tecnico)) { $this->nm_limpa_alfa($this->nome_tecnico); }
       if (isset($this->email_tecnico)) { $this->nm_limpa_alfa($this->email_tecnico); }
       if (isset($this->fone_tecnico)) { $this->nm_limpa_alfa($this->fone_tecnico); }
-      if (isset($this->usuario_login)) { $this->nm_limpa_alfa($this->usuario_login); }
+      if (isset($this->horario_tecnico)) { $this->nm_limpa_alfa($this->horario_tecnico); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1108,10 +1131,6 @@ class form_tecnicos_apl
 //
       if ($this->NM_ajax_flag && 'validate_' == substr($this->NM_ajax_opcao, 0, 9))
       {
-          if ('validate_id_tecnico' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_tecnico');
-          }
           if ('validate_nome_tecnico' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nome_tecnico');
@@ -1124,9 +1143,9 @@ class form_tecnicos_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'fone_tecnico');
           }
-          if ('validate_usuario_login' == $this->NM_ajax_opcao)
+          if ('validate_horario_tecnico' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'usuario_login');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'horario_tecnico');
           }
           form_tecnicos_pack_ajax_response();
           exit;
@@ -1653,20 +1672,23 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    {
        switch($campo)
        {
-           case 'id_tecnico':
-               return "Id Tecnico";
-               break;
            case 'nome_tecnico':
-               return "Nome Tecnico";
+               return "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . "";
                break;
            case 'email_tecnico':
-               return "Email Tecnico";
+               return "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . "";
                break;
            case 'fone_tecnico':
-               return "Fone Tecnico";
+               return "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . "";
+               break;
+           case 'horario_tecnico':
+               return "" . $this->Ini->Nm_lang['lang_tbl_horario_trabalho_tecnicos'] . "";
+               break;
+           case 'id_tecnico':
+               return "" . $this->Ini->Nm_lang['lang_tecnicos_fld_id_tecnico'] . "";
                break;
            case 'usuario_login':
-               return "Usuario Login";
+               return "" . $this->Ini->Nm_lang['lang_tecnicos_fld_usuario_login'] . "";
                break;
        }
 
@@ -1716,16 +1738,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_tecnicos'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ((!is_array($filtro) && ('' == $filtro || 'id_tecnico' == $filtro)) || (is_array($filtro) && in_array('id_tecnico', $filtro)))
-        $this->ValidateField_id_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'nome_tecnico' == $filtro)) || (is_array($filtro) && in_array('nome_tecnico', $filtro)))
         $this->ValidateField_nome_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'email_tecnico' == $filtro)) || (is_array($filtro) && in_array('email_tecnico', $filtro)))
         $this->ValidateField_email_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'fone_tecnico' == $filtro)) || (is_array($filtro) && in_array('fone_tecnico', $filtro)))
         $this->ValidateField_fone_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'usuario_login' == $filtro)) || (is_array($filtro) && in_array('usuario_login', $filtro)))
-        $this->ValidateField_usuario_login($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'horario_tecnico' == $filtro)) || (is_array($filtro) && in_array('horario_tecnico', $filtro)))
+        $this->ValidateField_horario_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -1739,62 +1759,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       }
    }
 
-    function ValidateField_id_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->id_tecnico === "" || is_null($this->id_tecnico))  
-      { 
-          $this->id_tecnico = 0;
-      } 
-      nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
-      if ($this->nmgp_opcao == "incluir")
-      { 
-          if ($this->id_tecnico != '')  
-          { 
-              $iTestSize = 10;
-              if (strlen($this->id_tecnico) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Id Tecnico: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['id_tecnico']))
-                  {
-                      $Campos_Erros['id_tecnico'] = array();
-                  }
-                  $Campos_Erros['id_tecnico'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['id_tecnico']) || !is_array($this->NM_ajax_info['errList']['id_tecnico']))
-                  {
-                      $this->NM_ajax_info['errList']['id_tecnico'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['id_tecnico'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->id_tecnico, 10, 0, 0, 0, "N") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Id Tecnico; " ; 
-                  if (!isset($Campos_Erros['id_tecnico']))
-                  {
-                      $Campos_Erros['id_tecnico'] = array();
-                  }
-                  $Campos_Erros['id_tecnico'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['id_tecnico']) || !is_array($this->NM_ajax_info['errList']['id_tecnico']))
-                  {
-                      $this->NM_ajax_info['errList']['id_tecnico'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['id_tecnico'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'id_tecnico';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_id_tecnico
-
     function ValidateField_nome_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -1804,7 +1768,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           if (NM_utf8_strlen($this->nome_tecnico) > 100) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Nome Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_tecnicos_fld_nome_tecnico'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['nome_tecnico']))
               {
                   $Campos_Erros['nome_tecnico'] = array();
@@ -1836,7 +1800,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           if (NM_utf8_strlen($this->email_tecnico) > 60) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Email Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_tecnicos_fld_email_tecnico'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 60 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['email_tecnico']))
               {
                   $Campos_Erros['email_tecnico'] = array();
@@ -1863,12 +1827,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     {
         global $teste_validade;
         $hasError = false;
+      $this->nm_tira_mask($this->fone_tecnico, "(99) 99999-9999", "(){}[].,;:-+/ "); 
       if ($this->nmgp_opcao != "excluir") 
       { 
           if (NM_utf8_strlen($this->fone_tecnico) > 20) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Fone Tecnico " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "" . $this->Ini->Nm_lang['lang_tecnicos_fld_fone_tecnico'] . " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['fone_tecnico']))
               {
                   $Campos_Erros['fone_tecnico'] = array();
@@ -1891,37 +1856,25 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_fone_tecnico
 
-    function ValidateField_usuario_login(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_horario_tecnico(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->usuario_login) > 32) 
+          if (trim($this->horario_tecnico) != "")  
           { 
-              $hasError = true;
-              $Campos_Crit .= "Usuario Login " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['usuario_login']))
-              {
-                  $Campos_Erros['usuario_login'] = array();
-              }
-              $Campos_Erros['usuario_login'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['usuario_login']) || !is_array($this->NM_ajax_info['errList']['usuario_login']))
-              {
-                  $this->NM_ajax_info['errList']['usuario_login'] = array();
-              }
-              $this->NM_ajax_info['errList']['usuario_login'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 32 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'usuario_login';
+            $fieldName = 'horario_tecnico';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_usuario_login
+    } // ValidateField_horario_tecnico
 
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
@@ -1946,10 +1899,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    {
     global
            $sc_seq_vert;
-    $this->nmgp_dados_form['id_tecnico'] = $this->id_tecnico;
     $this->nmgp_dados_form['nome_tecnico'] = $this->nome_tecnico;
     $this->nmgp_dados_form['email_tecnico'] = $this->email_tecnico;
     $this->nmgp_dados_form['fone_tecnico'] = $this->fone_tecnico;
+    $this->nmgp_dados_form['horario_tecnico'] = $this->horario_tecnico;
+    $this->nmgp_dados_form['id_tecnico'] = $this->id_tecnico;
     $this->nmgp_dados_form['usuario_login'] = $this->usuario_login;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -1958,6 +1912,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       global $nm_form_submit;
          $this->Before_unformat = array();
          $this->formatado = false;
+      $this->Before_unformat['fone_tecnico'] = $this->fone_tecnico;
+      $this->nm_tira_mask($this->fone_tecnico, "(99) 99999-9999", "(){}[].,;:-+/ "); 
       $this->Before_unformat['id_tecnico'] = $this->id_tecnico;
       nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
    }
@@ -2003,6 +1959,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    }
    function nm_clear_val($Nome_Campo)
    {
+      if ($Nome_Campo == "fone_tecnico")
+      {
+          $this->nm_tira_mask($this->fone_tecnico, "(99) 99999-9999", "(){}[].,;:-+/ "); 
+      }
       if ($Nome_Campo == "id_tecnico")
       {
           nm_limpa_numero($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp']) ; 
@@ -2016,9 +1976,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
          return;
      }
      $this->formatado = true;
-      if ('' !== $this->id_tecnico || (!empty($format_fields) && isset($format_fields['id_tecnico'])))
+      if (!empty($this->fone_tecnico) || (!empty($format_fields) && isset($format_fields['fone_tecnico'])))
       {
-          nmgp_Form_Num_Val($this->id_tecnico, $this->field_config['id_tecnico']['symbol_grp'], $this->field_config['id_tecnico']['symbol_dec'], "0", "S", $this->field_config['id_tecnico']['format_neg'], "", "", "-", $this->field_config['id_tecnico']['symbol_fmt']) ; 
+          $this->nm_gera_mask($this->fone_tecnico, "(99) 99999-9999"); 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -2421,36 +2381,27 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
    function ajax_return_values()
    {
-          $this->ajax_return_values_id_tecnico();
           $this->ajax_return_values_nome_tecnico();
           $this->ajax_return_values_email_tecnico();
           $this->ajax_return_values_fone_tecnico();
-          $this->ajax_return_values_usuario_login();
+          $this->ajax_return_values_horario_tecnico();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
               $this->NM_ajax_info['navStatus']['ret'] = $this->Nav_permite_ret ? 'S' : 'N';
               $this->NM_ajax_info['navStatus']['ava'] = $this->Nav_permite_ava ? 'S' : 'N';
               $this->NM_ajax_info['fldList']['id_tecnico']['keyVal'] = form_tecnicos_pack_protect_string($this->nmgp_dados_form['id_tecnico']);
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['foreign_key']['id_tecnico'] = $this->nmgp_dados_form['id_tecnico'];
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_filter'] = "id_tecnico = " . $this->nmgp_dados_form['id_tecnico'] . "";
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_detal']  = "id_tecnico = " . $this->nmgp_dados_form['id_tecnico'] . "";
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['total'] < 0)
+              {
+                  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['where_filter'] = "1 <> 1";
+              }
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['reg_start'] = "";
+              unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['form_horario_trabalho_tecnicos_script_case_init'] ]['form_horario_trabalho_tecnicos']['total']);
           }
    } // ajax_return_values
-
-          //----- id_tecnico
-   function ajax_return_values_id_tecnico($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_tecnico", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->id_tecnico);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['id_tecnico'] = array(
-                       'row'    => '',
-               'type'    => 'label',
-               'valList' => array($sTmpValue),
-               'labList' => array($this->form_format_readonly("id_tecnico", $this->form_encode_input($sTmpValue))),
-              );
-          }
-   }
 
           //----- nome_tecnico
    function ajax_return_values_nome_tecnico($bForce = false)
@@ -2500,18 +2451,18 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           }
    }
 
-          //----- usuario_login
-   function ajax_return_values_usuario_login($bForce = false)
+          //----- horario_tecnico
+   function ajax_return_values_horario_tecnico($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("usuario_login", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("horario_tecnico", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->usuario_login);
+              $sTmpValue = NM_charset_to_utf8($this->horario_tecnico);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['usuario_login'] = array(
+          $this->NM_ajax_info['fldList']['horario_tecnico'] = array(
                        'row'    => '',
                'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'valList' => array($sTmpValue),
               );
           }
    }
@@ -2665,10 +2616,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       { 
           $this->Ini->sc_tem_trans_banco = $this->Db->BeginTrans(); 
       } 
-      $NM_val_form['id_tecnico'] = $this->id_tecnico;
       $NM_val_form['nome_tecnico'] = $this->nome_tecnico;
       $NM_val_form['email_tecnico'] = $this->email_tecnico;
       $NM_val_form['fone_tecnico'] = $this->fone_tecnico;
+      $NM_val_form['horario_tecnico'] = $this->horario_tecnico;
+      $NM_val_form['id_tecnico'] = $this->id_tecnico;
       $NM_val_form['usuario_login'] = $this->usuario_login;
       if ($this->id_tecnico === "" || is_null($this->id_tecnico))  
       { 
@@ -2704,6 +2656,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           { 
               $this->usuario_login = "null"; 
               $NM_val_null[] = "usuario_login";
+          } 
+          $this->horario_tecnico_before_qstr = $this->horario_tecnico;
+          $this->horario_tecnico = substr($this->Db->qstr($this->horario_tecnico), 1, -1); 
+          if ($this->horario_tecnico == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->horario_tecnico = "null"; 
+              $NM_val_null[] = "horario_tecnico";
           } 
       }
       if ($this->nmgp_opcao == "alterar") 
@@ -2772,37 +2731,41 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico', usuario_login = '$this->usuario_login'"; 
+                  $SC_fields_update[] = "nome_tecnico = '$this->nome_tecnico', email_tecnico = '$this->email_tecnico', fone_tecnico = '$this->fone_tecnico'"; 
+              } 
+              if (isset($NM_val_form['usuario_login']) && $NM_val_form['usuario_login'] != $this->nmgp_dados_select['usuario_login']) 
+              { 
+                  $SC_fields_update[] = "usuario_login = '$this->usuario_login'"; 
               } 
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -2866,6 +2829,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->email_tecnico = $this->email_tecnico_before_qstr;
               $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
+              $this->horario_tecnico = $this->horario_tecnico_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -2883,16 +2847,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               }
 
 
-              if     (isset($NM_val_form) && isset($NM_val_form['id_tecnico'])) { $this->id_tecnico = $NM_val_form['id_tecnico']; }
-              elseif (isset($this->id_tecnico)) { $this->nm_limpa_alfa($this->id_tecnico); }
               if     (isset($NM_val_form) && isset($NM_val_form['nome_tecnico'])) { $this->nome_tecnico = $NM_val_form['nome_tecnico']; }
               elseif (isset($this->nome_tecnico)) { $this->nm_limpa_alfa($this->nome_tecnico); }
               if     (isset($NM_val_form) && isset($NM_val_form['email_tecnico'])) { $this->email_tecnico = $NM_val_form['email_tecnico']; }
               elseif (isset($this->email_tecnico)) { $this->nm_limpa_alfa($this->email_tecnico); }
               if     (isset($NM_val_form) && isset($NM_val_form['fone_tecnico'])) { $this->fone_tecnico = $NM_val_form['fone_tecnico']; }
               elseif (isset($this->fone_tecnico)) { $this->nm_limpa_alfa($this->fone_tecnico); }
-              if     (isset($NM_val_form) && isset($NM_val_form['usuario_login'])) { $this->usuario_login = $NM_val_form['usuario_login']; }
-              elseif (isset($this->usuario_login)) { $this->nm_limpa_alfa($this->usuario_login); }
+              if     (isset($NM_val_form) && isset($NM_val_form['horario_tecnico'])) { $this->horario_tecnico = $NM_val_form['horario_tecnico']; }
+              elseif (isset($this->horario_tecnico)) { $this->nm_limpa_alfa($this->horario_tecnico); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -2900,7 +2862,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('id_tecnico', 'nome_tecnico', 'email_tecnico', 'fone_tecnico', 'usuario_login'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('nome_tecnico', 'email_tecnico', 'fone_tecnico', 'horario_tecnico'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -3128,6 +3090,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->email_tecnico = $this->email_tecnico_before_qstr;
               $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
+              $this->horario_tecnico = $this->horario_tecnico_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['db_changed'] = true;
@@ -3142,17 +3105,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->email_tecnico = $this->email_tecnico_before_qstr;
               $this->fone_tecnico = $this->fone_tecnico_before_qstr;
               $this->usuario_login = $this->usuario_login_before_qstr;
+              $this->horario_tecnico = $this->horario_tecnico_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
               if ('refresh_insert' != $this->nmgp_opcao && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['sc_redir_insert']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['sc_redir_insert'] != "S"))
               {
-              $this->nmgp_opcao = "novo"; 
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['run_iframe'] == "R")
-              { 
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['return_edit'] = "new";
-              } 
+              $this->nmgp_opcao   = "igual"; 
+              $this->nmgp_opc_ant = "igual"; 
               }
               $this->nm_flag_iframe = true;
           } 
@@ -3167,6 +3128,19 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
           $bDelecaoOk = true;
           $sMsgErro   = '';
+          if ($bDelecaoOk)
+          {
+              $sDetailWhere = "id_tecnico = " . $this->id_tecnico . "";
+              $this->form_horario_trabalho_tecnicos->ini_controle();
+              if ($this->form_horario_trabalho_tecnicos->temRegistros($sDetailWhere))
+              {
+                  if (!$this->form_horario_trabalho_tecnicos->deletaRegistros($sDetailWhere))
+                  {
+                      $bDelecaoOk = false;
+                      $sMsgErro   = $this->Ini->Nm_lang['lang_errm_fkvi'];
+                  }
+              }
+          }
 
           if ($bDelecaoOk)
           {
@@ -3694,6 +3668,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->nmgp_dados_form["fone_tecnico"] = $this->fone_tecnico;
               $this->usuario_login = "";  
               $this->nmgp_dados_form["usuario_login"] = $this->usuario_login;
+              $this->horario_tecnico = "";  
+              $this->nmgp_dados_form["horario_tecnico"] = $this->horario_tecnico;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -3719,6 +3695,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       { 
           $this->nm_proc_onload();
       }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_horario_trabalho_tecnicos']['embutida_parms'] = "NM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
   }
 // 
 //-- 
@@ -4166,10 +4143,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     function form_highlight_search_quicksearch(&$result, $field, $value)
     {
         $searchOk = false;
-        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("id_tecnico", "nome_tecnico", "email_tecnico", "fone_tecnico", "usuario_login"))) {
+        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("nome_tecnico", "email_tecnico", "fone_tecnico", "horario_tecnico"))) {
             $searchOk = true;
         }
-        elseif ($field == $this->nmgp_fast_search && in_array($field, array("id_tecnico", "nome_tecnico", "email_tecnico", "fone_tecnico", "usuario_login"))) {
+        elseif ($field == $this->nmgp_fast_search && in_array($field, array("nome_tecnico", "email_tecnico", "fone_tecnico", "horario_tecnico"))) {
             $searchOk = true;
         }
 
@@ -4531,10 +4508,6 @@ function sc_file_size($file, $format = false)
       }
       $sv_data = $data_search;
       foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp" || $field == "id_tecnico") 
-          {
-              $this->SC_monta_condicao($comando, "id_tecnico", $arg_search, str_replace(",", ".", $data_search));
-          }
           if ($field == "SC_all_Cmp" || $field == "nome_tecnico") 
           {
               $this->SC_monta_condicao($comando, "nome_tecnico", $arg_search, $data_search);
@@ -4546,10 +4519,6 @@ function sc_file_size($file, $format = false)
           if ($field == "SC_all_Cmp" || $field == "fone_tecnico") 
           {
               $this->SC_monta_condicao($comando, "fone_tecnico", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp" || $field == "usuario_login") 
-          {
-              $this->SC_monta_condicao($comando, "usuario_login", $arg_search, $data_search);
           }
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_tecnicos']['where_detal']) && !empty($comando)) 
